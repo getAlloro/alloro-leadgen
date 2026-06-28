@@ -52,17 +52,20 @@ export const WebsiteScanStage = memo(
       [],
     );
 
+    // Activity labels, not verdicts. These float during the scan BEFORE any
+    // analysis exists, so they must describe what's being looked at — never
+    // assert a positive result the report may later contradict.
     const tags = useMemo(
       () => [
-        "Speed OK",
-        "SSL Secure",
-        "Fonts Loaded",
-        "JS Minified",
-        "Images Optimized",
-        "CTA Found",
-        "H1 Present",
-        "Meta Tags OK",
-        "Schema Valid",
+        "Checking speed",
+        "Verifying SSL",
+        "Reading fonts",
+        "Inspecting scripts",
+        "Scanning images",
+        "Locating CTAs",
+        "Checking headings",
+        "Reading meta tags",
+        "Validating schema",
       ],
       [],
     );
