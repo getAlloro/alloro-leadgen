@@ -2,6 +2,22 @@
 
 All notable changes to the Alloro Leadgen Tool are documented here.
 
+## [0.0.5] - June 2026
+
+### Audit — Honest Scan Tags + Competitor Cohort Transparency
+
+Two trust fixes paired with backend Audit work: the website scan stops asserting fake results, and the Local Ranking card is honest about thin competitor cohorts.
+
+**Key Changes:**
+- **Honest scan tags.** `WebsiteScanStage.tsx` floating badges changed from asserted verdicts (Speed OK, SSL Secure, CTA Found) — which fire before any analysis exists and can contradict the real report — to neutral activity verbs (Checking speed, Verifying SSL, Locating CTAs).
+- **Competitor cohort transparency.** The Local Ranking card now shows the real cohort size ("Ranked against N nearby competitors") and, when N < 4, a "Limited local cohort — directional, not definitive" caveat, so a fragile small-cohort percentile is never presented as authoritative. `App.tsx` passes the real competitor count to `DashboardStage`.
+
+**Verification:** `npx tsc --noEmit` clean. Live-confirmed on One Endodontics (2-competitor cohort renders the caveat) and the grade cards (C+/D+/A) via an `?audit_id=` deep-link.
+
+**Commits:**
+- `9e50030` feat(audit): honest website-scan tags — activity verbs, not fake verdicts
+- `854ef72` feat(audit): surface competitor cohort size + thin-cohort caveat
+
 ## [0.0.4] - April 2026
 
 ### Audit — Blocked-State UX + Honest Stage Copy
