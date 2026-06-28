@@ -718,6 +718,7 @@ const App = () => {
                 hasWebsiteData={hasWebsiteData}
                 websiteBlocked={websiteBlocked}
                 gbpData={gbpData}
+                competitorCount={auditData?.competitors?.length ?? 0}
                 screenshotUrl={screenshotUrl}
                 auditId={auditId}
                 emailSubmitted={emailSubmitted}

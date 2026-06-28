@@ -86,6 +86,7 @@ export const DashboardStage = ({
   hasWebsiteData = true,
   websiteBlocked = false,
   gbpData,
+  competitorCount = 0,
   screenshotUrl,
   auditId,
   emailSubmitted,
@@ -107,6 +108,9 @@ export const DashboardStage = ({
   // generic "No website" placeholder.
   websiteBlocked?: boolean;
   gbpData: GBPAnalysis;
+  // Real number of competitors the local rank was computed against. Surfaced
+  // so a thin cohort is shown honestly rather than implied as authoritative.
+  competitorCount?: number;
   screenshotUrl?: string;
   auditId?: string | null;
   emailSubmitted: boolean;
@@ -605,6 +609,17 @@ export const DashboardStage = ({
                   />
                 </div>
               </div>
+              {competitorCount > 0 && (
+                <p className="mt-4 text-[11px] text-gray-500 text-center relative z-10">
+                  Ranked against {competitorCount} nearby{" "}
+                  {competitorCount === 1 ? "competitor" : "competitors"}
+                  {competitorCount < 4 && (
+                    <span className="block text-amber-600 font-semibold mt-0.5">
+                      Limited local cohort — directional, not definitive
+                    </span>
+                  )}
+                </p>
+              )}
             </motion.div>
           )}
         </div>
