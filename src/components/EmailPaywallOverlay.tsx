@@ -107,9 +107,9 @@ export const EmailPaywallOverlay: React.FC<EmailPaywallOverlayProps> = ({
           Enter Your Email to Access Full Insights
         </h2>
         <p className="text-gray-600 mb-8 text-sm leading-relaxed">
-          Unlock your complete practice analysis including local ranking
+          Unlock your complete business analysis including local ranking
           insights, detailed performance metrics, and actionable recommendations
-          to grow your practice.
+          to grow your business.
         </p>
 
         {/* Email Form */}

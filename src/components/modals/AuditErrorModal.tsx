@@ -268,7 +268,7 @@ export const AuditErrorModal: React.FC<AuditErrorModalProps> = ({
                   We had trouble looking into your data
                 </h2>
                 <p className="text-gray-500 text-sm leading-relaxed">
-                  Something went wrong while analyzing your practice. You can try
+                  Something went wrong while analyzing your business. You can try
                   again or leave your email and we'll reach out to help.
                 </p>
               </motion.div>

@@ -95,6 +95,8 @@ interface SessionInitPayload {
 
 const SESSION_STORAGE_KEY = "leadgen_session_id";
 const ATTR_SENT_KEY = "leadgen_attr_sent";
+// Set once this device's session has an audit on it: one it started, or one it adopted from a report link.
+const HAD_AUDIT_KEY = "leadgen_session_had_audit";
 // Prefix — the full key is `leadgen_fired_stages:<session_id>`, value is
 // a comma-separated list of progression stage event names that have
 // already been dispatched from this device. Server-side strict ordering
@@ -323,6 +325,49 @@ export async function resolveSessionByAuditId(
   }
 }
 
+/** Record that the current session has an audit, so the next NEW audit from this device starts a session of its own. */
+export function markSessionHasAudit(): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(HAD_AUDIT_KEY, "1");
+  } catch {
+    // localStorage may be unavailable; the fired-stages cache is the second signal.
+  }
+}
+
+/**
+ * Call when the visitor submits the form for a NEW audit. If this device's
+ * session already carries an audit, switch to a fresh session id first.
+ *
+ * Why: the session id lives in localStorage for good, and a session row holds
+ * ONE audit. A second audit from the same browser used to re-point the old row
+ * at the new audit: the first audit lost its row, and the admin list showed the
+ * run under the date the device was first seen, sometimes weeks back, where it
+ * read as "not recorded". One audit, one row.
+ *
+ * Opening an existing report (`?audit_id=`) still adopts that report's own
+ * session; that path does not come through here.
+ */
+export function beginNewAuditSession(): void {
+  if (typeof window === "undefined") return;
+  const current = getSessionId();
+  let hadAudit = hasFiredStage(current, "audit_started");
+  try {
+    hadAudit = hadAudit || window.localStorage.getItem(HAD_AUDIT_KEY) === "1";
+  } catch {
+    // fall through with what the fired-stages cache said
+  }
+  if (!hadAudit) return;
+  adoptSessionId(generateUuid());
+  try {
+    window.localStorage.removeItem(HAD_AUDIT_KEY);
+    // The new row gets the visit's referrer and campaign fields of its own.
+    window.localStorage.removeItem(ATTR_SENT_KEY);
+  } catch {
+    // noop
+  }
+}
+
 export function getSessionId(): string {
   if (cachedSessionId) return cachedSessionId;
   if (typeof window === "undefined") {
@@ -409,6 +454,7 @@ export function trackEvent(
   if (!key) return;
 
   const sessionId = getSessionId();
+  if (name === "audit_started") markSessionHasAudit();
 
   // Progression stage events are exactly-once per session. CTA /
   // interaction events bypass this check. Server enforces the same

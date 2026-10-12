@@ -202,7 +202,7 @@ export const Sidebar = ({
             Alloro
           </span>
           <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">
-            Practice Analyzer
+            Business Analyzer
           </span>
         </div>
       </div>
