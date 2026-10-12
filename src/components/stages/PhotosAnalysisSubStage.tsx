@@ -100,7 +100,7 @@ export const PhotosAnalysisSubStage = ({
               <img
                 src={url}
                 className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-110"
-                alt={`Practice ${i + 1}`}
+                alt={`Business ${i + 1}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <motion.div

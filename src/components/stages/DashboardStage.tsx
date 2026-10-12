@@ -226,7 +226,7 @@ export const DashboardStage = ({
             </motion.div>
             <div>
               <p className="text-sm font-bold">
-                Your Alloro Practice Analysis is ready!
+                Your Alloro Business Analysis is ready!
               </p>
               <p className="text-xs text-white/80 mt-0.5">
                 Get personalized weekly insights & AI-powered growth
@@ -325,7 +325,7 @@ export const DashboardStage = ({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  Alloro Practice Intelligence Report
+                  Alloro Business Intelligence Report
                 </motion.span>
               </div>
               <motion.h2
@@ -691,22 +691,22 @@ export const DashboardStage = ({
                         But good enough isn't winning. <br />
                       </>
                     )}
-                    Your practice has more potential.
+                    Your business has more potential.
                   </h3>
                   <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto mb-6">
                     {isOutranked ? (
                       <>
                         Your scores show bad foundations, and competitors with
-                        stronger execution are capturing the patients you're
+                        stronger execution are capturing the customers you're
                         missing. Alloro helps you close those gaps and
-                        outperform the average practice in your area.
+                        outperform the average business in your area.
                       </>
                     ) : (
                       <>
                         Your scores show a solid foundation, but competitors
-                        with stronger execution are capturing the patients
+                        with stronger execution are capturing the customers
                         you're missing. Alloro helps you close those gaps and
-                        outperform the average practice in your area.
+                        outperform the average business in your area.
                       </>
                     )}
                   </p>
@@ -977,7 +977,7 @@ export const DashboardStage = ({
                 </h3>
                 <p className="text-sm text-gray-500 max-w-md mx-auto mb-5">
                   Create your free Alloro account and we'll help you launch
-                  a high-performing website built for your practice.
+                  a high-performing website built for your business.
                 </p>
                 <motion.a
                   href="https://app.getalloro.com/signup"
@@ -1106,7 +1106,7 @@ export const DashboardStage = ({
               */}
               <div className="blur-[2px] select-none pointer-events-none rounded-3xl overflow-hidden scale-[0.97] origin-top">
                 {/* App shell — matches the real Alloro app: dark navy sidebar
-                    + beige main content with the Practice Hub layout. */}
+                    + beige main content with the Business Hub layout. */}
                 <div className="rounded-3xl border border-black/10 overflow-hidden mb-6 flex bg-beige">
                   {/* Sidebar — dark navy like the real app */}
                   <div className="hidden md:flex w-48 shrink-0 flex-col bg-[#1a2433] text-white p-3 gap-1">
@@ -1131,7 +1131,7 @@ export const DashboardStage = ({
                       Navigation
                     </div>
                     {[
-                      { label: "Practice Hub", active: true },
+                      { label: "Business Hub", active: true },
                       { label: "Referrals Hub" },
                       { label: "Local Rankings" },
                       { label: "Websites" },
@@ -1213,10 +1213,10 @@ export const DashboardStage = ({
                         </div>
                         <div className="hidden md:block">
                           <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-500">
-                            Practice Hub
+                            Business Hub
                           </div>
                           <div className="text-[8px] font-semibold uppercase tracking-[0.18em] text-gray-400 mt-0.5">
-                            Visioning of your practice
+                            Visioning of your business
                           </div>
                         </div>
                       </div>
@@ -1251,7 +1251,7 @@ export const DashboardStage = ({
                         Good Morning, Saif.
                       </h3>
                       <p className="text-xs md:text-sm text-gray-500 mb-5 leading-snug">
-                        Welcome to your practice dashboard. We're loading your
+                        Welcome to your business dashboard. We're loading your
                         latest insights.
                       </p>
 
@@ -1290,7 +1290,7 @@ export const DashboardStage = ({
                       {/* KPI tiles row */}
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
                         {[
-                          { label: "New Patients", val: "142", trend: "+18%" },
+                          { label: "New Customers", val: "142", trend: "+18%" },
                           { label: "Reviews", val: "4.8", trend: "+0.2" },
                           { label: "GBP Views", val: "12.4k", trend: "+24%" },
                           { label: "Call Clicks", val: "847", trend: "+9%" },
@@ -1316,12 +1316,12 @@ export const DashboardStage = ({
 
                       {/* Chart + Sparkline row */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
-                        {/* Bar chart — Patient Acquisition */}
+                        {/* Bar chart — Customer Acquisition */}
                         <div className="md:col-span-2 bg-white rounded-2xl border border-black/5 shadow-sm p-4">
                           <div className="flex items-center justify-between mb-3">
                             <div>
                               <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
-                                Patient Acquisition
+                                Customer Acquisition
                               </div>
                               <div className="font-heading text-base font-bold text-gray-900 mt-0.5">
                                 Trending up · 12 weeks
@@ -1545,7 +1545,7 @@ export const DashboardStage = ({
                     <h2 className="font-heading text-lg md:text-xl font-semibold mb-4 leading-snug">
                       You're one step away from
                       <br />
-                      unlocking more patients.
+                      unlocking more customers.
                     </h2>
 
                     <ul className="text-left space-y-2 mb-5 max-w-xs mx-auto">
@@ -1553,7 +1553,7 @@ export const DashboardStage = ({
                         {
                           icon: Globe,
                           tint: "bg-blue-500/15 text-blue-300",
-                          text: "A website built to convert visitors into patients",
+                          text: "A website built to convert visitors into customers",
                         },
                         {
                           icon: TrendingUp,

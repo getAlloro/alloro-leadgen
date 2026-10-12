@@ -34,7 +34,7 @@ function generateEmailHTML(
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Your Alloro Practice Analysis Report</title>
+  <title>Your Alloro Business Analysis Report</title>
   <style>
     body, table, td, p, a, li, blockquote {
       -webkit-text-size-adjust: 100%;
@@ -81,7 +81,7 @@ function generateEmailHTML(
 </head>
 <body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
   <div style="display: none; max-height: 0; overflow: hidden; mso-hide: all;">
-    Your complete Alloro practice analysis report is ready
+    Your complete Alloro business analysis report is ready
   </div>
   <div style="display: none; max-height: 0; overflow: hidden; mso-hide: all;">
     &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
@@ -117,7 +117,7 @@ function generateEmailHTML(
         </span>
       </div>
       <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #212D40;">
-        Your Practice Analysis is Complete
+        Your Business Analysis is Complete
       </h1>
     </div>
   
@@ -127,7 +127,7 @@ function generateEmailHTML(
     
     <div style="background-color: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 24px;">
       <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #334155;">
-We've completed a comprehensive analysis of your practice's digital presence. Your full report includes:
+We've completed a comprehensive analysis of your business's digital presence. Your full report includes:
 <br><br>
 ✓ Website Performance Grade & Score<br>
 ✓ Google Business Profile Readiness Analysis<br>
@@ -206,7 +206,7 @@ export async function sendAuditReportEmail({
     bcc: ["info@getalloro.com"],
     body: emailBody,
     from: "info@getalloro.com",
-    subject: "📊 Your Alloro Practice Analysis Report",
+    subject: "📊 Your Alloro Business Analysis Report",
     fromName: "Alloro",
     recipients: [recipientEmail],
   };
@@ -296,7 +296,7 @@ function generateErrorNotificationHTML({
                 <p style="margin: 0 0 12px 0; font-size: 14px; color: #334155;">
                   <strong>Audit ID:</strong> ${auditId}
                 </p>
-                ${practiceInfo ? `<p style="margin: 0 0 12px 0; font-size: 14px; color: #334155;"><strong>Practice:</strong> ${practiceInfo}</p>` : ""}
+                ${practiceInfo ? `<p style="margin: 0 0 12px 0; font-size: 14px; color: #334155;"><strong>Business:</strong> ${practiceInfo}</p>` : ""}
                 ${errorMessage ? `<p style="margin: 0; font-size: 14px; color: #ef4444;"><strong>Error:</strong> ${errorMessage}</p>` : ""}
               </div>
 

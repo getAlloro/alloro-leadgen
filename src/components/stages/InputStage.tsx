@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Sparkles, Zap, Users, Globe, AlertCircle } from "lucide-react";
 import { SelectedGBP } from "../../types";
 import { GBPSearchSelect } from "../GBPSearchSelect";
-import { trackEvent, setCurrentStage } from "../../lib/tracking";
+import { trackEvent, setCurrentStage, beginNewAuditSession } from "../../lib/tracking";
 
 function normalizeUrl(input: string): string {
   const trimmed = input.trim();
@@ -80,6 +80,8 @@ export const InputStage = ({
       };
     })();
 
+    // A device that already ran an audit starts a session of its own for this one.
+    beginNewAuditSession();
     setCurrentStage("input_submitted");
     trackEvent("input_submitted", {
       domain: effective.domain,
@@ -111,18 +113,18 @@ export const InputStage = ({
           <div className="flex items-center gap-2 px-4 py-1.5 bg-brand-50 rounded-full border border-brand-100">
             <Sparkles className="w-4 h-4 text-brand-500" />
             <span className="text-sm font-semibold text-brand-600">
-              Alloro Practice Analyzer
+              Alloro Business Analyzer
             </span>
           </div>
         </motion.div>
         <h1 className="text-4xl md:text-6xl font-medium text-gray-900 mb-6 tracking-tight">
-          Is your practice <br />
+          Is your business <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-orange-400">
             losing to your competition?
           </span>
         </h1>
         <p className="text-xl text-gray-600 mb-10 font-light">
-          Alloro will analyze your practice's digital presence and reveal growth
+          Alloro will analyze your business's digital presence and reveal growth
           opportunities.
         </p>
 
@@ -167,7 +169,7 @@ export const InputStage = ({
                     inputMode="url"
                     value={websiteOverride}
                     onChange={(e) => setWebsiteOverride(e.target.value)}
-                    placeholder="https://yourpractice.com"
+                    placeholder="https://yourbusiness.com"
                     className="w-full pl-9 pr-3 py-2.5 rounded-lg border-2 border-amber-200 focus:border-brand-500 outline-none text-sm bg-white text-gray-900"
                   />
                 </div>

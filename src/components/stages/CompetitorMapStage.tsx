@@ -240,7 +240,7 @@ export const CompetitorMapStage = memo(
               // against competitors and compiling the full report.
               <>
                 <Loader2 className="w-3 h-3 animate-spin inline mr-1" />
-                Cross-referencing your practice against{" "}
+                Cross-referencing your business against{" "}
                 <strong className="text-gray-900">
                   {uniqueCompetitors.length} local competitors
                 </strong>

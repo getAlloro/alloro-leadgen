@@ -30,6 +30,7 @@ import {
   setCurrentStage,
   resolveSessionByAuditId,
   adoptSessionId,
+  markSessionHasAudit,
   retryAudit,
 } from "./src/lib/tracking";
 
@@ -147,6 +148,8 @@ const App = () => {
           const originalId = await resolveSessionByAuditId(auditIdParam);
           if (originalId) {
             adoptSessionId(originalId);
+            // This session is that report's. A new audit started from here gets its own.
+            markSessionHasAudit();
           }
           // Whether we adopted or not, open the gate — downstream tracking
           // should proceed.
