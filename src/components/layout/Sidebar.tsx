@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
+  LucideIcon,
   CheckCircle2,
   Loader2,
   Circle,
@@ -40,7 +41,7 @@ function FancyCheck({ className = "" }: { className?: string }) {
     </svg>
   );
 }
-import { AuditStage } from "../../types";
+import { AuditStage, DashboardAction } from "../../types";
 import { TimeElapsed } from "../ui/TimeElapsed";
 import { trackEvent, getSessionId } from "../../lib/tracking";
 
@@ -67,16 +68,7 @@ export const Sidebar = ({
   stage: AuditStage;
   progress: number;
   setStage: (s: AuditStage) => void;
-  onDashboardAction?: (
-    action:
-      | "scroll-overall"
-      | "scroll-rank"
-      | "scroll-gbp"
-      | "scroll-website"
-      | "open-insights-gbp"
-      | "open-insights-website"
-      | "schedule-call",
-  ) => void;
+  onDashboardAction?: (action: DashboardAction) => void;
 }) => {
   const steps: { id: AuditStage; label: string; icon: any }[] = [
     { id: "input", label: "Business Search", icon: Search },
@@ -86,22 +78,30 @@ export const Sidebar = ({
     { id: "dashboard", label: "Final Report", icon: TrendingUp },
   ];
 
-  const dashboardSteps = [
-    { label: "Overall Score", icon: Star },
-    { label: "Local Ranking Insights", icon: Users },
+  const dashboardSteps: {
+    id: DashboardAction;
+    label: string;
+    icon: LucideIcon;
+  }[] = [
+    { id: "scroll-overall", label: "Overall Score", icon: Star },
+    { id: "scroll-rank", label: "Local Ranking Insights", icon: Users },
     {
+      id: "scroll-gbp",
       label: "GBP Analysis",
       icon: MapPin,
     },
     {
+      id: "scroll-website",
       label: "Website Performance Metrics",
       icon: Globe,
     },
     {
+      id: "open-insights-gbp",
       label: "GBP Key Insights",
       icon: Sparkles,
     },
     {
+      id: "open-insights-website",
       label: "Website Key Insights",
       icon: Sparkles,
     },
@@ -132,12 +132,7 @@ export const Sidebar = ({
           {dashboardSteps.map((step, idx) => (
             <button
               key={`step-${idx}`}
-              onClick={() =>
-                onDashboardAction &&
-                onDashboardAction(
-                  (step as { id?: string }).id as any
-                )
-              }
+              onClick={() => onDashboardAction && onDashboardAction(step.id)}
               className="w-full flex items-center gap-3 transition-all duration-200 text-left group py-2.5 pr-3 rounded-lg hover:bg-white/60 text-gray-700"
             >
               <FancyCheck className="w-7 h-7 shrink-0 text-green-600" />

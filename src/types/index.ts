@@ -215,6 +215,18 @@ export type AuditStage =
   | "competitor_map"
   | "dashboard";
 
+// What a control outside the report can ask the report to do: scroll to one
+// of its sections, open one of its insights windows, or open the call link.
+// Each "scroll-*" name is also the id of that section's anchor in DashboardStage.
+export type DashboardAction =
+  | "scroll-overall"
+  | "scroll-rank"
+  | "scroll-gbp"
+  | "scroll-website"
+  | "open-insights-gbp"
+  | "open-insights-website"
+  | "schedule-call";
+
 // Selected GBP from search dropdown
 export interface SelectedGBP {
   placeId: string;

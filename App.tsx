@@ -22,6 +22,7 @@ import {
 } from "./utils/constants";
 import {
   AuditStage,
+  DashboardAction,
   SelectedGBP,
   StartAuditResponse,
 } from "./src/types";
@@ -463,28 +464,38 @@ const App = () => {
   };
 
   const handleDashboardAction = useCallback(
-    (
-      action:
-        | "scroll-overall"
-        | "scroll-rank"
-        | "scroll-gbp"
-        | "scroll-website"
-        | "open-insights-gbp"
-        | "open-insights-website"
-        | "schedule-call",
-    ) => {
+    (action: DashboardAction) => {
       const scrollWithOffset = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
           const container = element.closest(".overflow-y-auto");
           if (container) {
-            const topPos = element.offsetTop;
+            // Where the section sits in the scrolled content, measured from
+            // the two boxes on screen. `offsetTop` is counted from the nearest
+            // positioned parent, and for the sections inside the report's
+            // wrapper that is the wrapper, not this container.
+            const topPos =
+              container.scrollTop +
+              element.getBoundingClientRect().top -
+              container.getBoundingClientRect().top;
             container.scrollTo({ top: topPos - 80, behavior: "smooth" });
           } else {
             element.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }
       };
+
+      // Until the email is given, the sections under the grades and both
+      // insights windows are locked. A link to any of them opens nothing and
+      // goes to where the locked part starts.
+      if (
+        !emailSubmitted &&
+        action !== "scroll-overall" &&
+        action !== "schedule-call"
+      ) {
+        scrollWithOffset("scroll-rank");
+        return;
+      }
 
       switch (action) {
         case "scroll-overall":
@@ -505,6 +516,12 @@ const App = () => {
           setModalOpen(true);
           break;
         case "open-insights-website":
+          // No website findings (no site, or the scan was blocked): there is
+          // nothing to open, so go to the card that says so.
+          if (!auditData?.website_analysis) {
+            scrollWithOffset("scroll-website");
+            break;
+          }
           setSelectedDataType("website");
           setSelectedPillarCategory(null);
           setModalOpen(true);
@@ -514,7 +531,7 @@ const App = () => {
           break;
       }
     },
-    [],
+    [emailSubmitted, auditData?.website_analysis],
   );
 
   // --- MEMOIZED DATA ---

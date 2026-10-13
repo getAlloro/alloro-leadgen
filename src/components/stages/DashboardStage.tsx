@@ -846,6 +846,7 @@ export const DashboardStage = ({
                 </motion.div>
               </motion.div>
             )}
+            <span id="scroll-gbp"></span>
             {/* GBP Performance Metrics - Horizontal Progress Bars */}
             <motion.div
               className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8 mb-8 overflow-hidden relative"
@@ -941,6 +942,7 @@ export const DashboardStage = ({
                 </motion.a>
               </motion.div>
             </motion.div>
+            <span id="scroll-website"></span>
             {/* Website Performance Metrics card — three states:
                   1. Real website data → render the full metrics card below
                   2. Website blocked (CF etc.) → show "your site blocks scanners"
