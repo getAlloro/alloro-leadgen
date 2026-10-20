@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { ArrowRight, MapPin, RotateCcw } from "lucide-react";
 import { cardVariants } from "../../lib/animations/variants";
 
 /**
@@ -35,6 +35,26 @@ export const NoGoogleListingCard = () => (
       again to see your Google grade and how you rank against nearby
       competitors.
     </p>
+    <div className="flex flex-wrap gap-3 mt-5">
+      <a
+        href="https://business.google.com/create"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors"
+      >
+        Create a free Google Business Profile
+        <ArrowRight className="w-4 h-4" />
+      </a>
+      {/* A fresh check from the start page: the lead searches again once the
+          listing is live. Same tab, so it reads as one flow. */}
+      <a
+        href="/"
+        className="inline-flex items-center gap-2 border border-gray-300 hover:bg-gray-50 text-gray-800 px-5 py-2.5 rounded-xl font-bold text-sm transition-colors"
+      >
+        <RotateCcw className="w-4 h-4" />
+        Run the check again
+      </a>
+    </div>
   </motion.div>
 );
 

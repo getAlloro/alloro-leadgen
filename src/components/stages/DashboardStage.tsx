@@ -679,7 +679,9 @@ export const DashboardStage = ({
                           : "bg-yellow-100 text-yellow-800"
                       }`}
                     >
-                      {isOutranked ? "Outranked" : "Good"}
+                      {/* No listing means no ranking was checked, so a low
+                          website grade reads "Needs work", not "Outranked". */}
+                      {isOutranked ? (gbpData ? "Outranked" : "Needs work") : "Good"}
                     </span>
                   </p>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
@@ -691,7 +693,24 @@ export const DashboardStage = ({
                     Your business has more potential.
                   </h3>
                   <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto mb-6">
-                    {isOutranked ? (
+                    {/* Website-only report: no competitors were checked, so
+                        the verdict talks only about what was measured. */}
+                    {!gbpData ? (
+                      isOutranked ? (
+                        <>
+                          Your website has gaps to fix, and without a Google
+                          Maps listing most local customers never find you.
+                          Alloro helps you fix both.
+                        </>
+                      ) : (
+                        <>
+                          Your website shows a solid foundation, but without a
+                          Google Maps listing most local customers never find
+                          you. Alloro helps you get listed and turn your website
+                          into a steady source of new customers.
+                        </>
+                      )
+                    ) : isOutranked ? (
                       <>
                         Your scores show bad foundations, and competitors with
                         stronger execution are capturing the customers you're
