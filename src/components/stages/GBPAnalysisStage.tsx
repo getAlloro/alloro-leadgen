@@ -55,14 +55,14 @@ export const GBPAnalysisStage = memo(
         <div className="mb-3 md:mb-6 text-center shrink-0">
           <h2 className="text-lg md:text-3xl font-bold text-gray-900 tracking-tight">
             {isLoading || !data
-              ? "Fetching Your GBP Data"
+              ? "Finding Your Google Listing"
               : "Google Business Profile"}
           </h2>
           <div className="inline-flex items-center gap-2 mt-2 md:mt-4 px-3 md:px-4 py-1 bg-brand-50 rounded-full border border-brand-100">
             <Loader2 className="w-3 h-3 animate-spin text-brand-600" />
             <p className="text-brand-600 font-mono text-[11px] md:text-sm font-semibold">
               {isLoading || !data
-                ? "Pulling profile + reviews..."
+                ? "Looking up your business on Google Maps..."
                 : "Analyzing profile + sentiment"}
             </p>
           </div>

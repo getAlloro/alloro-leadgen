@@ -64,11 +64,15 @@ export const Sidebar = ({
   progress,
   setStage,
   onDashboardAction,
+  websiteOnly = false,
 }: {
   stage: AuditStage;
   progress: number;
   setStage: (s: AuditStage) => void;
   onDashboardAction?: (action: DashboardAction) => void;
+  // True for a website-only report (no Google listing). The Google sections
+  // are not on the page, so their links are left out.
+  websiteOnly?: boolean;
 }) => {
   const steps: { id: AuditStage; label: string; icon: any }[] = [
     { id: "input", label: "Business Search", icon: Search },
@@ -78,7 +82,7 @@ export const Sidebar = ({
     { id: "dashboard", label: "Final Report", icon: TrendingUp },
   ];
 
-  const dashboardSteps: {
+  const allDashboardSteps: {
     id: DashboardAction;
     label: string;
     icon: LucideIcon;
@@ -106,6 +110,15 @@ export const Sidebar = ({
       icon: Sparkles,
     },
   ];
+
+  const GOOGLE_SECTION_LINKS: DashboardAction[] = [
+    "scroll-rank",
+    "scroll-gbp",
+    "open-insights-gbp",
+  ];
+  const dashboardSteps = websiteOnly
+    ? allDashboardSteps.filter((s) => !GOOGLE_SECTION_LINKS.includes(s.id))
+    : allDashboardSteps;
 
   const currentStepIndex = steps.findIndex((s) => s.id === stage);
 

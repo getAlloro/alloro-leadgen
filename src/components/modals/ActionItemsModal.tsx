@@ -18,14 +18,14 @@ export const ActionItemsModal = ({
   pillarCategory?: string | null;
   dataType: "website" | "gbp" | null;
   websiteData: WebsiteAnalysis;
-  gbpData: GBPAnalysis;
+  gbpData: GBPAnalysis | null;
   competitorAnalysis?: any | null;
 }) => {
   if (!isOpen || !dataType) return null;
 
   // Get ALL pillars from the selected data type
   const pillars =
-    dataType === "website" ? websiteData.pillars : gbpData.pillars;
+    dataType === "website" ? websiteData.pillars : (gbpData?.pillars ?? []);
 
   return (
     <motion.div
