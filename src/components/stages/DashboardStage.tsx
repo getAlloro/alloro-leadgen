@@ -33,6 +33,7 @@ import {
   WhyThisMattersTooltip,
 } from "../ui";
 import { ActionItemsModal } from "../modals";
+import { NoGoogleListingCard } from "./NoGoogleListingCard";
 import { EmailPaywallOverlay } from "../EmailPaywallOverlay";
 import { cardVariants } from "../../lib/animations/variants";
 import { parseScoreValue } from "../../lib/helpers/scoreUtils";
@@ -40,7 +41,6 @@ import { WHY_THIS_MATTERS } from "../../lib/constants/whyThisMatters";
 import { sendAuditReportEmail } from "../../../utils/emailService";
 import {
   MOCK_BUSINESS,
-  MOCK_COMPETITORS,
   MOCK_SCREENSHOT_DESKTOP,
   MOCK_SCREENSHOT_MOBILE,
 } from "../../../utils/constants";
@@ -107,7 +107,8 @@ export const DashboardStage = ({
   // distinct "Your website blocks Alloro scanners" UX rather than the
   // generic "No website" placeholder.
   websiteBlocked?: boolean;
-  gbpData: GBPAnalysis;
+  // Null for a website-only audit: the business has no Google Maps listing.
+  gbpData: GBPAnalysis | null;
   // Real number of competitors the local rank was computed against. Surfaced
   // so a thin cohort is shown honestly rather than implied as authoritative.
   competitorCount?: number;
@@ -122,14 +123,6 @@ export const DashboardStage = ({
   selectedDataType: "website" | "gbp" | null;
   setSelectedDataType: (type: "website" | "gbp" | null) => void;
 }) => {
-  // Find the competitor with most reviews for comparison
-  const topCompetitor = MOCK_COMPETITORS.reduce(
-    (max, comp) => (comp.reviewsCount > max.reviewsCount ? comp : max),
-    MOCK_COMPETITORS[0],
-  );
-
-  const reviewGap = topCompetitor.reviewsCount - business.reviewsCount;
-
   // `stage_viewed_5` (Report Viewed) fires on mount — objective signal
   // that the pipeline rendered the dashboard shell. Fires BEFORE the
   // paywall is satisfied; the blurred report still counts as "report
@@ -192,7 +185,7 @@ export const DashboardStage = ({
             dataType={selectedDataType}
             websiteData={websiteData}
             gbpData={gbpData}
-            competitorAnalysis={gbpData.competitor_analysis}
+            competitorAnalysis={gbpData?.competitor_analysis}
           />
         )}
       </AnimatePresence>
@@ -474,7 +467,10 @@ export const DashboardStage = ({
             </div>
           </motion.div>
 
-          {/* GBP Grade */}
+          {/* GBP Grade — or, with no Google listing, one plain card in its place */}
+          {!gbpData ? (
+            <NoGoogleListingCard />
+          ) : (
           <motion.div
             className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 overflow-hidden relative"
             custom={2}
@@ -540,9 +536,10 @@ export const DashboardStage = ({
               </div>
             </div>
           </motion.div>
+          )}
 
           {/* Local Ranking Grade */}
-          {gbpData.competitor_analysis && (
+          {gbpData?.competitor_analysis && (
             <motion.div
               className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 overflow-hidden relative"
               custom={3}
@@ -744,7 +741,7 @@ export const DashboardStage = ({
             }
           >
             {/* Local Ranking Insights Card - Cobalt Blue with Orange Accent */}
-            {gbpData.top_action_items && (
+            {gbpData?.top_action_items && (
               <motion.div
                 className="bg-slate-900 rounded-2xl shadow-lg p-6 md:p-8 mb-8 overflow-hidden relative"
                 custom={4}
@@ -848,6 +845,7 @@ export const DashboardStage = ({
             )}
             <span id="scroll-gbp"></span>
             {/* GBP Performance Metrics - Horizontal Progress Bars */}
+            {gbpData && (
             <motion.div
               className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8 mb-8 overflow-hidden relative"
               custom={3}
@@ -942,6 +940,7 @@ export const DashboardStage = ({
                 </motion.a>
               </motion.div>
             </motion.div>
+            )}
             <span id="scroll-website"></span>
             {/* Website Performance Metrics card — three states:
                   1. Real website data → render the full metrics card below
@@ -1468,7 +1467,7 @@ export const DashboardStage = ({
                     Detailed GBP Analysis
                   </h3>
                   <div className="space-y-6">
-                    {gbpData.pillars.map((pillar, idx) => (
+                    {(gbpData?.pillars ?? []).map((pillar, idx) => (
                       <div
                         key={idx}
                         className="border-b border-gray-100 pb-6 last:border-0"

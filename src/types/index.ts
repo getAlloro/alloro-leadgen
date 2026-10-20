@@ -288,6 +288,9 @@ export interface AuditStatusResponse {
   // Alloro scanners" placeholder vs the generic "NO WEBSITE" placeholder.
   // Optional for forward-compat with older API versions that don't emit it.
   website_blocked?: boolean;
+  // The lead's own search text, e.g. "Smile Dental, Austin, TX". Names the
+  // business on a website-only report. Optional: older API versions omit it.
+  practice_search_string?: string | null;
 }
 
 export interface StartAuditResponse {

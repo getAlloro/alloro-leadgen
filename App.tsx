@@ -34,6 +34,10 @@ import {
   markSessionHasAudit,
   retryAudit,
 } from "./src/lib/tracking";
+import {
+  isWebsiteOnlyAudit,
+  websiteOnlyBusiness,
+} from "./src/lib/websiteOnlyBusiness";
 
 /**
  * Main App Component - Simplified after refactoring
@@ -228,6 +232,16 @@ const App = () => {
       return;
     }
 
+    // Website-only audit (no Google listing): there is no Google profile or
+    // competitor map to show, so go straight to the report.
+    if (isWebsiteOnlyAudit(auditData)) {
+      if (stage !== "dashboard") {
+        setStage("dashboard");
+        setPendingStage(null);
+      }
+      return;
+    }
+
     // GBP gate: hold on analyzing_gbp until carousel completes.
     if (
       stage === "analyzing_gbp" &&
@@ -281,6 +295,7 @@ const App = () => {
     gbpCarouselComplete,
     competitorMapDisplayed,
     pendingStage,
+    auditData,
   ]);
 
   // Mobile progress bar — persists across audit sub-stages (scanning_website
@@ -535,9 +550,20 @@ const App = () => {
   );
 
   // --- MEMOIZED DATA ---
+  // A website-only audit has no Google listing. Name the business from the
+  // lead's own search instead of the sample business.
+  const websiteOnly = isWebsiteOnlyAudit(auditData);
   const businessData = useMemo(
-    () => auditData?.self_gbp || MOCK_BUSINESS,
-    [auditData?.self_gbp],
+    () =>
+      auditData?.self_gbp ||
+      (websiteOnly
+        ? websiteOnlyBusiness({
+            searchString: auditData?.practice_search_string,
+            fallbackName: selectedGBP?.name,
+            website: selectedGBP?.websiteUri,
+          })
+        : MOCK_BUSINESS),
+    [auditData?.self_gbp, auditData?.practice_search_string, websiteOnly, selectedGBP],
   );
   const competitorData = useMemo(
     () => auditData?.competitors || MOCK_COMPETITORS,
@@ -557,8 +583,9 @@ const App = () => {
     [auditData?.website_analysis],
   );
   const gbpData = useMemo(
-    () => auditData?.gbp_analysis || MOCK_GBP_ANALYSIS,
-    [auditData?.gbp_analysis],
+    () =>
+      auditData?.gbp_analysis || (websiteOnly ? null : MOCK_GBP_ANALYSIS),
+    [auditData?.gbp_analysis, websiteOnly],
   );
   const screenshotUrl = useMemo(
     () => auditData?.screenshots?.desktop_url || MOCK_SCREENSHOT_DESKTOP,
@@ -585,6 +612,7 @@ const App = () => {
               progress={progress}
               setStage={setStage}
               onDashboardAction={handleDashboardAction}
+              websiteOnly={websiteOnly}
             />
           </motion.div>
         )}
