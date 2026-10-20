@@ -8,7 +8,15 @@ import { cardVariants } from "../../lib/animations/variants";
  * what to do about it; it never shows a grade, because there is nothing to
  * grade.
  */
-export const NoGoogleListingCard = () => (
+export const NoGoogleListingCard = ({
+  websiteGraded = true,
+  websiteBlocked = false,
+}: {
+  // False when no website was given or our scan was blocked: then the report
+  // has no website grade either, and the card must not say it does.
+  websiteGraded?: boolean;
+  websiteBlocked?: boolean;
+}) => (
   <motion.div
     className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 overflow-hidden relative lg:col-span-2"
     custom={2}
@@ -30,10 +38,14 @@ export const NoGoogleListingCard = () => (
     </p>
     <p className="text-sm text-gray-600 max-w-xl">
       Most customers look for a local business on Google Maps first. Without a
-      listing, you don&apos;t show up there at all. This report covers your
-      website only. Add a free Google Business Profile, then run the check
-      again to see your Google grade and how you rank against nearby
-      competitors.
+      listing, you don&apos;t show up there at all.{" "}
+      {websiteGraded
+        ? "This report covers your website only. "
+        : websiteBlocked
+        ? "Your website also blocks automated checks, so we couldn't grade it. "
+        : "We couldn't check a website either. "}
+      Add a free Google Business Profile, then run the check again to see your
+      Google grade and how you rank against nearby competitors.
     </p>
     <div className="flex flex-wrap gap-3 mt-5">
       <a

@@ -346,7 +346,11 @@ export const DashboardStage = ({
                     icon: MapPin,
                   },
                   { label: "Category:", value: business.categoryName },
-                ].map((item, idx) => (
+                ]
+                  // No Google listing: there is no address to show, so the
+                  // Location row is left out instead of reading "N/A".
+                  .filter((item) => gbpData || item.label !== "Location:")
+                  .map((item, idx) => (
                   <motion.div
                     key={idx}
                     className="flex items-center gap-2 min-w-0"
@@ -469,7 +473,10 @@ export const DashboardStage = ({
 
           {/* GBP Grade — or, with no Google listing, one plain card in its place */}
           {!gbpData ? (
-            <NoGoogleListingCard />
+            <NoGoogleListingCard
+              websiteGraded={hasWebsiteData && !!websiteData}
+              websiteBlocked={websiteBlocked}
+            />
           ) : (
           <motion.div
             className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 overflow-hidden relative"
@@ -657,6 +664,9 @@ export const DashboardStage = ({
 
           <div className="relative z-10 p-8 md:p-12 text-center">
             {(() => {
+              // Nothing graded: no Google listing, and the website was not
+              // given or blocked our scan. The verdict must not call that "Good".
+              const nothingGraded = !gbpData && !(hasWebsiteData && websiteData);
               const candidateGrades = [
                 hasWebsiteData && websiteData ? websiteData.overall_grade : null,
                 gbpData?.gbp_grade,
@@ -674,18 +684,26 @@ export const DashboardStage = ({
                     <span className="h-[.5px] w-[20px] bg-white/50 inline-block"></span>
                     <span
                       className={`text-xs px-5 py-1.5 rounded-full ${
-                        isOutranked
+                        nothingGraded
+                          ? "bg-white/20 text-white"
+                          : isOutranked
                           ? "bg-red-100 text-red-800"
                           : "bg-yellow-100 text-yellow-800"
                       }`}
                     >
                       {/* No listing means no ranking was checked, so a low
                           website grade reads "Needs work", not "Outranked". */}
-                      {isOutranked ? (gbpData ? "Outranked" : "Needs work") : "Good"}
+                      {nothingGraded
+                        ? "Not graded"
+                        : isOutranked
+                        ? gbpData
+                          ? "Outranked"
+                          : "Needs work"
+                        : "Good"}
                     </span>
                   </p>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                    {!isOutranked && (
+                    {!isOutranked && !nothingGraded && (
                       <>
                         But good enough isn't winning. <br />
                       </>
@@ -695,7 +713,23 @@ export const DashboardStage = ({
                   <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto mb-6">
                     {/* Website-only report: no competitors were checked, so
                         the verdict talks only about what was measured. */}
-                    {!gbpData ? (
+                    {nothingGraded ? (
+                      websiteBlocked ? (
+                        <>
+                          Your website blocks automated checks and we couldn't
+                          find you on Google Maps, so there was nothing we could
+                          grade. Alloro can get you listed and show you what
+                          your site is missing.
+                        </>
+                      ) : (
+                        <>
+                          We couldn't find a website or a Google Maps listing
+                          for this business, so there was nothing to grade.
+                          Alloro can help you get both, so local customers can
+                          find you.
+                        </>
+                      )
+                    ) : !gbpData ? (
                       isOutranked ? (
                         <>
                           Your website has gaps to fix, and without a Google
@@ -980,9 +1014,11 @@ export const DashboardStage = ({
                   This site uses bot protection (Cloudflare or similar) which
                   prevents Alloro from analyzing the website's content.
                 </p>
-                <p className="text-xs text-gray-500 max-w-md mx-auto">
-                  Your Google Business Profile report below is unaffected.
-                </p>
+                {gbpData && (
+                  <p className="text-xs text-gray-500 max-w-md mx-auto">
+                    Your Google Business Profile report below is unaffected.
+                  </p>
+                )}
               </motion.div>
             )}
             {!hasWebsiteData && !websiteBlocked && (
