@@ -455,6 +455,9 @@ const App = () => {
         body: JSON.stringify({
           domain: gbp.websiteUri || (gbp.domain ? `https://${gbp.domain}` : ""),
           practice_search_string: gbp.practiceSearchString,
+          // The exact Google place the lead picked, so the audit grades that
+          // business instead of searching for the name again.
+          place_id: gbp.placeId || undefined,
         }),
       });
 
