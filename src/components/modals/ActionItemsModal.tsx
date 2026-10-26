@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Target } from "lucide-react";
 import { WebsiteAnalysis, GBPAnalysis } from "../../types";
+import { isPillarUnchecked } from "../../lib/helpers/scoreUtils";
 
 /**
  * Action Items Modal Component - Shows pillars grouped with key findings and action items
@@ -78,14 +79,16 @@ export const ActionItemsModal = ({
                 </h3>
                 <span
                   className={`px-3 py-1 text-sm font-bold rounded-full ${
-                    Number(pillar.score) >= 90
+                    isPillarUnchecked(pillar)
+                      ? "bg-gray-100 text-gray-500"
+                      : Number(pillar.score) >= 90
                       ? "bg-green-100 text-green-700"
                       : Number(pillar.score) >= 70
                         ? "bg-yellow-100 text-yellow-700"
                         : "bg-red-100 text-red-700"
                   }`}
                 >
-                  {pillar.score}%
+                  {isPillarUnchecked(pillar) ? "Not checked" : `${pillar.score}%`}
                 </span>
               </div>
 

@@ -14,6 +14,16 @@ export const parseScoreValue = (
 };
 
 /**
+ * A pillar we could not read data for. It has no score and must never be
+ * shown as 0%. Older reports carry no flag and count as checked.
+ */
+export const isPillarUnchecked = (pillar: {
+  checked?: boolean;
+  score: string | number | null;
+}): boolean =>
+  pillar.checked === false || pillar.score === null || pillar.score === undefined;
+
+/**
  * Get color based on score threshold (green >= 90, yellow >= 70, red < 70)
  */
 export const getColorFromScore = (

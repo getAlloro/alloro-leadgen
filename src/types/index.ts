@@ -184,11 +184,16 @@ export interface GBPAnalysis {
   competitor_analysis?: CompetitorAnalysisData;
   pillars: AnalysisPillar[];
   top_action_items?: string[];
+  /** Google data we could not read, left out of the score. Absent on older reports. */
+  unchecked_fields?: string[];
 }
 
 export interface AnalysisPillar {
   category: string;
-  score: number | string;
+  /** null when the pillar was not checked. */
+  score: number | string | null;
+  /** false = we could not read its data. Absent on older reports (= checked). */
+  checked?: boolean;
   key_finding: string;
   executive_recommendation?: string;
   action_items?: string[];
