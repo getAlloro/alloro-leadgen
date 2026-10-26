@@ -56,6 +56,18 @@ import { trackEvent, setCurrentStage, getSessionId } from "../../lib/tracking";
  * Append `?ls={sessionId}` to a signup URL, preserving any existing query
  * params. Resolved at click-time so the tracking session id is always current.
  */
+/**
+ * The Live Preview dashboard is a picture of the product, shown on every
+ * report. It uses an invented business so no real customer's name, doctor or
+ * office appears on a stranger's report.
+ */
+const SAMPLE_PREVIEW = {
+  personName: "Dr. Rivera",
+  businessName: "Maple Street Dental",
+  locationName: "Springfield",
+  cityLabel: "Springfield",
+} as const;
+
 function buildSignupHref(base: string): string {
   const id = getSessionId();
   const sep = base.includes("?") ? "&" : "?";
@@ -1238,7 +1250,7 @@ export const DashboardStage = ({
                       <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-white/5 mb-1">
                         <div className="w-2.5 h-2.5 rounded-full bg-brand-400" />
                         <span className="text-[10px] font-semibold text-white">
-                          Gainesville
+                          {SAMPLE_PREVIEW.locationName}
                         </span>
                         <div className="ml-auto w-2 h-2 rounded bg-white/30" />
                       </div>
@@ -1247,7 +1259,7 @@ export const DashboardStage = ({
                           <div className="w-2 h-2 rounded-full bg-brand-400" />
                         </div>
                         <span className="text-[10px] text-white/70">
-                          One Endodontics
+                          {SAMPLE_PREVIEW.businessName}
                         </span>
                       </div>
                     </div>
@@ -1300,11 +1312,15 @@ export const DashboardStage = ({
                         <span className="text-[9px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600">
                           · Growth Looks Good
                         </span>
+                        {/* Invented business: these numbers are not the visitor's. */}
+                        <span className="text-[9px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-gray-900 text-white">
+                          Sample
+                        </span>
                       </div>
 
                       {/* Greeting */}
                       <h3 className="font-heading text-2xl md:text-4xl font-bold tracking-tight text-gray-900 mb-2">
-                        Good Morning, Saif.
+                        Good morning, {SAMPLE_PREVIEW.personName}.
                       </h3>
                       <p className="text-xs md:text-sm text-gray-500 mb-5 leading-snug">
                         Welcome to your business dashboard. We're loading your
@@ -1319,7 +1335,7 @@ export const DashboardStage = ({
                               Rankings
                             </span>
                             <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
-                              Gainesville, VA
+                              {SAMPLE_PREVIEW.cityLabel}
                             </span>
                           </div>
                           <p className="font-heading text-xl md:text-2xl font-bold text-gray-900 leading-tight">
