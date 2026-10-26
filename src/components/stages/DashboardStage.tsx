@@ -36,7 +36,7 @@ import { ActionItemsModal } from "../modals";
 import { NoGoogleListingCard } from "./NoGoogleListingCard";
 import { EmailPaywallOverlay } from "../EmailPaywallOverlay";
 import { cardVariants } from "../../lib/animations/variants";
-import { parseScoreValue } from "../../lib/helpers/scoreUtils";
+import { parseScoreValue, isPillarUnchecked } from "../../lib/helpers/scoreUtils";
 import { WHY_THIS_MATTERS } from "../../lib/constants/whyThisMatters";
 import { sendAuditReportEmail } from "../../../utils/emailService";
 import {
@@ -772,6 +772,14 @@ export const DashboardStage = ({
                       </>
                     )}
                   </p>
+                  {/* Data we could not read is left out of the grades, and the
+                      owner is told so instead of seeing it as a zero. */}
+                  {gbpData && (gbpData.unchecked_fields?.length ?? 0) > 0 && (
+                    <p className="text-white/80 text-xs md:text-sm max-w-2xl mx-auto -mt-3 mb-6">
+                      Some Google data could not be read, so it is left out of
+                      this verdict.
+                    </p>
+                  )}
                 </>
               );
             })()}
@@ -958,9 +966,30 @@ export const DashboardStage = ({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-1 relative z-10">
                 {[...gbpData.pillars]
-                  .sort((a, b) => Number(a.score) - Number(b.score))
+                  // Lowest score first; pillars we could not check go last.
+                  .sort((a, b) => {
+                    const ua = isPillarUnchecked(a);
+                    const ub = isPillarUnchecked(b);
+                    if (ua !== ub) return ua ? 1 : -1;
+                    return Number(a.score) - Number(b.score);
+                  })
                   .map((pillar, idx) => (
                     <div key={idx}>
+                      {isPillarUnchecked(pillar) ? (
+                        <div className="py-3">
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="text-sm font-semibold text-gray-700">
+                              {pillar.category}
+                            </span>
+                            <span className="text-xs font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-500">
+                              Not checked
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {pillar.key_finding}
+                          </p>
+                        </div>
+                      ) : (
                       <HorizontalProgressBar
                         score={Number(pillar.score)}
                         label={pillar.category}
@@ -973,6 +1002,7 @@ export const DashboardStage = ({
                         delay={0.6 + idx * 0.12}
                         whyThisMatters={WHY_THIS_MATTERS[pillar.category]}
                       />
+                      )}
                     </div>
                   ))}
               </div>
@@ -1548,7 +1578,7 @@ export const DashboardStage = ({
                             {pillar.category}
                           </h4>
                           <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
-                            {pillar.score}%
+                            {isPillarUnchecked(pillar) ? "Not checked" : `${pillar.score}%`}
                           </span>
                         </div>
                         <p className="text-gray-600 text-sm mb-3">
