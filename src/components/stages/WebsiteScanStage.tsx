@@ -205,15 +205,23 @@ export const WebsiteScanStage = memo(
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-full max-w-6xl relative">
+        <div className="flex items-center justify-center w-full max-w-7xl relative">
           {/* Decorative Background Elements */}
           <div className="absolute -inset-10 bg-gradient-to-r from-blue-50 to-brand-50 opacity-50 blur-3xl rounded-full"></div>
 
-          {/* Desktop View - Monitor Frame with Browser (mobile mockup intentionally removed) */}
+          {/* Desktop View - Monitor Frame with Browser (mobile mockup intentionally removed).
+              The monitor grows with the screen: as wide as the stage allows, and no
+              taller than the room left under the heading (its screen is 16:9, and
+              16rem is the heading, the padding, the bezel and the stand, with a
+              little air). It used to stop at 56rem, which left a tall screen
+              mostly empty. */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative w-full max-w-4xl z-10"
+            className="relative w-full z-10"
+            style={{
+              maxWidth: "min(80rem, max(20rem, calc((100vh - 16rem) * 16 / 9)))",
+            }}
           >
             {/* Monitor SVG Frame */}
             <div className="relative">
