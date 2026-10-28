@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { MotionConfig } from 'framer-motion';
 import App from './App';
+import './src/styles/motion.css';
 import { bindAbandonmentBeacon } from './src/lib/tracking';
 
 const rootElement = document.getElementById('root');
@@ -11,4 +13,8 @@ if (!rootElement) {
 bindAbandonmentBeacon();
 
 const root = ReactDOM.createRoot(rootElement);
-root.render(<App />);
+root.render(
+  <MotionConfig reducedMotion="user">
+    <App />
+  </MotionConfig>
+);
