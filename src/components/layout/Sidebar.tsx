@@ -166,7 +166,7 @@ export const Sidebar = ({
             background: "rgba(255, 255, 255, 0.7)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(15, 23, 42, 0.08)",
+            border: "1px solid rgba(23,22,21, 0.08)",
             boxShadow: "0 8px 24px rgba(0, 0, 0, 0.05)",
           }}
         >
@@ -297,7 +297,7 @@ export const Sidebar = ({
               background: "rgba(255, 255, 255, 0.5)",
               backdropFilter: "blur(20px)",
               WebkitBackdropFilter: "blur(20px)",
-              border: "1px solid rgba(15, 23, 42, 0.08)",
+              border: "1px solid rgba(23,22,21, 0.08)",
               boxShadow: "0 8px 24px rgba(0, 0, 0, 0.05)",
             }}
           >

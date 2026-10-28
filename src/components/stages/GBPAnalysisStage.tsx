@@ -60,7 +60,7 @@ export const GBPAnalysisStage = memo(
           </h2>
           <div className="inline-flex items-center gap-2 mt-2 md:mt-4 px-3 md:px-4 py-1 bg-brand-50 rounded-full border border-brand-100">
             <Loader2 className="w-3 h-3 animate-spin text-brand-600" />
-            <p className="text-brand-600 font-mono text-[11px] md:text-sm font-semibold">
+            <p className="text-brand-600 text-[11px] md:text-sm font-semibold">
               {isLoading || !data
                 ? "Looking up your business on Google Maps..."
                 : "Analyzing profile + sentiment"}
@@ -73,7 +73,7 @@ export const GBPAnalysisStage = memo(
           <div
             className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-green-500 to-transparent z-30 pointer-events-none"
             style={{
-              boxShadow: "0 0 20px 2px rgba(34,197,94,0.5)",
+              boxShadow: "0 0 20px 2px rgba(79,138,91,0.5)",
               animation: "gbpScanVertical 1.5s linear infinite",
             }}
           />

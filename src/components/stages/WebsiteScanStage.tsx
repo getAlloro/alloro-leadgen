@@ -199,7 +199,7 @@ export const WebsiteScanStage = memo(
           </h2>
           <div className="inline-flex items-center gap-2 px-4 py-1 bg-brand-50 rounded-full border border-brand-100">
             <Loader2 className="w-3 h-3 animate-spin text-brand-600" />
-            <p className="text-brand-600 font-mono text-sm font-semibold">
+            <p className="text-brand-600 text-sm font-semibold">
               {hasScreenshots ? activeMessage : "Connecting to website..."}
             </p>
           </div>

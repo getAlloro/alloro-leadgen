@@ -119,7 +119,7 @@ export const InputStage = ({
         </motion.div>
         <h1 className="text-4xl md:text-6xl font-medium text-gray-900 mb-6 tracking-tight">
           Is your business <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-orange-400">
+          <span className="text-brand-500 italic">
             losing to your competition?
           </span>
         </h1>

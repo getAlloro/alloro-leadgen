@@ -199,11 +199,11 @@ function ScoreRing({
           strokeDasharray={circumference}
           strokeDashoffset={circumference - progress}
           strokeLinecap="round"
-          style={{ filter: score >= 75 ? 'drop-shadow(0 0 6px rgba(34, 197, 94, 0.3))' : undefined }}
+          style={{ filter: score >= 75 ? 'drop-shadow(0 0 6px rgba(79,138,91, 0.3))' : undefined }}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-heading text-4xl font-semibold text-[#1A1D23] leading-none">{displayScore}</span>
+        <span className="font-heading text-4xl font-semibold text-[#171615] leading-none">{displayScore}</span>
         <span className={`text-xs font-bold mt-1 tracking-wide uppercase ${getScoreLabelColor(score)}`}>
           {getScoreLabel(score)}
         </span>
@@ -266,8 +266,8 @@ function SubScoreBar({
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-1">
-          <span className="text-sm font-medium text-[#1A1D23]/70">{label}</span>
-          <span className="text-sm font-semibold text-[#1A1D23]">
+          <span className="text-sm font-medium text-[#171615]/70">{label}</span>
+          <span className="text-sm font-semibold text-[#171615]">
             {score}/{maxScore}
           </span>
         </div>
@@ -325,7 +325,7 @@ function FindingCard({
     <div
       className={`relative rounded-xl p-4 transition-all duration-300 ${
         isSentiment
-          ? "bg-[#212D40] border border-[#212D40] shadow-lg"
+          ? "bg-[#171615] border border-[#171615] shadow-lg"
           : isPositive
             ? "bg-gradient-to-r from-emerald-50/60 to-white border border-emerald-200/40"
             : "bg-white border border-[#D56753]/10 hover:border-[#D56753]/20"
@@ -349,7 +349,7 @@ function FindingCard({
           />
         </div>
         <div className="min-w-0">
-          <p className={`text-sm font-semibold font-heading ${isSentiment ? "text-white" : "text-[#1A1D23]"}`}>
+          <p className={`text-sm font-semibold font-heading ${isSentiment ? "text-white" : "text-[#171615]"}`}>
             {finding.title}
           </p>
           <p className={`text-sm mt-1 leading-relaxed ${isSentiment ? "text-white/70" : "text-slate-500"}`}>{finding.detail}</p>
@@ -377,7 +377,7 @@ function ReviewRaceCard({ gap }: { gap: CheckupGapItem; key?: React.Key }) {
   return (
     <div className={`rounded-xl border p-5 ${isLeading ? "border-emerald-200 bg-emerald-50/50" : "border-[#D56753]/20 bg-white"}`}>
       {/* Race header */}
-      <p className={`text-sm font-bold leading-snug ${isLeading ? "text-emerald-800" : "text-[#1A1D23]"}`}>
+      <p className={`text-sm font-bold leading-snug ${isLeading ? "text-emerald-800" : "text-[#171615]"}`}>
         {gap.label}
       </p>
 
@@ -390,7 +390,7 @@ function ReviewRaceCard({ gap }: { gap: CheckupGapItem; key?: React.Key }) {
           />
         </div>
         <div className="flex items-center justify-between mt-1.5">
-          <span className="text-xs font-semibold text-[#1A1D23] tabular-nums">
+          <span className="text-xs font-semibold text-[#171615] tabular-nums">
             You: {gap.current}
           </span>
           <span className="text-xs font-semibold text-slate-400 tabular-nums">
@@ -403,7 +403,7 @@ function ReviewRaceCard({ gap }: { gap: CheckupGapItem; key?: React.Key }) {
       {v && (
         <div className="mt-4 grid grid-cols-3 gap-1 sm:gap-2">
           <div className="bg-slate-50 rounded-lg p-2 sm:p-2.5 text-center">
-            <p className="text-base sm:text-lg font-bold text-[#1A1D23] tabular-nums">{v.clientWeekly}</p>
+            <p className="text-base sm:text-lg font-bold text-[#171615] tabular-nums">{v.clientWeekly}</p>
             <p className="text-xs text-slate-400 leading-tight">Your pace</p>
           </div>
           <div className="bg-slate-50 rounded-lg p-2 sm:p-2.5 text-center">
@@ -433,7 +433,7 @@ function ReviewRaceCard({ gap }: { gap: CheckupGapItem; key?: React.Key }) {
           }`}>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-bold text-[#1A1D23]">
+                <p className="text-xs font-bold text-[#171615]">
                   This week's target: {v.thisWeekAsk} review{v.thisWeekAsk !== 1 ? "s" : ""}
                 </p>
                 <p className="text-xs text-slate-400 mt-0.5">
@@ -472,7 +472,7 @@ function GapBar({ gap }: { gap: CheckupGapItem; key?: React.Key }) {
         onClick={() => setExpanded(!expanded)}
         className="w-full text-left"
       >
-        <p className="text-sm font-semibold text-[#1A1D23] leading-snug">
+        <p className="text-sm font-semibold text-[#171615] leading-snug">
           {gap.label}
         </p>
         <div className="mt-3 flex items-center gap-3">
@@ -482,7 +482,7 @@ function GapBar({ gap }: { gap: CheckupGapItem; key?: React.Key }) {
               style={{ width: `${pct}%` }}
             />
           </div>
-          <span className="text-xs font-bold text-[#1A1D23] shrink-0 tabular-nums">
+          <span className="text-xs font-bold text-[#171615] shrink-0 tabular-nums">
             {gap.current}/{gap.target}
           </span>
         </div>
@@ -565,7 +565,7 @@ function CompetitorInviteSection({
         {competitors.slice(0, 4).map((c) => (
           <div key={c.placeId} className="flex items-center justify-between">
             <div className="min-w-0">
-              <p className="text-sm font-medium text-[#1A1D23] break-words">{c.name}</p>
+              <p className="text-sm font-medium text-[#171615] break-words">{c.name}</p>
               <p className="text-xs text-gray-400">{c.reviewCount} reviews, {c.rating} stars</p>
             </div>
             <button
@@ -594,7 +594,7 @@ function GapSection({ gaps }: { gaps: CheckupGapItem[] }) {
 
   return (
     <div className="space-y-3">
-      <h2 className="text-sm font-bold text-[#1A1D23] uppercase tracking-wide">
+      <h2 className="text-sm font-bold text-[#171615] uppercase tracking-wide">
         The Race
       </h2>
       <p className="text-xs text-slate-400 -mt-1">
@@ -716,15 +716,15 @@ export default function ResultsScreen() {
           <div className="w-14 h-14 rounded-2xl bg-[#D56753]/8 flex items-center justify-center mx-auto mb-5">
             <Globe className="w-6 h-6 text-[#D56753]" />
           </div>
-          <h2 className="text-xl font-bold text-[#1A1D23] font-heading">
+          <h2 className="text-xl font-bold text-[#171615] font-heading">
             We built this for local service businesses.
           </h2>
-          <p className="text-sm text-[#1A1D23]/60 mt-4 leading-relaxed">
+          <p className="text-sm text-[#171615]/60 mt-4 leading-relaxed">
             Alloro reads local markets: competitors, reviews, visibility, referral patterns.
             {place.name} looks like it operates differently, and we don't want to give you
             data that isn't useful.
           </p>
-          <p className="text-sm text-[#1A1D23]/60 mt-3 leading-relaxed">
+          <p className="text-sm text-[#171615]/60 mt-3 leading-relaxed">
             If we're wrong about this, or if you'd like to know when Alloro
             supports your type of business, we'd genuinely like to hear from you.
           </p>
@@ -735,7 +735,7 @@ export default function ResultsScreen() {
             Tell us what you were looking for
             <ArrowRight className="w-4 h-4" />
           </a>
-          <p className="text-xs text-[#1A1D23]/30 mt-4">
+          <p className="text-xs text-[#171615]/30 mt-4">
             Corey reads every one of these personally.
           </p>
         </div>
@@ -900,7 +900,7 @@ export default function ResultsScreen() {
       {/* Intent context chip */}
       {state.intent && (
         <div className="text-center">
-          <span className="inline-block text-xs font-semibold text-[#1A1D23]/60 bg-[#212D40]/4 border border-[#212D40]/10 rounded-full px-3.5 py-1.5">
+          <span className="inline-block text-xs font-semibold text-[#171615]/60 bg-[#171615]/4 border border-[#171615]/10 rounded-full px-3.5 py-1.5">
             {state.intent}
           </span>
         </div>
@@ -911,7 +911,7 @@ export default function ResultsScreen() {
         <p className="text-[11px] font-bold tracking-[0.2em] text-[#D56753]/70 uppercase mb-2">
           How You Stack Up
         </p>
-        <h2 className="font-heading text-[26px] sm:text-[30px] font-semibold text-[#1A1D23] tracking-tight leading-tight">{place.name}</h2>
+        <h2 className="font-heading text-[26px] sm:text-[30px] font-semibold text-[#171615] tracking-tight leading-tight">{place.name}</h2>
         {market && market.totalCompetitors > 0 && (
           <p className="text-sm text-slate-400 mt-1.5">
             vs. {market.totalCompetitors} competitors in {market.city}
@@ -946,7 +946,7 @@ export default function ResultsScreen() {
       )}
       {market && topCompetitor && market.rank > 1 && topCompetitor.reviewCount > place.reviewCount && (
         <p className="text-sm text-slate-600 text-center leading-relaxed -mt-2">
-          <span className="font-semibold text-[#1A1D23]">{place.name}</span> ranks
+          <span className="font-semibold text-[#171615]">{place.name}</span> ranks
           #{market.rank} in {market.city}.{" "}
           {topCompetitor.name} has{" "}
           <span className="font-semibold text-[#D56753]">
@@ -957,9 +957,9 @@ export default function ResultsScreen() {
       )}
 
       {/* Sub-scores — First Impression breakdown */}
-      <div className="bg-white border border-[#1A1D23]/6 rounded-2xl p-6 shadow-[0_4px_24px_rgba(26,29,35,0.07)] space-y-6">
+      <div className="bg-white border border-[#171615]/6 rounded-2xl p-6 shadow-[0_4px_24px_rgba(23,22,21,0.07)] space-y-6">
         <div className="flex items-center justify-between">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#1A1D23]/30">Behind the Score</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#171615]/30">Behind the Score</p>
           {state.scoreLabel && (
             <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
               score.composite >= 80 ? "bg-emerald-50 text-emerald-700" :
@@ -1044,7 +1044,7 @@ export default function ResultsScreen() {
           {state.ozMoments.map((moment, i) => (
             <div
               key={i}
-              className={`rounded-2xl bg-[#212D40] p-5 space-y-2.5 transition-all duration-700 shadow-lg ${
+              className={`rounded-2xl bg-[#171615] p-5 space-y-2.5 transition-all duration-700 shadow-lg ${
                 revealStage >= 2 ? "opacity-100 translate-y-0" : i === 0 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{ animation: `fade-in-up 0.5s ease-out ${i * 0.15}s both` }}
@@ -1067,7 +1067,7 @@ export default function ResultsScreen() {
 
       {/* Share prompt — right after Oz moments, when the impulse is strongest.
            Oz principle: the share is the user's own idea, not an ask. */}
-      <div className="bg-[#212D40] rounded-2xl p-5 flex flex-col sm:flex-row items-center gap-4">
+      <div className="bg-[#171615] rounded-2xl p-5 flex flex-col sm:flex-row items-center gap-4">
         <div className="flex-1 text-center sm:text-left">
           <p className="text-sm font-semibold text-white">
             Know someone who should see their market?
@@ -1109,7 +1109,7 @@ export default function ResultsScreen() {
               }).catch(() => {});
             }
           }}
-          className="shrink-0 flex items-center gap-2 text-sm font-semibold text-[#1A1D23] bg-white rounded-lg px-5 py-2.5 hover:bg-gray-50 active:scale-[0.98] transition-all"
+          className="shrink-0 flex items-center gap-2 text-sm font-semibold text-[#171615] bg-white rounded-lg px-5 py-2.5 hover:bg-gray-50 active:scale-[0.98] transition-all"
         >
           <Share2 className="w-3.5 h-3.5" />
           {linkCopied ? "Copied!" : "Share and split the check"}
@@ -1131,9 +1131,9 @@ export default function ResultsScreen() {
 
       {/* Findings — first visible, rest blurred */}
       <div className="space-y-3">
-        <h2 className="text-[10px] font-bold text-[#1A1D23]/30 uppercase tracking-[0.2em]">Key Findings</h2>
+        <h2 className="text-[10px] font-bold text-[#171615]/30 uppercase tracking-[0.2em]">Key Findings</h2>
         {state.userQuestion && (
-          <div className="bg-[#D56753]/5 border border-[#D56753]/15 rounded-xl px-4 py-3 text-sm text-[#1A1D23]">
+          <div className="bg-[#D56753]/5 border border-[#D56753]/15 rounded-xl px-4 py-3 text-sm text-[#171615]">
             You asked: &ldquo;{state.userQuestion}&rdquo;. Here&apos;s what we found.
           </div>
         )}
@@ -1152,14 +1152,14 @@ export default function ResultsScreen() {
       {/* Blur Gate — Voss-style: they're receiving something, not being extracted from.
           Frame as delivery, not transaction. "Your full checkup is ready." */}
       {!emailSubmitted ? (
-        <div className="relative bg-white rounded-2xl border border-[#1A1D23]/6 shadow-[0_8px_40px_rgba(26,29,35,0.08)] overflow-hidden">
+        <div className="relative bg-white rounded-2xl border border-[#171615]/6 shadow-[0_8px_40px_rgba(23,22,21,0.08)] overflow-hidden">
           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#D56753] to-[#e57c6a]" />
           <div className="pl-7 pr-6 pt-6 pb-6">
           <div className="mb-4">
-            <p className="font-heading text-[18px] font-semibold text-[#1A1D23]">
+            <p className="font-heading text-[18px] font-semibold text-[#171615]">
               Your full checkup is ready.
             </p>
-            <p className="text-sm text-[#1A1D23]/50 mt-1">
+            <p className="text-sm text-[#171615]/50 mt-1">
               {topCompetitor
                 ? `See the complete ${place.name} vs ${topCompetitor.name} breakdown with your action plan.`
                 : `See your complete ${cityLabel || "market"} analysis with your action plan.`}
@@ -1182,7 +1182,7 @@ export default function ResultsScreen() {
                 placeholder="Your email"
                 autoComplete="email"
                 required
-                className={`w-full h-10 sm:h-12 px-3 sm:px-4 rounded-xl border text-sm sm:text-base text-[#1A1D23] placeholder:text-slate-400 focus:outline-none focus:ring-4 transition-all duration-200 ${
+                className={`w-full h-10 sm:h-12 px-3 sm:px-4 rounded-xl border text-sm sm:text-base text-[#171615] placeholder:text-slate-400 focus:outline-none focus:ring-4 transition-all duration-200 ${
                   emailError
                     ? "border-red-400 focus:border-red-400 focus:ring-red-400/10 bg-red-50/30"
                     : "border-[#D56753]/15 bg-white focus:border-[#D56753] focus:ring-[#D56753]/10"
@@ -1331,7 +1331,7 @@ export default function ResultsScreen() {
                           setTimeout(() => setVendorShareCopied(false), 2000);
                         });
                       }}
-                      className="w-full h-12 flex items-center justify-center gap-2 rounded-xl border-2 border-[#212D40]/20 text-[#1A1D23] text-sm font-semibold hover:border-[#212D40]/40 transition-all"
+                      className="w-full h-12 flex items-center justify-center gap-2 rounded-xl border-2 border-[#171615]/20 text-[#171615] text-sm font-semibold hover:border-[#171615]/40 transition-all"
                     >
                       {vendorShareCopied ? "Copied!" : "Copy link"}
                     </button>
@@ -1393,17 +1393,17 @@ export default function ResultsScreen() {
           </form>
           {/* Trust signals */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 mt-5">
-            <span className="text-xs text-[#1A1D23]/30 flex items-center gap-1">
+            <span className="text-xs text-[#171615]/30 flex items-center gap-1">
               <Lock className="w-3 h-3" /> No credit card
             </span>
-            <span className="text-xs text-[#1A1D23]/30">
+            <span className="text-xs text-[#171615]/30">
               Cancel anytime
             </span>
-            <span className="text-xs text-[#1A1D23]/30">
+            <span className="text-xs text-[#171615]/30">
               Your data stays yours
             </span>
           </div>
-          <p className="text-xs text-[#1A1D23]/20 text-center mt-2 leading-relaxed">
+          <p className="text-xs text-[#171615]/20 text-center mt-2 leading-relaxed">
             Built on Claude by Anthropic. Your data is never sold or shared.
           </p>
           </div>
@@ -1423,7 +1423,7 @@ export default function ResultsScreen() {
         {/* ═══ SHAREABLE SCORE CARD — the Spotify Wrapped artifact ═══ */}
         {/* Designed for screenshots. The visual that gets texted to colleagues. */}
         <div className="rounded-2xl overflow-hidden shadow-lg">
-          <div className="bg-[#212D40] p-6 text-center">
+          <div className="bg-[#171615] p-6 text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/30 mb-3">
               Business Clarity Score
             </p>
@@ -1493,7 +1493,7 @@ export default function ResultsScreen() {
                 });
               }
             }}
-            className="flex items-center gap-2 text-sm font-medium text-[#1A1D23] border border-[#212D40]/20 rounded-lg px-4 py-2.5 hover:border-[#212D40]/40 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-[#171615] border border-[#171615]/20 rounded-lg px-4 py-2.5 hover:border-[#171615]/40 transition-colors"
           >
             <Copy className="w-3.5 h-3.5" />
             {linkCopied ? "Copied!" : "Share and split the check"}

@@ -20,8 +20,8 @@ interface SharedCard {
 }
 
 function getScoreColor(score: number): string {
-  if (score >= 75) return "#10B981";
-  if (score >= 40) return "#F59E0B";
+  if (score >= 75) return "#4f8a5b";
+  if (score >= 40) return "#d9a441";
   return "#D56753";
 }
 
@@ -61,16 +61,16 @@ export default function SharedResults() {
       <header className="flex flex-col items-center pt-10 pb-7 px-4 anim-slide-down">
         <Link to="/checkup" className="flex items-center gap-2.5">
           <img src="/logo.png" alt="Alloro" className="h-9 w-auto" />
-          <span className="font-heading font-bold text-[22px] tracking-tight text-[#1A1D23]">
+          <span className="font-heading font-bold text-[22px] tracking-tight text-[#171615]">
             Alloro
           </span>
         </Link>
         <div className="flex items-center gap-4 mt-5 w-full max-w-[280px]">
-          <div className="flex-1 h-px bg-[#1A1D23]/8" />
-          <span className="text-[10px] font-bold tracking-[0.22em] text-[#1A1D23]/22 uppercase whitespace-nowrap">
+          <div className="flex-1 h-px bg-[#171615]/8" />
+          <span className="text-[10px] font-bold tracking-[0.22em] text-[#171615]/22 uppercase whitespace-nowrap">
             Business Clarity
           </span>
-          <div className="flex-1 h-px bg-[#1A1D23]/8" />
+          <div className="flex-1 h-px bg-[#171615]/8" />
         </div>
       </header>
 
@@ -78,16 +78,16 @@ export default function SharedResults() {
         {loading && (
           <div className="flex flex-col items-center gap-3 mt-20 anim-fade-in">
             <div className="w-8 h-8 rounded-full border-2 border-[#D56753]/20 border-t-[#D56753] animate-spin" />
-            <p className="text-sm text-[#1A1D23]/35 font-medium tracking-wide">Loading market data…</p>
+            <p className="text-sm text-[#171615]/35 font-medium tracking-wide">Loading market data…</p>
           </div>
         )}
 
         {error && (
           <div className="max-w-[440px] w-full text-center mt-16 anim-fade-up">
-            <h1 className="font-heading text-[26px] font-semibold text-[#1A1D23] mb-3">
+            <h1 className="font-heading text-[26px] font-semibold text-[#171615] mb-3">
               This link has expired
             </h1>
-            <p className="text-[15px] text-[#1A1D23]/45 mb-8 leading-relaxed">
+            <p className="text-[15px] text-[#171615]/45 mb-8 leading-relaxed">
               Run your own free Checkup to see your market.
             </p>
             <Link
@@ -104,18 +104,18 @@ export default function SharedResults() {
           <div className="max-w-[440px] w-full mt-6 space-y-5">
             {/* Framing headline */}
             <div className="anim-fade-up text-center" style={{ animationDelay: '0ms' }}>
-              <p className="font-heading text-[22px] sm:text-[26px] font-semibold text-[#1A1D23] tracking-tight leading-tight">
+              <p className="font-heading text-[22px] sm:text-[26px] font-semibold text-[#171615] tracking-tight leading-tight">
                 A colleague scored{" "}
                 <span style={{ color }}>{card.score}</span>.
                 <br />Where do you rank?
               </p>
-              <p className="text-sm text-[#1A1D23]/40 mt-2">
+              <p className="text-sm text-[#171615]/40 mt-2">
                 {card.specialty} in {card.city}
               </p>
             </div>
 
             {/* Score card */}
-            <div className="anim-scale-in relative bg-white rounded-2xl border border-[#1A1D23]/6 shadow-[0_8px_40px_rgba(26,29,35,0.08)] overflow-hidden" style={{ animationDelay: '120ms' }}>
+            <div className="anim-scale-in relative bg-white rounded-2xl border border-[#171615]/6 shadow-[0_8px_40px_rgba(23,22,21,0.08)] overflow-hidden" style={{ animationDelay: '120ms' }}>
               {/* Top accent bar */}
               <div className="h-[3px]" style={{ background: `linear-gradient(to right, ${color}, ${color}99)` }} />
 
@@ -131,7 +131,7 @@ export default function SharedResults() {
                         boxShadow: `0 4px 24px ${color}18`,
                       }}
                     >
-                      <span className="font-heading text-[40px] font-semibold leading-none text-[#1A1D23]">{card.score}</span>
+                      <span className="font-heading text-[40px] font-semibold leading-none text-[#171615]">{card.score}</span>
                       <span className="text-[10px] font-bold uppercase tracking-[0.15em] mt-1" style={{ color }}>
                         {label}
                       </span>
@@ -155,23 +155,23 @@ export default function SharedResults() {
                     { icon: Users, value: card.totalCompetitors, label: "Competitors" },
                     { icon: Star, value: card.score, label: "Score" },
                   ].map(({ icon: Icon, value, label: statLabel }) => (
-                    <div key={statLabel} className="text-center bg-[#FDFCF9] rounded-xl py-3.5 border border-[#1A1D23]/5">
+                    <div key={statLabel} className="text-center bg-[#FDFCF9] rounded-xl py-3.5 border border-[#171615]/5">
                       <Icon className="w-3.5 h-3.5 mx-auto mb-1.5" style={{ color }} />
-                      <p className="font-heading text-[18px] font-semibold text-[#1A1D23] leading-none">{value}</p>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#1A1D23]/30 mt-1">{statLabel}</p>
+                      <p className="font-heading text-[18px] font-semibold text-[#171615] leading-none">{value}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#171615]/30 mt-1">{statLabel}</p>
                     </div>
                   ))}
                 </div>
 
                 {card.topCompetitorName && (
-                  <p className="text-sm text-[#1A1D23]/50 text-center leading-relaxed -mt-2">
+                  <p className="text-sm text-[#171615]/50 text-center leading-relaxed -mt-2">
                     Top competitor:{" "}
-                    <span className="font-semibold text-[#1A1D23]">{card.topCompetitorName}</span>
+                    <span className="font-semibold text-[#171615]">{card.topCompetitorName}</span>
                   </p>
                 )}
 
                 {/* CTA */}
-                <div className="pt-4 border-t border-[#1A1D23]/6 space-y-3">
+                <div className="pt-4 border-t border-[#171615]/6 space-y-3">
                   <Link
                     to="/checkup"
                     className="flex items-center justify-center gap-2 w-full rounded-xl text-white text-sm font-bold px-6 py-3.5 hover:brightness-110 active:scale-[0.97] transition-all shadow-[0_4px_16px_rgba(214,104,83,0.35)]"
@@ -180,10 +180,10 @@ export default function SharedResults() {
                     Check your score
                     <ArrowRight className="w-4 h-4" />
                   </Link>
-                  <p className="text-center text-[11px] text-[#1A1D23]/28 font-medium">
+                  <p className="text-center text-[11px] text-[#171615]/28 font-medium">
                     Free · 60 seconds · No one sees your results but you
                   </p>
-                  <p className="text-center font-heading text-sm font-semibold text-[#1A1D23] pt-1">
+                  <p className="text-center font-heading text-sm font-semibold text-[#171615] pt-1">
                     Can you beat {card.score}?
                   </p>
                 </div>
@@ -195,11 +195,11 @@ export default function SharedResults() {
 
       <footer className="py-8 text-center anim-fade-in" style={{ animationDelay: '400ms' }}>
         <div className="flex items-center gap-4 mx-auto max-w-[240px] mb-5">
-          <div className="flex-1 h-px bg-[#1A1D23]/6" />
+          <div className="flex-1 h-px bg-[#171615]/6" />
           <div className="w-1 h-1 rounded-full bg-[#D56753]/30" />
-          <div className="flex-1 h-px bg-[#1A1D23]/6" />
+          <div className="flex-1 h-px bg-[#171615]/6" />
         </div>
-        <p className="text-[10px] font-bold tracking-[0.2em] text-[#1A1D23]/20 uppercase">
+        <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/20 uppercase">
           Alloro &middot; Business Clarity
         </p>
       </footer>

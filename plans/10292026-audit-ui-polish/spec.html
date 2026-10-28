@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audit tool UI polish</title>
+  <style>
+    :root { color-scheme: light; --paper: #ffffff; --ink: #080808; --muted: #5f5f5f; --line: #d8d8d8; --soft: #f5f5f5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
+    .spec-shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0; }
+    .spec-hero, .spec-card, .task-card { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+    .spec-hero { border-color: var(--ink); padding: 32px; margin-bottom: 20px; }
+    .hero-topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .spec-card { padding: 28px; margin-top: 16px; }
+    .task-card { padding: 20px; background: var(--soft); margin-top: 12px; }
+    .eyebrow, dt { color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0; text-transform: uppercase; }
+    .eyebrow { margin: 0; }
+    .status-pill { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; }
+    .status-card { border-color: var(--ink) !important; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 900px; margin-bottom: 24px; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; }
+    h2 { font-size: 1.35rem; }
+    h3 { font-size: 1rem; }
+    code { padding: 0.1rem 0.3rem; border: 1px solid var(--line); border-radius: 4px; background: var(--soft); font-size: 0.92em; }
+    .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0; }
+    .meta-grid div { border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+    dd { margin: 4px 0 0; font-weight: 700; }
+    .task-card dd { font-weight: 400; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-top: 1px solid var(--line); }
+    th { font-size: 0.78rem; text-transform: uppercase; color: var(--muted); }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { padding: 10px 0; border-top: 1px solid var(--line); }
+    .note { border-left: 3px solid var(--ink); padding: 8px 14px; background: var(--soft); }
+    .revision-entry { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px; }
+    @media (max-width: 640px) { .spec-shell { width: min(100% - 20px, 1120px); padding: 24px 0; } .spec-hero, .spec-card { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <main class="spec-shell">
+    <header class="spec-hero">
+      <div class="hero-topline">
+        <p class="eyebrow">Plan Spec · -s · audit.getalloro.com</p>
+        <span class="status-pill">In Progress</span>
+      </div>
+      <h1>Audit tool: the alloro.com look and a little motion, with everything working exactly as it does today</h1>
+      <dl class="meta-grid">
+        <div class="status-card"><dt>Status</dt><dd>In Progress: S1 built and checked locally (Rev 2). Nothing pushed.</dd></div>
+        <div><dt>Plan folder</dt><dd>plans/10292026-audit-ui-polish</dd></div>
+        <div><dt>Repo</dt><dd>getAlloro/alloro-leadgen (audit.getalloro.com). No dev stage: a merge to <code>main</code> deploys to production.</dd></div>
+        <div><dt>Worktree</dt><dd>Documents/Projects/alloro-leadgen-worktrees/audit-ui-polish</dd></div>
+        <div><dt>Branch</dt><dd>jov-claude/audit-ui-polish, from origin/main 0e0d039 (merge of #7). Not pushed.</dd></div>
+        <div><dt>Size / risk</dt><dd>Medium (about 25 files, styles only). Level 2: it is production on merge; each slice ships alone and is undone alone.</dd></div>
+        <div><dt>Source</dt><dd>Context build 2026-10-29 (23 findings). Jov: "yes to all 6".</dd></div>
+      </dl>
+    </header>
+
+    <section class="spec-card" id="why">
+      <h2>Why</h2>
+      <p>The audit tool is the first thing many owners see of Alloro, and it does not look like Alloro. Its headings use a different font (Playfair Display, while alloro.com uses Spectral), its headline fades into an orange that is not in the palette, and its screens mix cold blue-greys, blue and orange grade boxes and navy panels into a warm terracotta brand. Small text (83 places at 9–11px) is hard to read, and on a phone three "Create account" buttons show at once while a sticky bar covers about 110px of the report. This plan gives it alloro.com's fonts, colours and calm motion, so the tool and the site read as one company, without changing what the tool does.</p>
+      <p><strong>Metric line:</strong> no number moves by design. The test is "looks like alloro.com, works the same". Email capture is tracked by the tool already; this plan must leave those counts unchanged in kind (same events, same order).</p>
+    </section>
+
+    <section class="spec-card" id="rules">
+      <h2>Rules (Jov's words, made checkable)</h2>
+      <ul>
+        <li><strong>"Save a copy so we can easily undo it."</strong> Done before any change. See Backup and undo.</li>
+        <li><strong>"Make sure nothing breaks, and still works the same as before."</strong> Every slice re-runs the existing proof walk (report links, email card, unlock) and compares the list of requests the tool sends with today's list. Both must match before a slice is shown to Jov.</li>
+        <li><strong>"Nothing added or removed. Only update the UI/UX part."</strong> No change to: what the tool asks, sends or stores; the order of screens; timings; tracking events; the email card's place (Jov's final verdict, 2026-10-13); words, except the one wording change Jov approved (Q3). Items from the list that would add or remove content without an explicit yes are held out (see Not in this plan).</li>
+        <li><strong>"Don't overkill."</strong> Motion plays once, is short, and is off for anyone whose device asks for less motion.</li>
+        <li><strong>Fonts and colours from alloro.com only.</strong> Plus Jakarta Sans and Spectral; alloro.com's tokens: terracotta <code>#d66853</code>, terracotta-text <code>#b1462c</code>, terracotta-deep <code>#c0543a</code>, ink <code>#171615</code>, ink-soft <code>#3b3531</code>, muted <code>#6b635c</code>, line <code>#e8e4df</code>, line-strong <code>#d8d3cc</code>, paper <code>#f7f5f3</code>, surface <code>#ffffff</code>, green <code>#4f8a5b</code>, amber <code>#d9a441</code>. The tool keeps its own beige page colour <code>#fbf8f0</code>.</li>
+      </ul>
+    </section>
+
+    <section class="spec-card" id="backup">
+      <h2>Backup and undo (done 2026-10-29, before any change)</h2>
+      <p>Folder: <code>Documents/Projects/alloro-leadgen-backups/2026-10-29-before-ui-polish/</code> (35 MB), with a README that says how to restore.</p>
+      <table>
+        <tr><th>Copy</th><th>What it holds</th></tr>
+        <tr><td>Git tag <code>backup/before-ui-polish-2026-10-29</code></td><td>The commit live today, <code>0e0d039</code>. Local tag in the main clone; not pushed.</td></tr>
+        <tr><td><code>alloro-leadgen-full-history.bundle</code></td><td>The whole repository, every branch and commit. <code>git bundle verify</code>: okay.</td></tr>
+        <tr><td><code>live-site/</code></td><td>The exact files the live site served: <code>index.html</code>, <code>assets/index-DMe0IezO.js</code> (sha256 770387a9de03bf6a…), <code>logo.png</code>.</td></tr>
+        <tr><td><code>baseline-screens/</code></td><td>Every screen before the change: first screen, scanning steps, locked and unlocked report, at 1440 and 390 wide. These are the "before" for every comparison.</td></tr>
+        <tr><td><code>tour-rig/</code></td><td>The scripts that took them, to take the same shots after each slice.</td></tr>
+      </table>
+      <h3>How to undo</h3>
+      <ol>
+        <li><strong>One slice:</strong> revert that slice's merge commit on <code>main</code> (<code>git revert -m 1 &lt;merge sha&gt;</code>) and push. The deploy workflow rebuilds and copies the previous files to the server, as for any merge.</li>
+        <li><strong>Everything at once:</strong> push the tagged commit's tree back to <code>main</code> as a new commit (restore, not force-push), or revert every slice merge newest first.</li>
+        <li><strong>Last resort, without GitHub:</strong> copy <code>live-site/index.html</code> and <code>live-site/assets/</code> into <code>~/audit</code> on the server (needs the server login, which Dave holds).</li>
+      </ol>
+      <p class="note">Each slice is its own PR, so each is undone on its own. The deploy copies new files but never deletes old ones, so an undo serves the old bundle again by name.</p>
+    </section>
+
+    <section class="spec-card" id="context">
+      <h2>Context (measured 2026-10-29)</h2>
+      <p>Live first screen measured in Chrome; every later screen measured on today's live code, built and run locally against the proof-rig stand-in (sample business "Garrison Orthodontics", no real request leaves the machine, no email given).</p>
+      <table>
+        <tr><th>Finding</th><th>Measured</th><th>Where</th></tr>
+        <tr><td>Heading font</td><td>Playfair Display (loaded weight 500); alloro.com uses Spectral</td><td><code>index.html</code> font link + inline Tailwind config <code>heading</code></td></tr>
+        <tr><td>Dead font rule</td><td><code>index.css</code> names "Source Serif 4", never loaded</td><td><code>index.css</code> <code>.font-heading</code></td></tr>
+        <tr><td>⛔ <code>index.css</code> never loads on live</td><td>Live <code>/index.css</code> answers with the page itself (text/html). Its 4 entrance animations (used 27 times) and its rules have never run on live.</td><td><code>index.html</code> line 505 links <code>/index.css</code>, a root file the build does not ship</td></tr>
+        <tr><td>Tailwind at runtime</td><td>Styles are built in the visitor's browser from <code>cdn.tailwindcss.com</code> (v3.4.17), with an inline config in <code>index.html</code>; Tailwind marks this copy as not for production</td><td><code>index.html</code> lines 9–30</td></tr>
+        <tr><td>Headline gradient</td><td>terracotta → <code>#fb923c</code> (Tailwind orange)</td><td>Entry screen</td></tr>
+        <tr><td>Cool greys</td><td>gray-900/500/400/700/600, slate-400/500/600, bg-gray-200/100/50 (about 300 uses)</td><td>src/ and App.tsx</td></tr>
+        <tr><td>Off-brand colours</td><td>Blue B+/B grade boxes, orange D, blue "You" pin, blue and yellow chip icons, navy panels (Local Ranking Insights, upsell card), red monospace scan label</td><td>Report, scan, entry</td></tr>
+        <tr><td>Small text</td><td>83 uses of 9–11px (<code>text-[10px]</code> 44, <code>text-[9px]</code> 21, <code>text-[11px]</code> 18); 52 elements under 12px on the report</td><td>src/</td></tr>
+        <tr><td>Subtitle weight</td><td>20px at weight 300, gray-600 on beige</td><td>Entry screen</td></tr>
+        <tr><td>Phone report header</td><td>Name, date and location cut off with "…"</td><td>DashboardStage</td></tr>
+        <tr><td>Phone section heads</td><td>"Google Business Profile Analysis" wraps to 4 lines beside "See Key Insights"</td><td>DashboardStage</td></tr>
+        <tr><td>Account buttons</td><td>11 in code; on a phone 3 at once (top bar, banner, sticky bottom bar about 110px)</td><td>Sidebar, DashboardStage, App</td></tr>
+        <tr><td>Button wording</td><td>"Book Strategy Call" while scanning, "Create Your Free Account" on the report</td><td>Sidebar</td></tr>
+        <tr><td>Scan screen</td><td>Google listing step sits still about 45s with the lower half empty</td><td>GBPAnalysisStage</td></tr>
+        <tr><td>Phone blurred preview</td><td>About 3 phone screens of blurred preview after the email card</td><td>DashboardStage</td></tr>
+        <tr><td>Motion</td><td>No reduce-motion handling anywhere</td><td>whole app</td></tr>
+      </table>
+      <p><strong>Existing work reused:</strong> the full-height scan screens were built on 2026-10-13 on local branch <code>jov-claude/scan-screens-full-height</code> (commit <code>63281fc</code>). It is stacked on two email-card commits and a scan-walk change; only its layout part is taken (see S4).</p>
+    </section>
+
+    <section class="spec-card" id="scope">
+      <h2>In this plan, and not in it</h2>
+      <table>
+        <tr><th>List item</th><th>Decision</th></tr>
+        <tr><td>1–6 fonts and colours</td><td>In (Q1 yes): S1</td></tr>
+        <tr><td>7, 8, 9, 10 readability</td><td>In: S2</td></tr>
+        <tr><td>12 slimmer phone bar, no duplicate top-bar button</td><td>In (Q2 yes): S3. Removes one duplicate button on phones only; the same action stays one tap away.</td></tr>
+        <tr><td>13 one button wording</td><td><strong>Held out (Rev 1).</strong> Jov said yes (Q3), but the readiness re-read found "Book Strategy Call" is a different action: it opens a Google Calendar booking page and records <code>cta_clicked_strategy_call</code>. New words would promise an account and open a calendar; a new link would change what the tool does. The button stays as it is unless Jov decides otherwise.</td></tr>
+        <tr><td>14 full-height scan screens</td><td>In (Q4 yes): S4, layout only.</td></tr>
+        <tr><td>15 competitor map looked empty</td><td>In as a check in S4: confirm on the local build whether tiles load. If it is a real fault, report it; fixing it would be a behaviour change, so it is not done here.</td></tr>
+        <tr><td>16 shorter blurred preview on phones</td><td>In: S3. Decoration height only; the email card's place is unchanged.</td></tr>
+        <tr><td>17–21 motion</td><td>In (Q6 yes, exactly these): S5</td></tr>
+        <tr><td>22 styles built into the site</td><td>In (Q5 yes, own change, last): S6</td></tr>
+        <tr><td>11 hide map coordinates</td><td><strong>Held out.</strong> It removes information. Needs Jov's yes by name.</td></tr>
+        <tr><td>23 search description</td><td><strong>Held out.</strong> It adds words. Needs Jov's yes and his wording.</td></tr>
+      </table>
+    </section>
+
+    <section class="spec-card" id="risk">
+      <h2>Risk</h2>
+      <ul>
+        <li><strong>Production on merge (Level 2).</strong> Mitigation: one slice per PR, each proved locally with screenshots for Jov first, merged only on his word, undone by one revert.</li>
+        <li><strong>Turning on <code>index.css</code> changes more than motion (Level 2).</strong> It carries a Tailwind v4 import, a theme and a heading font rule that would land on top of the runtime Tailwind v3. Mitigation: S1–S5 do not link it; motion goes in a new small stylesheet bundled by Vite. S6 retires both the runtime CDN and the dead <code>index.css</code> in one change, proved by a pixel comparison.</li>
+        <li><strong>Cherry-picking the scan screens (Level 2).</strong> The branch also carries a scan-walk timing change and email-card changes. Mitigation: take only the layout of <code>GBPAnalysisStage</code> / <code>WebsiteScanStage</code>; the request and timing checks (A2, A9) fail if anything else came along.</li>
+        <li><strong>Colour swaps touch many files.</strong> Mitigation: colours change through a token map (one place), then class swaps file by file, and the words check (A3) and request check (A2) run on every slice.</li>
+        <li><strong>Blast radius:</strong> the audit tool only. The main app, its API and alloro.com are not touched. The report email (sent by the backend) is not touched.</li>
+      </ul>
+    </section>
+
+    <section class="spec-card" id="tasks">
+      <h2>Tasks (one PR each, in this order)</h2>
+      <div class="task-card"><h3>S0 Backups and baseline (DONE 2026-10-29)</h3><p>Tag, full bundle, live files, baseline screenshots and tour scripts saved. See Backup and undo.</p></div>
+      <div class="task-card"><h3>S1 Fonts and colours (items 1–6)</h3>
+        <dl><dt>Files</dt><dd><code>index.html</code> (font link: Spectral replaces Playfair; Tailwind config: <code>heading</code> font, alloro colour tokens, warm greys); stage and layout components where colours are hard-coded.</dd>
+        <dt>Do</dt><dd>Headings in Spectral; headline accent solid terracotta italic (no orange gradient); cool gray/slate classes mapped to ink/ink-soft/muted/line; grade boxes and chip icons to the Alloro set (green/amber/terracotta keep their good/okay/bad meaning); navy panels to ink <code>#171615</code>; scan label in the site sans, muted.</dd>
+        <dt>Not</dt><dd>No layout, word or behaviour change.</dd></dl></div>
+      <div class="task-card"><h3>S2 Readability (items 7–10)</h3>
+        <dl><dt>Do</dt><dd>9–11px text to 12px minimum; entry subtitle weight 300 → 400; phone report header lines wrap to two lines instead of "…"; phone section heads put their "See Key Insights" button under the heading.</dd></dl></div>
+      <div class="task-card"><h3>S3 Flow (items 12, 16)</h3>
+        <dl><dt>Do</dt><dd>Phone bottom bar becomes one line (button only, about 64px); the top-bar account button hides on phones while that bar shows; phone blurred preview is one screen tall.</dd>
+        <dt>Not</dt><dd>The email card's place, the account link, the "Book Strategy Call" button and the desktop sidebar card stay as they are.</dd></dl></div>
+      <div class="task-card"><h3>S4 Scan screens fill the screen (item 14, check item 15)</h3>
+        <dl><dt>Do</dt><dd>Take the layout part of <code>63281fc</code>: the Google listing step's cards run the full height with the profile facts already fetched; the website step's monitor grows with the screen. Check the competitor map's tiles on the local build and report.</dd>
+        <dt>Not</dt><dd>No scan-walk or timing change; no new request.</dd></dl></div>
+      <div class="task-card"><h3>S5 Motion (items 17–21)</h3>
+        <dl><dt>Files</dt><dd>New <code>src/styles/motion.css</code>, imported by the app so Vite bundles it; small additions in the components that use it.</dd>
+        <dt>Do</dt><dd>Respect reduce-motion (all motion off); first screen: one fade-up and a small laurel sprig drawn beside the badge; grade rings and score bars draw once when they come into view; report sections fade in once as they scroll in; search box gets a soft terracotta focus ring.</dd>
+        <dt>Not</dt><dd>No loops, nothing repeats, no motion that delays a click or a screen.</dd></dl></div>
+      <div class="task-card"><h3>S6 Styles built into the site (item 22), last</h3>
+        <dl><dt>Do</dt><dd>Compile Tailwind at build time with the same config, remove the <code>cdn.tailwindcss.com</code> script and the dead <code>/index.css</code> link (its entrance animations move into <code>motion.css</code> only if S5 uses them).</dd>
+        <dt>Proof</dt><dd>Pixel comparison of every screen before and after S6: no difference.</dd></dl></div>
+    </section>
+
+    <section class="spec-card" id="acceptance">
+      <h2>Acceptance (numbered checks with the signal each predicts)</h2>
+      <table>
+        <tr><th>#</th><th>Check</th><th>Predicted signal</th></tr>
+        <tr><td>A1</td><td>Works the same: the proof rig walk (<code>prove.ps1</code>: report links, unlock with email, no-website report, blocked-website report)</td><td>Exit 0 on every slice, same as on <code>0e0d039</code></td></tr>
+        <tr><td>A2</td><td>Same requests: the stand-in log of a full audit (start, session, events in order, status polls, email) before vs after</td><td>Identical list of paths and event names</td></tr>
+        <tr><td>A3</td><td>Same words: visible text of every screen before vs after</td><td>Identical on every screen (no exceptions since Rev 1)</td></tr>
+        <tr><td>A4</td><td>Fonts</td><td><code>document.fonts</code>: Plus Jakarta Sans and Spectral loaded; no Playfair Display request</td></tr>
+        <tr><td>A5</td><td>Colours</td><td>0 Tailwind blue/indigo/sky/slate/gray classes left in <code>src/</code> and <code>App.tsx</code>; no <code>#fb923c</code></td></tr>
+        <tr><td>A6</td><td>Small text</td><td>0 visible elements under 12px on every screen, 1440 and 390</td></tr>
+        <tr><td>A7</td><td>Phone layout</td><td>No sideways scroll on any screen; report header shows the full name; one account button visible at a time; bottom bar ≤ 64px</td></tr>
+        <tr><td>A8</td><td>Email card place</td><td>Its top offset in the report matches the baseline within 8px, desktop and phone (locked report)</td></tr>
+        <tr><td>A9</td><td>Scan timing</td><td>Every scan step is shown, and the report arrives at the same time as the baseline (±5s) on the slow stand-in</td></tr>
+        <tr><td>A10</td><td>Motion off when asked</td><td>With reduce-motion on, <code>document.getAnimations()</code> is 0 after load and after scrolling</td></tr>
+        <tr><td>A11</td><td>Motion once</td><td>With motion on, each piece plays once; scrolling back does not replay it</td></tr>
+        <tr><td>A12</td><td>S6 no visual change</td><td>Pixel difference 0 on every screen vs the pre-S6 build; no request to <code>cdn.tailwindcss.com</code></td></tr>
+        <tr><td>A13</td><td>Live after each merge (read-only)</td><td>New bundle name served; first screen loads with both fonts; no console error. Later screens are not run on live (a live audit is a real lead).</td></tr>
+      </table>
+    </section>
+
+    <section class="spec-card" id="open">
+      <h2>Open items</h2>
+      <ul>
+        <li><strong>O1 (answered in Rev 1)</strong> "Book Strategy Call" opens <code>calendar.app.google/…</code> (a booking page) and records <code>cta_clicked_strategy_call</code>; it is not the account link. Item 13 is held out.</li>
+        <li><strong>O2</strong> Items 11, 13 and 23 stay out unless Jov says yes to each by name.</li>
+        <li><strong>O3</strong> S6 may not reach "no visual change": the repo's build-time Tailwind is v4 (<code>@tailwindcss/vite</code>) while the live page runs v3 from the CDN, and v4 changes some defaults (shadow, ring and border sizes). If A12 cannot reach 0 without adding a package, S6 stops and is reported, not forced.</li>
+      </ul>
+    </section>
+
+    <section class="spec-card" id="done">
+      <h2>Done</h2>
+      <ul class="checklist">
+        <li>☑ S0 backups and baseline saved, README with restore steps</li>
+        <li>☐ S1–S6 each built locally, A1–A12 passing, shown to Jov with a localhost link and screenshots</li>
+        <li>☐ Each slice merged to <code>main</code> only on Jov's word, one at a time</li>
+        <li>☐ A13 checked on live after each merge</li>
+        <li>☐ Undo path written in each PR body (the revert command and the backup folder)</li>
+      </ul>
+    </section>
+
+    <section class="spec-card" id="revision-log">
+      <h2>Revision Log</h2>
+      <article class="revision-entry">
+        <h3>Rev 1 - 2026-10-29</h3>
+        <p><strong>Change:</strong> Item 13 (one button wording) moved to held out; S3 and A3 updated; O1 answered; O3 added (S6 Tailwind v3 at runtime vs v4 at build time).</p>
+        <p><strong>Reason:</strong> Readiness re-read: "Book Strategy Call" opens a Google Calendar booking page with its own tracking event, so renaming it would mislead and relinking it would change behaviour, against Jov's rule "works the same as before, nothing added or removed".</p>
+        <p><strong>Updated Done criteria:</strong> A3 now expects identical words on every screen.</p>
+      </article>
+      <article class="revision-entry">
+        <h3>Rev 2 - 2026-10-29</h3>
+        <p><strong>Change:</strong> S1 built. Palette set once in the Tailwind config in <code>index.html</code> (gray/slate → warm greys, blue/indigo → warm ink, orange → terracotta, yellow/amber → alloro amber, green/emerald → alloro green); 169 hard-coded cool colours swapped (the plan's "145" counted lines, not occurrences); headings in Spectral; headline accent solid terracotta italic; scan labels in the site font (the timer keeps monospace digits). Red is kept as "bad" but warmed (<code>#cc4a3d</code> family) instead of left as Tailwind's bright red.</p>
+        <p><strong>Reason:</strong> Execution deviation: left as is, the bright red looked louder than everything else once green and amber took alloro.com's softer tones. It still reads as red.</p>
+        <p><strong>Updated Done criteria:</strong> none. S1 checks: A1 4/4 runs ok, A2 same 12 requests in order, A3 words identical on 6 screens, A8 email card 1220/2020px unchanged, A9 86s → 86s.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

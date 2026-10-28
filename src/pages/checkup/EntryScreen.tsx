@@ -304,7 +304,7 @@ export default function EntryScreen() {
 
       {/* Referral banner */}
       {referrerName && (
-        <div className="anim-fade-up flex items-center justify-center gap-2 mb-6 text-sm text-[#1A1D23] bg-[#D56753]/6 border border-[#D56753]/15 rounded-xl px-4 py-2.5">
+        <div className="anim-fade-up flex items-center justify-center gap-2 mb-6 text-sm text-[#171615] bg-[#D56753]/6 border border-[#D56753]/15 rounded-xl px-4 py-2.5">
           <UserCheck className="w-4 h-4 text-[#D56753] shrink-0" />
           <span>Referred by <strong>{referrerName}</strong></span>
         </div>
@@ -327,9 +327,9 @@ export default function EntryScreen() {
           editKey="checkup.entry.headline"
           defaultText="Let's see what your business has been saying."
           as="h1"
-          className="font-heading text-[34px] sm:text-[42px] font-semibold text-[#1A1D23] tracking-tight leading-[1.1] mb-5"
+          className="font-heading text-[34px] sm:text-[42px] font-semibold text-[#171615] tracking-tight leading-[1.1] mb-5"
         />
-        <p className="text-[15px] text-[#1A1D23]/45 leading-relaxed max-w-sm mx-auto">
+        <p className="text-[15px] text-[#171615]/45 leading-relaxed max-w-sm mx-auto">
           {selectedPlace
             ? `We'll read your market in ${selectedPlace.city || "your area"} and tell you what we find. Honest.`
             : "Type your business name. We'll tell you something specific and true."}
@@ -339,7 +339,7 @@ export default function EntryScreen() {
       {/* Search input */}
       <div className="anim-fade-up relative" style={{ animationDelay: '160ms' }}>
         <div className="relative group">
-          <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-[#1A1D23]/25 pointer-events-none transition-colors duration-200 group-focus-within:text-[#D56753]" />
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-[#171615]/25 pointer-events-none transition-colors duration-200 group-focus-within:text-[#D56753]" />
           <input
             ref={searchInputRef}
             type="text"
@@ -347,7 +347,7 @@ export default function EntryScreen() {
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder="Search your business name…"
             autoComplete="off"
-            className="w-full h-[60px] pl-14 pr-14 rounded-2xl bg-white border-2 border-[#1A1D23]/8 text-base font-medium text-[#1A1D23] placeholder:text-[#1A1D23]/25 shadow-[0_4px_24px_rgba(26,29,35,0.06)] transition-all duration-200 focus:outline-none focus:border-[#D56753]/35 focus:shadow-[0_4px_32px_rgba(214,104,83,0.12)]"
+            className="w-full h-[60px] pl-14 pr-14 rounded-2xl bg-white border-2 border-[#171615]/8 text-base font-medium text-[#171615] placeholder:text-[#171615]/25 shadow-[0_4px_24px_rgba(23,22,21,0.06)] transition-all duration-200 focus:outline-none focus:border-[#D56753]/35 focus:shadow-[0_4px_32px_rgba(214,104,83,0.12)]"
           />
           {isSearching && (
             <Loader2 className="absolute right-5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-[#D56753] animate-spin" />
@@ -361,16 +361,16 @@ export default function EntryScreen() {
           </p>
         )}
         {noResults && !isSearching && !searchError && query.trim().length >= 3 && (
-          <p className="text-xs text-[#1A1D23]/40 mt-2.5 ml-1.5">
+          <p className="text-xs text-[#171615]/40 mt-2.5 ml-1.5">
             No businesses found. Try a different name or add your city.
           </p>
         )}
 
         {/* Autocomplete dropdown */}
         {suggestions.length > 0 && !selectedPlace && (
-          <ul className="absolute z-30 top-full mt-2 w-full bg-white border-2 border-[#1A1D23]/6 rounded-2xl shadow-[0_16px_48px_rgba(26,29,35,0.12)] overflow-hidden max-h-[60vh] overflow-y-auto anim-slide-down">
+          <ul className="absolute z-30 top-full mt-2 w-full bg-white border-2 border-[#171615]/6 rounded-2xl shadow-[0_16px_48px_rgba(23,22,21,0.12)] overflow-hidden max-h-[60vh] overflow-y-auto anim-slide-down">
             {suggestions.map((s, i) => (
-              <li key={s.placeId} className="border-b border-[#1A1D23]/4 last:border-0">
+              <li key={s.placeId} className="border-b border-[#171615]/4 last:border-0">
                 <button
                   type="button"
                   onClick={() => handleSelect(s)}
@@ -381,8 +381,8 @@ export default function EntryScreen() {
                     <MapPin className="w-3.5 h-3.5 text-[#D56753]" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-[#1A1D23] break-words leading-snug">{s.mainText}</p>
-                    <p className="text-xs text-[#1A1D23]/40 break-words mt-0.5">{s.secondaryText}</p>
+                    <p className="text-sm font-semibold text-[#171615] break-words leading-snug">{s.mainText}</p>
+                    <p className="text-xs text-[#171615]/40 break-words mt-0.5">{s.secondaryText}</p>
                   </div>
                 </button>
               </li>
@@ -405,7 +405,7 @@ export default function EntryScreen() {
               className={`text-[12px] px-3.5 py-1.5 rounded-full border transition-all duration-200 ${
                 intent === label
                   ? "border-[#D56753] bg-[#D56753]/8 text-[#D56753] font-bold shadow-[0_2px_8px_rgba(214,104,83,0.15)]"
-                  : "border-[#1A1D23]/10 bg-white/60 text-[#1A1D23]/50 hover:border-[#D56753]/30 hover:text-[#D56753] hover:bg-white"
+                  : "border-[#171615]/10 bg-white/60 text-[#171615]/50 hover:border-[#D56753]/30 hover:text-[#D56753] hover:bg-white"
               }`}
             >
               {label}
@@ -418,14 +418,14 @@ export default function EntryScreen() {
       {isSelecting && (
         <div className="mt-10 flex flex-col items-center gap-3">
           <div className="w-8 h-8 rounded-full border-2 border-[#D56753]/20 border-t-[#D56753] animate-spin" />
-          <p className="text-xs text-[#1A1D23]/35 font-medium tracking-wide">Fetching your profile…</p>
+          <p className="text-xs text-[#171615]/35 font-medium tracking-wide">Fetching your profile…</p>
         </div>
       )}
 
       {/* Confirm card */}
       {selectedPlace && !isSelecting && (
         <div className="anim-scale-in mt-6" style={{ animationDelay: '0ms' }}>
-          <div className="relative bg-white rounded-2xl shadow-[0_8px_40px_rgba(26,29,35,0.08)] overflow-hidden border border-[#1A1D23]/6">
+          <div className="relative bg-white rounded-2xl shadow-[0_8px_40px_rgba(23,22,21,0.08)] overflow-hidden border border-[#171615]/6">
             {/* Left accent bar */}
             <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#D56753] to-[#e57c6a]" />
 
@@ -436,8 +436,8 @@ export default function EntryScreen() {
                   <MapPin className="w-5 h-5 text-[#D56753]" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[15px] font-bold text-[#1A1D23] leading-tight">{selectedPlace.name}</p>
-                  <p className="text-sm text-[#1A1D23]/45 mt-1 leading-snug">{selectedPlace.formattedAddress}</p>
+                  <p className="text-[15px] font-bold text-[#171615] leading-tight">{selectedPlace.name}</p>
+                  <p className="text-sm text-[#171615]/45 mt-1 leading-snug">{selectedPlace.formattedAddress}</p>
                   <div className="flex items-center gap-2.5 mt-3">
                     {selectedPlace.category && (
                       <span className="inline-block text-[11px] font-bold text-[#D56753] bg-[#D56753]/8 rounded-full px-2.5 py-0.5 tracking-wide uppercase">
@@ -445,11 +445,11 @@ export default function EntryScreen() {
                       </span>
                     )}
                     {selectedPlace.rating != null && (
-                      <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#1A1D23]/50">
+                      <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#171615]/50">
                         <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
                         {selectedPlace.rating}
                         {selectedPlace.reviewCount > 0 && (
-                          <span className="font-normal text-[#1A1D23]/30">({selectedPlace.reviewCount})</span>
+                          <span className="font-normal text-[#171615]/30">({selectedPlace.reviewCount})</span>
                         )}
                       </span>
                     )}
@@ -458,7 +458,7 @@ export default function EntryScreen() {
               </div>
 
               {/* Actions */}
-              <div className="mt-5 pt-4 border-t border-[#1A1D23]/6 flex items-center justify-between gap-3">
+              <div className="mt-5 pt-4 border-t border-[#171615]/6 flex items-center justify-between gap-3">
                 <button
                   type="button"
                   onClick={() => {
@@ -466,7 +466,7 @@ export default function EntryScreen() {
                     setQuery("");
                     setSuggestions([]);
                   }}
-                  className="text-xs text-[#1A1D23]/30 hover:text-[#1A1D23]/55 transition-colors font-medium"
+                  className="text-xs text-[#171615]/30 hover:text-[#171615]/55 transition-colors font-medium"
                 >
                   ← Search again
                 </button>
@@ -488,8 +488,8 @@ export default function EntryScreen() {
       <div className="anim-fade-up mt-10 flex items-center justify-center gap-0" style={{ animationDelay: '320ms' }}>
         {["Free", "60 seconds", "See your score instantly"].map((text, i) => (
           <span key={text} className="flex items-center">
-            {i > 0 && <span className="w-px h-3 bg-[#1A1D23]/12 mx-3.5" />}
-            <span className="text-[11px] font-medium text-[#1A1D23]/28 tracking-wide">{text}</span>
+            {i > 0 && <span className="w-px h-3 bg-[#171615]/12 mx-3.5" />}
+            <span className="text-[11px] font-medium text-[#171615]/28 tracking-wide">{text}</span>
           </span>
         ))}
       </div>

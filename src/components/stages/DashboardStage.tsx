@@ -1732,7 +1732,7 @@ export const DashboardStage = ({
                 background: "rgba(255, 255, 255, 0.6)",
                 backdropFilter: "blur(28px)",
                 WebkitBackdropFilter: "blur(28px)",
-                border: "1px solid rgba(15, 23, 42, 0.12)",
+                border: "1px solid rgba(23,22,21, 0.12)",
                 boxShadow: "0 8px 28px rgba(0, 0, 0, 0.10)",
               }}
             >
