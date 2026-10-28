@@ -23,7 +23,7 @@ import {
 // ---------------------------------------------------------------------------
 
 const TERRACOTTA = "#D56753";
-const NAVY = "#212D40";
+const NAVY = "#171615";
 const MIN_THEATER_MS = 10000; // minimum 10s theater (was 15s, reduced to respect user's time)
 const SKIP_VISIBLE_MS = 15000; // show skip button after 15s regardless of API status
 const ITEM_INTERVAL_MS = 1800; // ~1.8s per checklist item (snappier progression)
@@ -199,7 +199,7 @@ function ChecklistItem({
             ? "bg-[#D56753] shadow-[0_2px_8px_rgba(214,104,83,0.35)]"
             : state === "active"
               ? "bg-[#D56753]/12 ring-2 ring-[#D56753]/30"
-              : "bg-[#1A1D23]/6"
+              : "bg-[#171615]/6"
         }`}
       >
         {state === "done" && <Check className="w-3.5 h-3.5 text-white" />}
@@ -210,10 +210,10 @@ function ChecklistItem({
       <span
         className={`text-[13px] leading-snug transition-all duration-500 ${
           state === "done"
-            ? "text-[#1A1D23] font-semibold"
+            ? "text-[#171615] font-semibold"
             : state === "active"
-              ? "text-[#1A1D23] font-semibold"
-              : "text-[#1A1D23]/40"
+              ? "text-[#171615] font-semibold"
+              : "text-[#171615]/40"
         }`}
       >
         {text}
@@ -332,9 +332,9 @@ function DiscoveryFeed({
   }, [apiDone, competitors.length, businessItems.length]);
 
   return (
-    <div className="space-y-1.5 mt-5 pt-5 border-t border-[#1A1D23]/6 max-h-[220px] overflow-y-auto">
+    <div className="space-y-1.5 mt-5 pt-5 border-t border-[#171615]/6 max-h-[220px] overflow-y-auto">
       {/* Business data section */}
-      <p className="text-[10px] font-bold tracking-[0.2em] text-[#1A1D23]/30 uppercase mb-2">
+      <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mb-2">
         Your Profile
       </p>
       {businessItems.slice(0, visibleBusinessItems).map((item, i) => (
@@ -344,7 +344,7 @@ function DiscoveryFeed({
         >
           <item.icon className="w-3.5 h-3.5 text-[#D56753] shrink-0" />
           <span className="text-slate-500">{item.label}</span>
-          <span className="ml-auto font-semibold text-[#1A1D23] text-right break-words max-w-[160px]">{item.value}</span>
+          <span className="ml-auto font-semibold text-[#171615] text-right break-words max-w-[160px]">{item.value}</span>
         </div>
       ))}
       {visibleBusinessItems === 0 && (
@@ -357,7 +357,7 @@ function DiscoveryFeed({
       {/* Competitors section */}
       {visibleCompetitorItems > 0 && (
         <>
-          <p className="text-[10px] font-bold tracking-[0.2em] text-[#1A1D23]/30 uppercase mt-3 mb-2">
+          <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mt-3 mb-2">
             Competitors Found
           </p>
           {competitorItems.current.slice(0, visibleCompetitorItems).map((item, i) => {
@@ -366,15 +366,15 @@ function DiscoveryFeed({
               <div
                 key={`comp-${i}`}
                 className={`flex items-center gap-2.5 text-xs py-1.5 px-2 -mx-2 rounded-lg transition-all duration-500 animate-in fade-in slide-in-from-left-2 ${
-                  isHighlighted ? "bg-[#212D40]/5" : ""
+                  isHighlighted ? "bg-[#171615]/5" : ""
                 }`}
               >
                 <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${
-                  isHighlighted ? "bg-[#212D40]" : "bg-[#212D40]/20"
+                  isHighlighted ? "bg-[#171615]" : "bg-[#171615]/20"
                 }`}>
                   <span className="text-[8px] font-bold text-white">{i + 1}</span>
                 </div>
-                <span className={`font-semibold break-words max-w-[140px] ${isHighlighted ? "text-[#1A1D23]" : "text-slate-600"}`}>
+                <span className={`font-semibold break-words max-w-[140px] ${isHighlighted ? "text-[#171615]" : "text-slate-600"}`}>
                   {item.label}
                 </span>
                 <span className="ml-auto text-slate-400 text-right break-words max-w-[120px]">{item.value}</span>
@@ -395,7 +395,7 @@ function DiscoveryFeed({
       {/* Oz teaser findings — build anticipation for the results page */}
       {visibleOzLines > 0 && (
         <>
-          <p className="text-[10px] font-bold tracking-[0.2em] text-[#1A1D23]/30 uppercase mt-3 mb-2">
+          <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mt-3 mb-2">
             Deep Analysis
           </p>
           {OZ_TEASER_LINES.slice(0, visibleOzLines).map((line, i) => (
@@ -441,7 +441,7 @@ function ReviewTicker({ reviews }: { reviews: PlaceReview[] }) {
   return (
     <div
       key={visibleIndex}
-      className="mt-3 bg-[#FDFCF9] border border-[#1A1D23]/6 rounded-xl p-3 anim-scale-in"
+      className="mt-3 bg-[#FDFCF9] border border-[#171615]/6 rounded-xl p-3 anim-scale-in"
     >
       <div className="flex items-start gap-2">
         <Quote className="w-3 h-3 text-[#D56753] shrink-0 mt-0.5 rotate-180" />
@@ -486,7 +486,7 @@ function PhotoStrip({ photos }: { photos: PlacePhoto[] }) {
 
   return (
     <div className="mt-3">
-      <p className="text-[10px] font-bold tracking-[0.2em] text-[#1A1D23]/30 uppercase mb-2">
+      <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mb-2">
         GBP Photos
       </p>
       <div className="flex gap-1.5 overflow-hidden">
@@ -763,7 +763,7 @@ export default function ScanningTheater() {
   if (error) {
     return (
       <div className="w-full max-w-md mt-4 sm:mt-12 text-center px-4">
-        <p className="text-base font-medium text-[#1A1D23]">
+        <p className="text-base font-medium text-[#171615]">
           We hit a snag analyzing your market.
         </p>
         <p className="text-sm text-gray-500 mt-2">
@@ -816,10 +816,10 @@ export default function ScanningTheater() {
           </span>
           Market Analysis
         </span>
-        <h2 className="font-heading text-[26px] sm:text-[32px] font-semibold text-[#1A1D23] tracking-tight leading-tight">
+        <h2 className="font-heading text-[26px] sm:text-[32px] font-semibold text-[#171615] tracking-tight leading-tight">
           Scanning {place.name}
         </h2>
-        <p className="text-sm text-[#1A1D23]/40 mt-2">
+        <p className="text-sm text-[#171615]/40 mt-2">
           Analyzing {place.city ? `the ${place.city} market` : "your market"} in real time
         </p>
       </div>
@@ -827,7 +827,7 @@ export default function ScanningTheater() {
       {/* Two-panel layout */}
       <div className="flex flex-col lg:flex-row gap-5">
         {/* Left panel — Animated Checklist */}
-        <div className="order-last lg:order-first lg:w-[340px] shrink-0 bg-white border border-[#1A1D23]/6 rounded-2xl p-6 shadow-[0_4px_24px_rgba(26,29,35,0.07)] lg:max-h-[520px] lg:overflow-y-auto anim-fade-up" style={{ animationDelay: '100ms' }}>
+        <div className="order-last lg:order-first lg:w-[340px] shrink-0 bg-white border border-[#171615]/6 rounded-2xl p-6 shadow-[0_4px_24px_rgba(23,22,21,0.07)] lg:max-h-[520px] lg:overflow-y-auto anim-fade-up" style={{ animationDelay: '100ms' }}>
           <div className="space-y-4">
             {CHECKLIST_ITEMS.map((text, i) => (
               <ChecklistItem

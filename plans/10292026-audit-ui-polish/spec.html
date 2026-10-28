@@ -42,11 +42,11 @@
     <header class="spec-hero">
       <div class="hero-topline">
         <p class="eyebrow">Plan Spec · -s · audit.getalloro.com</p>
-        <span class="status-pill">Pending Execution</span>
+        <span class="status-pill">In Progress</span>
       </div>
       <h1>Audit tool: the alloro.com look and a little motion, with everything working exactly as it does today</h1>
       <dl class="meta-grid">
-        <div class="status-card"><dt>Status</dt><dd>Pending Execution. Backups saved 2026-10-29. Nothing built. Waits for Jov's command.</dd></div>
+        <div class="status-card"><dt>Status</dt><dd>In Progress: S1 built and checked locally (Rev 2). Nothing pushed.</dd></div>
         <div><dt>Plan folder</dt><dd>plans/10292026-audit-ui-polish</dd></div>
         <div><dt>Repo</dt><dd>getAlloro/alloro-leadgen (audit.getalloro.com). No dev stage: a merge to <code>main</code> deploys to production.</dd></div>
         <div><dt>Worktree</dt><dd>Documents/Projects/alloro-leadgen-worktrees/audit-ui-polish</dd></div>
@@ -218,6 +218,12 @@
         <p><strong>Change:</strong> Item 13 (one button wording) moved to held out; S3 and A3 updated; O1 answered; O3 added (S6 Tailwind v3 at runtime vs v4 at build time).</p>
         <p><strong>Reason:</strong> Readiness re-read: "Book Strategy Call" opens a Google Calendar booking page with its own tracking event, so renaming it would mislead and relinking it would change behaviour, against Jov's rule "works the same as before, nothing added or removed".</p>
         <p><strong>Updated Done criteria:</strong> A3 now expects identical words on every screen.</p>
+      </article>
+      <article class="revision-entry">
+        <h3>Rev 2 - 2026-10-29</h3>
+        <p><strong>Change:</strong> S1 built. Palette set once in the Tailwind config in <code>index.html</code> (gray/slate → warm greys, blue/indigo → warm ink, orange → terracotta, yellow/amber → alloro amber, green/emerald → alloro green); 169 hard-coded cool colours swapped (the plan's "145" counted lines, not occurrences); headings in Spectral; headline accent solid terracotta italic; scan labels in the site font (the timer keeps monospace digits). Red is kept as "bad" but warmed (<code>#cc4a3d</code> family) instead of left as Tailwind's bright red.</p>
+        <p><strong>Reason:</strong> Execution deviation: left as is, the bright red looked louder than everything else once green and amber took alloro.com's softer tones. It still reads as red.</p>
+        <p><strong>Updated Done criteria:</strong> none. S1 checks: A1 4/4 runs ok, A2 same 12 requests in order, A3 words identical on 6 screens, A8 email card 1220/2020px unchanged, A9 86s → 86s.</p>
       </article>
     </section>
   </main>

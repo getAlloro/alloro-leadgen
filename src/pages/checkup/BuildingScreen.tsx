@@ -19,10 +19,10 @@ function getScoreLabel(score: number): string {
 }
 
 function getScoreColor(score: number): string {
-  if (score >= 80) return "#10B981";
-  if (score >= 60) return "#F59E0B";
-  if (score >= 40) return "#F97316";
-  return "#EF4444";
+  if (score >= 80) return "#4f8a5b";
+  if (score >= 60) return "#d9a441";
+  if (score >= 40) return "#e07a66";
+  return "#cc4a3d";
 }
 
 const CHECKS = [
@@ -94,29 +94,29 @@ export default function BuildingScreen() {
           <CheckCircle2 className="w-8 h-8 text-emerald-500" />
         </div>
         <div>
-          <h2 className="font-heading text-[28px] sm:text-[34px] font-semibold text-[#1A1D23] tracking-tight leading-tight">
+          <h2 className="font-heading text-[28px] sm:text-[34px] font-semibold text-[#171615] tracking-tight leading-tight">
             {businessName} is set up.
           </h2>
-          <p className="text-sm text-[#1A1D23]/45 mt-2">Here's what just happened.</p>
+          <p className="text-sm text-[#171615]/45 mt-2">Here's what just happened.</p>
         </div>
       </div>
 
       {/* Score card */}
       {checkupScore != null && checkupScore > 0 && (
-        <div className="anim-scale-in relative bg-white rounded-2xl border border-[#1A1D23]/6 shadow-[0_8px_40px_rgba(26,29,35,0.07)] overflow-hidden" style={{ animationDelay: '200ms' }}>
+        <div className="anim-scale-in relative bg-white rounded-2xl border border-[#171615]/6 shadow-[0_8px_40px_rgba(23,22,21,0.07)] overflow-hidden" style={{ animationDelay: '200ms' }}>
           <div className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ background: `linear-gradient(to bottom, ${scoreColor}, ${scoreColor}99)` }} />
           <div className="pl-7 pr-6 py-6 flex items-center justify-between gap-4">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#1A1D23]/35 mb-1">
+              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#171615]/35 mb-1">
                 Business Clarity Score
               </p>
               <div className="flex items-baseline gap-2">
-                <span className="text-[48px] font-heading font-semibold leading-none text-[#1A1D23]" style={{ fontVariantNumeric: 'tabular-nums' }}>
+                <span className="text-[48px] font-heading font-semibold leading-none text-[#171615]" style={{ fontVariantNumeric: 'tabular-nums' }}>
                   {checkupScore}
                 </span>
                 <span className="text-sm font-bold" style={{ color: scoreColor }}>{scoreLabel}</span>
               </div>
-              <p className="text-xs text-[#1A1D23]/35 mt-1.5">Updates every week in your dashboard</p>
+              <p className="text-xs text-[#171615]/35 mt-1.5">Updates every week in your dashboard</p>
             </div>
             <div className="shrink-0 w-14 h-14 rounded-xl flex items-center justify-center" style={{ background: `${scoreColor}12` }}>
               <TrendingUp className="w-7 h-7" style={{ color: scoreColor }} />
@@ -132,17 +132,17 @@ export default function BuildingScreen() {
             key={i}
             className={`flex items-start gap-3.5 p-4 rounded-xl border transition-all duration-500 ${
               visibleChecks > i
-                ? "bg-white border-[#1A1D23]/6 opacity-100 shadow-[0_2px_12px_rgba(26,29,35,0.05)]"
+                ? "bg-white border-[#171615]/6 opacity-100 shadow-[0_2px_12px_rgba(23,22,21,0.05)]"
                 : "bg-transparent border-transparent opacity-0"
             }`}
           >
             <div className="shrink-0 w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center mt-0.5">
               <CheckCircle2 className="w-3 h-3 text-emerald-500" />
             </div>
-            <p className="text-sm font-medium text-[#1A1D23]/70 leading-snug">
+            <p className="text-sm font-medium text-[#171615]/70 leading-snug">
               {text}
               {i === 2 && email && (
-                <> — <span className="text-[#1A1D23]">{email}</span></>
+                <> — <span className="text-[#171615]">{email}</span></>
               )}
             </p>
           </div>

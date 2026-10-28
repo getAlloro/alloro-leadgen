@@ -297,7 +297,7 @@ export const CompetitorMapStage = memo(
               isLoading ? "opacity-100" : "opacity-0"
             }`}
             style={{
-              boxShadow: "0 0 20px 4px rgba(34,197,94,0.6)",
+              boxShadow: "0 0 20px 4px rgba(79,138,91,0.6)",
               animation: "mapScanHorizontal 2s linear infinite",
             }}
           />
@@ -308,7 +308,7 @@ export const CompetitorMapStage = memo(
               isLoading ? "opacity-100" : "opacity-0"
             }`}
             style={{
-              boxShadow: "0 0 20px 4px rgba(34,197,94,0.6)",
+              boxShadow: "0 0 20px 4px rgba(79,138,91,0.6)",
               animation: "mapScanVertical 1.5s linear infinite 0.5s",
             }}
           />

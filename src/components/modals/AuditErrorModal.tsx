@@ -113,9 +113,9 @@ export const AuditErrorModal: React.FC<AuditErrorModalProps> = ({
           className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-brand-500/5"
           animate={{
             background: [
-              "linear-gradient(135deg, rgba(239,68,68,0.05) 0%, transparent 50%, rgba(214,104,83,0.05) 100%)",
-              "linear-gradient(135deg, rgba(214,104,83,0.05) 0%, transparent 50%, rgba(239,68,68,0.05) 100%)",
-              "linear-gradient(135deg, rgba(239,68,68,0.05) 0%, transparent 50%, rgba(214,104,83,0.05) 100%)",
+              "linear-gradient(135deg, rgba(204,74,61,0.05) 0%, transparent 50%, rgba(214,104,83,0.05) 100%)",
+              "linear-gradient(135deg, rgba(214,104,83,0.05) 0%, transparent 50%, rgba(204,74,61,0.05) 100%)",
+              "linear-gradient(135deg, rgba(204,74,61,0.05) 0%, transparent 50%, rgba(214,104,83,0.05) 100%)",
             ],
           }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

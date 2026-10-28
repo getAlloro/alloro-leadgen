@@ -24,10 +24,10 @@ function getScoreLabel(score: number): string {
 }
 
 function getScoreColor(score: number): string {
-  if (score >= 80) return "#10B981";
-  if (score >= 60) return "#F59E0B";
-  if (score >= 40) return "#F97316";
-  return "#EF4444";
+  if (score >= 80) return "#4f8a5b";
+  if (score >= 60) return "#d9a441";
+  if (score >= 40) return "#e07a66";
+  return "#cc4a3d";
 }
 
 export default function ColleagueShare() {
@@ -113,10 +113,10 @@ export default function ColleagueShare() {
         <div className="anim-fade-up flex justify-center mb-2" style={{ animationDelay: '0ms' }}>
           <div className="relative inline-flex flex-col items-center">
             <div
-              className="w-24 h-24 rounded-2xl flex flex-col items-center justify-center border-2 shadow-[0_8px_32px_rgba(26,29,35,0.08)]"
+              className="w-24 h-24 rounded-2xl flex flex-col items-center justify-center border-2 shadow-[0_8px_32px_rgba(23,22,21,0.08)]"
               style={{ borderColor: `${getScoreColor(checkupScore)}40`, background: `${getScoreColor(checkupScore)}08` }}
             >
-              <span className="font-heading text-[40px] font-semibold leading-none text-[#1A1D23]">
+              <span className="font-heading text-[40px] font-semibold leading-none text-[#171615]">
                 {checkupScore}
               </span>
               <span className="text-[10px] font-bold uppercase tracking-[0.15em] mt-1" style={{ color: getScoreColor(checkupScore) }}>
@@ -129,20 +129,20 @@ export default function ColleagueShare() {
 
       {/* Headline */}
       <div className="anim-fade-up text-center space-y-2.5" style={{ animationDelay: '80ms' }}>
-        <h1 className="font-heading text-[26px] sm:text-[30px] font-semibold text-[#1A1D23] tracking-tight leading-tight">
+        <h1 className="font-heading text-[26px] sm:text-[30px] font-semibold text-[#171615] tracking-tight leading-tight">
           Know someone who should see theirs?
         </h1>
-        <p className="text-sm text-[#1A1D23]/45 leading-relaxed max-w-xs mx-auto">
+        <p className="text-sm text-[#171615]/45 leading-relaxed max-w-xs mx-auto">
           60 seconds. Send the link and they'll see exactly where they stand.
         </p>
       </div>
 
       {/* Message preview card */}
-      <div className="anim-scale-in relative bg-white rounded-2xl border border-[#1A1D23]/6 shadow-[0_4px_24px_rgba(26,29,35,0.06)] overflow-hidden" style={{ animationDelay: '160ms' }}>
+      <div className="anim-scale-in relative bg-white rounded-2xl border border-[#171615]/6 shadow-[0_4px_24px_rgba(23,22,21,0.06)] overflow-hidden" style={{ animationDelay: '160ms' }}>
         <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#D56753] to-[#e57c6a]" />
         <div className="pl-6 pr-5 py-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#1A1D23]/30 mb-3">Your message</p>
-          <p className="text-sm text-[#1A1D23]/70 leading-relaxed">
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#171615]/30 mb-3">Your message</p>
+          <p className="text-sm text-[#171615]/70 leading-relaxed">
             "I just found out where I rank in my market. Took 60 seconds. You should see yours:{" "}
             <span className="text-[#D56753] font-semibold break-all">{checkupLink}</span>"
           </p>
@@ -168,11 +168,11 @@ export default function ColleagueShare() {
           type="text"
           readOnly
           value={checkupLink}
-          className="flex-1 text-xs text-[#1A1D23]/40 bg-white border border-[#1A1D23]/8 rounded-xl px-3.5 py-3 truncate focus:outline-none font-medium"
+          className="flex-1 text-xs text-[#171615]/40 bg-white border border-[#171615]/8 rounded-xl px-3.5 py-3 truncate focus:outline-none font-medium"
         />
         <button
           onClick={handleCopy}
-          className="shrink-0 flex items-center gap-1.5 px-4 py-3 rounded-xl border border-[#1A1D23]/8 bg-white text-sm font-semibold text-[#1A1D23] hover:bg-[#FDFCF9] transition-colors"
+          className="shrink-0 flex items-center gap-1.5 px-4 py-3 rounded-xl border border-[#171615]/8 bg-white text-sm font-semibold text-[#171615] hover:bg-[#FDFCF9] transition-colors"
         >
           {copied ? (
             <>
@@ -192,7 +192,7 @@ export default function ColleagueShare() {
       {referralCode && (
         <div className="anim-scale-in bg-[#D56753]/5 border border-[#D56753]/15 rounded-xl p-4" style={{ animationDelay: '360ms' }}>
           <p className="text-[10px] font-bold text-[#D56753] uppercase tracking-[0.18em] mb-1.5">Rise Together</p>
-          <p className="text-sm text-[#1A1D23]/70 leading-relaxed">
+          <p className="text-sm text-[#171615]/70 leading-relaxed">
             When they join, you both pay $1,000 instead of $2,000 for the first 3 months.
           </p>
         </div>
@@ -202,7 +202,7 @@ export default function ColleagueShare() {
       <div className="flex justify-center pt-1">
         <button
           onClick={handleSkip}
-          className="text-xs text-[#1A1D23]/25 hover:text-[#1A1D23]/45 transition-colors py-2 font-medium"
+          className="text-xs text-[#171615]/25 hover:text-[#171615]/45 transition-colors py-2 font-medium"
         >
           Skip for now
         </button>
