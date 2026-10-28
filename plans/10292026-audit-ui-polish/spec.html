@@ -42,11 +42,11 @@
     <header class="spec-hero">
       <div class="hero-topline">
         <p class="eyebrow">Plan Spec · -s · audit.getalloro.com</p>
-        <span class="status-pill">In Progress</span>
+        <span class="status-pill">Completed (local)</span>
       </div>
       <h1>Audit tool: the alloro.com look and a little motion, with everything working exactly as it does today</h1>
       <dl class="meta-grid">
-        <div class="status-card"><dt>Status</dt><dd>S1-S5 built and checked locally; S6 stopped and waits for Jov (Rev 7). Nothing pushed.</dd></div>
+        <div class="status-card"><dt>Status</dt><dd>Completed locally: S1-S6 built and checked (Rev 8). Nothing pushed; each slice ships as its own PR on Jov.s word.</dd></div>
         <div><dt>Plan folder</dt><dd>plans/10292026-audit-ui-polish</dd></div>
         <div><dt>Repo</dt><dd>getAlloro/alloro-leadgen (audit.getalloro.com). No dev stage: a merge to <code>main</code> deploys to production.</dd></div>
         <div><dt>Worktree</dt><dd>Documents/Projects/alloro-leadgen-worktrees/audit-ui-polish</dd></div>
@@ -204,7 +204,7 @@
       <h2>Done</h2>
       <ul class="checklist">
         <li>☑ S0 backups and baseline saved, README with restore steps</li>
-        <li>☑ S1–S5 built locally, A1–A11 passing, shown to Jov with screenshots (S6 stopped, Rev 7)</li>
+        <li>☑ S1–S6 built locally, A1–A12 passing, shown to Jov with screenshots (Rev 8)</li>
         <li>☐ Each slice merged to <code>main</code> only on Jov's word, one at a time</li>
         <li>☐ A13 checked on live after each merge</li>
         <li>☐ Undo path written in each PR body (the revert command and the backup folder)</li>
@@ -254,6 +254,12 @@
         <p><strong>Change:</strong> S6 stopped before any code change (O3). The build's Tailwind is v4.2.2 (<code>@tailwindcss/vite</code>, already in <code>vite.config.ts</code>); live runs v3.4.17 from the CDN. In this code v4 would restyle 105 <code>border</code> uses (default colour), 26 <code>shadow-sm</code>, 4 <code>rounded-sm</code>, 5 <code>ring</code>, 6 <code>outline-none</code> and others, and v4 needs newer browsers (Tailwind documents Safari 16.4+, Chrome 111+, Firefox 128+) where the CDN v3 works in older ones. Reaching A12 (no pixel change) would mean a v3 package plus a lockfile change, or a full v4 compatibility layer.</p>
         <p><strong>Reason:</strong> The plan's O3: "If A12 cannot reach 0 without adding a package, S6 stops and is reported, not forced." The browser floor would also be a behaviour change, against "works the same as before".</p>
         <p><strong>Updated Done criteria:</strong> S6 waits for Jov: leave it out, or add Tailwind v3 as a build dependency in its own PR with A12 proved. S1–S5 are complete locally.</p>
+      </article>
+      <article class="revision-entry">
+        <h3>Rev 8 - 2026-10-29</h3>
+        <p><strong>Change:</strong> S6 built with Tailwind 3.4.17, the exact version the CDN served. <code>tailwindcss</code> v4.2.2 and <code>@tailwindcss/vite</code> removed (nothing used them in the output), <code>tailwindcss@3.4.17</code> pinned as a dev dependency; lockfile: only Tailwind's own tree changed (no other package version moved). The inline config moved unchanged into <code>tailwind.config.js</code>; <code>postcss.config.js</code> runs Tailwind only (no autoprefixer, as the CDN added none); <code>src/styles/tailwind.css</code> is imported from <code>index.tsx</code> before <code>motion.css</code>; the CDN script, the inline config and the dead <code>/index.css</code> link are gone from <code>index.html</code>. The worktree got its own <code>node_modules</code> (the link to the main clone was removed first, so other branches keep their packages).</p>
+        <p><strong>Reason:</strong> Jov: "proceed now to S6", after checking S1–S5. The v3 route keeps the look and the browsers the tool supports today.</p>
+        <p><strong>Updated Done criteria:</strong> A12 measured on a calibrated harness (S5 against itself: 1 screen, 9px; dot patterns that drift on their own hidden on both sides): S5 → S6 identical on all 49 report, entry and pop-up screens at 1440 and 390, including the no-website and blocked reports and the Key Insights pop-up. Scan screens differ only by timing noise (random label positions, the progress bar), except one correction: the highlighted step in the scan sidebar now always shows at its intended <code>text-lg</code> (18px); with the CDN it was sometimes still 14px because the CDN applies new styles late. No request to <code>cdn.tailwindcss.com</code>. First paint on this machine: about 400ms (was 620–920ms with the CDN, before its internet download). A1 4/4 ok, A2 same 12 requests, A3 words identical, A8 place unchanged, A9 86s, A10/A11 pass.</p>
       </article>
     </section>
   </main>

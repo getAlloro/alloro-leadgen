@@ -1,0 +1,4 @@
+/* Tailwind 3 compiled at build time (replaces the CDN script; plan 10292026-audit-ui-polish, S6). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
