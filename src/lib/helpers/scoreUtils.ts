@@ -58,5 +58,5 @@ export const glowClasses = {
   green: "drop-shadow-[0_0_12px_rgba(79,138,91,0.6)]",
   yellow: "drop-shadow-[0_0_12px_rgba(234,179,8,0.6)]",
   red: "drop-shadow-[0_0_12px_rgba(204,74,61,0.6)]",
-  blue: "drop-shadow-[0_0_12px_rgba(59,130,246,0.6)]",
+  blue: "drop-shadow-[0_0_12px_rgba(23,22,21,0.6)]",
 } as const;

@@ -359,7 +359,7 @@ export const CompetitorMapStage = memo(
                   className="absolute -inset-12 bg-blue-500/30 rounded-full"
                   style={{ animation: "pinPulse 2s ease-in-out infinite" }}
                 />
-                <div className="bg-blue-600 text-white p-3 rounded-full shadow-[0_10px_20px_rgba(37,99,235,0.4)] relative border-[3px] border-white z-20">
+                <div className="bg-blue-600 text-white p-3 rounded-full shadow-[0_10px_20px_rgba(23,22,21,0.4)] relative border-[3px] border-white z-20">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div className="absolute top-14 left-1/2 -translate-x-1/2 bg-white px-3 py-1.5 rounded-lg shadow-xl text-xs font-bold whitespace-nowrap border border-gray-100 flex flex-col items-center">
