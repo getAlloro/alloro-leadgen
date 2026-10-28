@@ -669,7 +669,7 @@ const App = () => {
               href="https://app.getalloro.com/signup"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-500 hover:bg-brand-600 text-white px-3.5 py-2 rounded-full text-xs font-bold shadow-sm shadow-brand-500/30 whitespace-nowrap shrink-0"
+              className={`bg-brand-500 hover:bg-brand-600 text-white px-3.5 py-2 rounded-full text-xs font-bold shadow-sm shadow-brand-500/30 whitespace-nowrap shrink-0 ${emailSubmitted ? "hidden" : ""}`}
             >
               Create Free Account
             </a>
