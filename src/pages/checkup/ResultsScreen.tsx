@@ -1381,7 +1381,7 @@ export default function ResultsScreen() {
                   type="submit"
                   disabled={emailSending || !agreedToTerms}
                   className="w-full h-[3.25rem] flex items-center justify-center gap-2 rounded-xl text-white text-[15px] font-semibold shadow-[0_4px_16px_rgba(214,104,83,0.3),0_2px_4px_rgba(214,104,83,0.15)] hover:shadow-[0_8px_24px_rgba(214,104,83,0.35),0_2px_8px_rgba(214,104,83,0.2)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 disabled:opacity-70"
-                  style={{ background: agreedToTerms ? 'linear-gradient(135deg, #D66853 0%, #C45A46 100%)' : '#94a3b8' }}
+                  style={{ background: agreedToTerms ? 'linear-gradient(135deg, #D66853 0%, #C45A46 100%)' : '#a1988f' }}
                 >
                   {emailSending
                     ? "Setting up your checkup..."

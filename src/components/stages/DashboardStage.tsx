@@ -403,7 +403,7 @@ export const DashboardStage = ({
             animate="visible"
             whileHover={{
               scale: 1.02,
-              boxShadow: "0 20px 50px rgba(59,130,246,0.15)",
+              boxShadow: "0 20px 50px rgba(23,22,21,0.15)",
               transition: { duration: 0.3 },
             }}
           >
@@ -1101,14 +1101,14 @@ export const DashboardStage = ({
               variants={cardVariants}
               initial="hidden"
               animate="visible"
-              whileHover={{ boxShadow: "0 15px 50px rgba(59,130,246,0.12)" }}
+              whileHover={{ boxShadow: "0 15px 50px rgba(23,22,21,0.12)" }}
             >
               {/* Subtle pattern background */}
               <div
                 className="absolute inset-0 opacity-[0.02]"
                 style={{
                   backgroundImage:
-                    "radial-gradient(circle, #3B82F6 1px, transparent 1px)",
+                    "radial-gradient(circle, #3b3531 1px, transparent 1px)",
                   backgroundSize: "24px 24px",
                 }}
               />
@@ -1459,8 +1459,8 @@ export const DashboardStage = ({
                           </div>
                           <div className="relative flex items-center justify-center h-24">
                             <svg viewBox="0 0 36 36" className="w-24 h-24 -rotate-90">
-                              <circle cx="18" cy="18" r="15.9155" fill="transparent" stroke="#e5e7eb" strokeWidth="3" />
-                              <circle cx="18" cy="18" r="15.9155" fill="transparent" stroke="#22c55e" strokeWidth="3" strokeDasharray="88, 100" strokeLinecap="round" />
+                              <circle cx="18" cy="18" r="15.9155" fill="transparent" stroke="#e8e4df" strokeWidth="3" />
+                              <circle cx="18" cy="18" r="15.9155" fill="transparent" stroke="#4f8a5b" strokeWidth="3" strokeDasharray="88, 100" strokeLinecap="round" />
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
                               <span className="font-heading text-2xl font-black tracking-tighter text-gray-900 leading-none">
