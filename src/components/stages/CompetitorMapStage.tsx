@@ -195,7 +195,7 @@ export const CompetitorMapStage = memo(
             <span
               className={`w-6 h-6 ${
                 isRevealed && !isLoadingState ? "bg-red-500" : "bg-gray-300"
-              } text-white rounded-full flex items-center justify-center text-[10px] font-bold transition-colors duration-300 shadow-sm`}
+              } text-white rounded-full flex items-center justify-center text-xs font-bold transition-colors duration-300 shadow-sm`}
             >
               {index + 1}
             </span>
@@ -364,7 +364,7 @@ export const CompetitorMapStage = memo(
                 </div>
                 <div className="absolute top-14 left-1/2 -translate-x-1/2 bg-white px-3 py-1.5 rounded-lg shadow-xl text-xs font-bold whitespace-nowrap border border-gray-100 flex flex-col items-center">
                   <span className="text-blue-600">You</span>
-                  <span className="text-[10px] text-gray-400">
+                  <span className="text-xs text-gray-400">
                     {self.reviewsCount} Reviews
                   </span>
                 </div>
@@ -430,7 +430,7 @@ export const CompetitorMapStage = memo(
                         {comp.title}
                       </div>
                       <div
-                        className="text-[10px] text-gray-500 truncate mt-0.5"
+                        className="text-xs text-gray-500 truncate mt-0.5"
                         title={comp.address}
                       >
                         {comp.address}

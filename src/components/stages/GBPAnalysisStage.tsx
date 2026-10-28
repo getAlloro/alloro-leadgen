@@ -60,7 +60,7 @@ export const GBPAnalysisStage = memo(
           </h2>
           <div className="inline-flex items-center gap-2 mt-2 md:mt-4 px-3 md:px-4 py-1 bg-brand-50 rounded-full border border-brand-100">
             <Loader2 className="w-3 h-3 animate-spin text-brand-600" />
-            <p className="text-brand-600 text-[11px] md:text-sm font-semibold">
+            <p className="text-brand-600 text-xs md:text-sm font-semibold">
               {isLoading || !data
                 ? "Looking up your business on Google Maps..."
                 : "Analyzing profile + sentiment"}
@@ -97,7 +97,7 @@ export const GBPAnalysisStage = memo(
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 text-white pr-3">
-                    <div className="bg-brand-500 text-[11px] md:text-xs font-bold px-3 py-1.5 rounded-lg mb-2 inline-block shadow-lg shadow-brand-500/30">
+                    <div className="bg-brand-500 text-xs md:text-xs font-bold px-3 py-1.5 rounded-lg mb-2 inline-block shadow-lg shadow-brand-500/30">
                       {data.categoryName}
                     </div>
                     {data.location && (
@@ -117,7 +117,7 @@ export const GBPAnalysisStage = memo(
                     >
                       {data.title}
                     </h3>
-                    <div className="bg-green-100 text-green-700 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold border border-green-200 flex items-center gap-1 md:gap-1.5 shadow-sm shrink-0">
+                    <div className="bg-green-100 text-green-700 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full text-xs md:text-xs font-bold border border-green-200 flex items-center gap-1 md:gap-1.5 shadow-sm shrink-0">
                       <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
                       <span>Verified</span>
                     </div>
@@ -156,7 +156,7 @@ export const GBPAnalysisStage = memo(
                         {data.totalScore}
                         <Star className="w-4 h-4 md:w-5 md:h-5 text-yellow-500 fill-yellow-500" />
                       </div>
-                      <div className="text-[9px] md:text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-1">
+                      <div className="text-xs md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">
                         Star Rating
                       </div>
                     </div>
@@ -164,7 +164,7 @@ export const GBPAnalysisStage = memo(
                       <div className="text-xl md:text-2xl font-black text-gray-900">
                         {data.reviewsCount}
                       </div>
-                      <div className="text-[9px] md:text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-1">
+                      <div className="text-xs md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">
                         Reviews
                       </div>
                     </div>
@@ -178,7 +178,7 @@ export const GBPAnalysisStage = memo(
               {data.reviews && data.reviews.length > 0 && (
                 <div className="space-y-2 md:space-y-2.5 md:min-w-0 md:overflow-y-auto md:max-h-[70vh]">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] md:text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">
+                    <span className="text-xs md:text-xs font-bold uppercase tracking-[0.18em] text-gray-500">
                       Recent Reviews
                     </span>
                     <div className="h-px flex-1 bg-gray-200" />
@@ -224,11 +224,11 @@ export const GBPAnalysisStage = memo(
                             </div>
                           </div>
                         </div>
-                        <span className="text-[9px] md:text-[10px] font-medium bg-gray-100 text-gray-500 px-2 py-0.5 md:py-1 rounded-full shrink-0 ml-2">
+                        <span className="text-xs md:text-xs font-medium bg-gray-100 text-gray-500 px-2 py-0.5 md:py-1 rounded-full shrink-0 ml-2">
                           {review.publishAt}
                         </span>
                       </div>
-                      <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed line-clamp-2">
+                      <p className="text-gray-600 text-xs md:text-sm leading-relaxed line-clamp-2">
                         "{review.text}"
                       </p>
                     </motion.div>

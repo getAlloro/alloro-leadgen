@@ -19,7 +19,7 @@ export default function CheckupLayout() {
         {/* Thin rule with tagline */}
         <div className="flex items-center gap-4 mt-5 w-full max-w-[280px]">
           <div className="flex-1 h-px bg-[#171615]/8" />
-          <span className="text-[10px] font-bold tracking-[0.22em] text-[#171615]/22 uppercase whitespace-nowrap">
+          <span className="text-xs font-bold tracking-[0.22em] text-[#171615]/22 uppercase whitespace-nowrap">
             Business Clarity
           </span>
           <div className="flex-1 h-px bg-[#171615]/8" />
@@ -38,7 +38,7 @@ export default function CheckupLayout() {
           <div className="w-1 h-1 rounded-full bg-[#D56753]/30" />
           <div className="flex-1 h-px bg-[#171615]/6" />
         </div>
-        <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/20 uppercase">
+        <p className="text-xs font-bold tracking-[0.2em] text-[#171615]/20 uppercase">
           Alloro &middot; Business Clarity
         </p>
       </footer>

@@ -115,7 +115,7 @@ export const ActionItemsModal = ({
                         className="flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-brand-300 hover:bg-brand-50/30 transition-colors"
                       >
                         <div className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center">
-                          <span className="text-[10px] font-bold text-white">
+                          <span className="text-xs font-bold text-white">
                             {itemIdx + 1}
                           </span>
                         </div>

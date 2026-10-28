@@ -167,7 +167,7 @@ export const EmailPaywallOverlay: React.FC<EmailPaywallOverlayProps> = ({
           </motion.button>
         </form>
 
-        <p className="text-[11px] text-gray-500 mt-6 flex items-center justify-center gap-1.5">
+        <p className="text-xs text-gray-500 mt-6 flex items-center justify-center gap-1.5">
           <Lock className="w-3 h-3" />
           We respect your privacy. No spam, ever.
         </p>

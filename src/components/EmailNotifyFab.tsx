@@ -214,7 +214,7 @@ export const EmailNotifyFab: React.FC<Props> = ({
                     </>
                   )}
                 </button>
-                <p className="mt-2 text-center text-[11px] uppercase tracking-wide text-gray-400">
+                <p className="mt-2 text-center text-xs uppercase tracking-wide text-gray-400">
                   — or —
                 </p>
               </div>

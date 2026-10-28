@@ -50,7 +50,7 @@ export const CircularProgress = ({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.6, delay, type: "spring", stiffness: 100 }}
     >
-      <span className="mb-2 text-[10px] font-semibold text-gray-500 text-center uppercase tracking-wide">
+      <span className="mb-2 text-xs font-semibold text-gray-500 text-center uppercase tracking-wide">
         {label}
       </span>
       <div className="relative" style={{ width: size, height: size }}>

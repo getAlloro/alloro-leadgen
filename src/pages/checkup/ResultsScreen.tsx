@@ -908,7 +908,7 @@ export default function ResultsScreen() {
 
       {/* Practice name + market context */}
       <div className="text-center">
-        <p className="text-[11px] font-bold tracking-[0.2em] text-[#D56753]/70 uppercase mb-2">
+        <p className="text-xs font-bold tracking-[0.2em] text-[#D56753]/70 uppercase mb-2">
           How You Stack Up
         </p>
         <h2 className="font-heading text-[26px] sm:text-[30px] font-semibold text-[#171615] tracking-tight leading-tight">{place.name}</h2>
@@ -959,7 +959,7 @@ export default function ResultsScreen() {
       {/* Sub-scores — First Impression breakdown */}
       <div className="bg-white border border-[#171615]/6 rounded-2xl p-6 shadow-[0_4px_24px_rgba(23,22,21,0.07)] space-y-6">
         <div className="flex items-center justify-between">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#171615]/30">Behind the Score</p>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#171615]/30">Behind the Score</p>
           {state.scoreLabel && (
             <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
               score.composite >= 80 ? "bg-emerald-50 text-emerald-700" :
@@ -1131,7 +1131,7 @@ export default function ResultsScreen() {
 
       {/* Findings — first visible, rest blurred */}
       <div className="space-y-3">
-        <h2 className="text-[10px] font-bold text-[#171615]/30 uppercase tracking-[0.2em]">Key Findings</h2>
+        <h2 className="text-xs font-bold text-[#171615]/30 uppercase tracking-[0.2em]">Key Findings</h2>
         {state.userQuestion && (
           <div className="bg-[#D56753]/5 border border-[#D56753]/15 rounded-xl px-4 py-3 text-sm text-[#171615]">
             You asked: &ldquo;{state.userQuestion}&rdquo;. Here&apos;s what we found.
