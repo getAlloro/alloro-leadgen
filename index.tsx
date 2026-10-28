@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { MotionConfig } from 'framer-motion';
 import App from './App';
+import './src/styles/tailwind.css';
 import './src/styles/motion.css';
 import { bindAbandonmentBeacon } from './src/lib/tracking';
 
