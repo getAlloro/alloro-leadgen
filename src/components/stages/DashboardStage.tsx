@@ -1202,7 +1202,7 @@ export const DashboardStage = ({
                 onto the beige surround. Scale-[0.97] adds a subtle inset so
                 the clip feels intentional rather than flush.
               */}
-              <div className="blur-[2px] select-none pointer-events-none rounded-3xl overflow-hidden scale-[0.97] origin-top">
+              <div className="blur-[2px] select-none pointer-events-none rounded-3xl overflow-hidden scale-[0.97] origin-top max-h-[38rem] md:max-h-none">
                 {/* App shell — matches the real Alloro app: dark navy sidebar
                     + beige main content with the Business Hub layout. */}
                 <div className="rounded-3xl border border-black/10 overflow-hidden mb-6 flex bg-beige">
@@ -1727,7 +1727,7 @@ export const DashboardStage = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.6 }}
-              className="fixed bottom-3 left-3 right-3 z-40 px-4 py-3 rounded-xl md:hidden flex flex-col items-center gap-2"
+              className="fixed bottom-3 left-3 right-3 z-40 px-3 py-2 rounded-xl md:hidden flex flex-col items-center gap-1.5"
               style={{
                 background: "rgba(255, 255, 255, 0.6)",
                 backdropFilter: "blur(28px)",
@@ -1736,7 +1736,7 @@ export const DashboardStage = ({
                 boxShadow: "0 8px 28px rgba(0, 0, 0, 0.10)",
               }}
             >
-              <p className="text-[13px] font-semibold text-gray-700 leading-snug text-center">
+              <p className="text-xs font-semibold text-gray-700 leading-snug text-center">
                 Knowing isn't enough. Execution matters. Let{" "}
                 <span className="text-brand-500">Alloro</span> help.
               </p>
@@ -1747,7 +1747,7 @@ export const DashboardStage = ({
                 onClick={(e) =>
                   handleSignupClick(e, "dashboard_mobile_floating_cta")
                 }
-                className="block w-full text-center px-4 py-2.5 text-white font-bold rounded-full text-sm"
+                className="block w-full text-center px-4 py-2 text-white font-bold rounded-full text-sm"
                 style={{
                   backgroundColor: "#d66853",
                   boxShadow: "0 6px 18px rgba(214, 104, 83, 0.4)",

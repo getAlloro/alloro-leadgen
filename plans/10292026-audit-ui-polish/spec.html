@@ -46,7 +46,7 @@
       </div>
       <h1>Audit tool: the alloro.com look and a little motion, with everything working exactly as it does today</h1>
       <dl class="meta-grid">
-        <div class="status-card"><dt>Status</dt><dd>In Progress: S1-S2 built and checked locally (Rev 3). Nothing pushed.</dd></div>
+        <div class="status-card"><dt>Status</dt><dd>In Progress: S1-S3 built and checked locally (Rev 4). Nothing pushed.</dd></div>
         <div><dt>Plan folder</dt><dd>plans/10292026-audit-ui-polish</dd></div>
         <div><dt>Repo</dt><dd>getAlloro/alloro-leadgen (audit.getalloro.com). No dev stage: a merge to <code>main</code> deploys to production.</dd></div>
         <div><dt>Worktree</dt><dd>Documents/Projects/alloro-leadgen-worktrees/audit-ui-polish</dd></div>
@@ -230,6 +230,12 @@
         <p><strong>Change:</strong> S2 built: 83 uses of 9–11px → 12px; three readable 8px spots on the scan screens → 12px (review snippet and initial, phone "Capturing...", step number, whose circle grows 16 → 20px); entry subtitle weight 300 → 400; phone report header wraps to two lines; the two section heads stack "See Key Insights" under the heading on phones. A8 reworded: the email card must keep its place in the report's order (right after "Your business has more potential.") on every width, and its pixel top within 8px on desktop. A6 exception: the miniature dashboard behind the blur keeps its 8px text (9 pieces).</p>
         <p><strong>Reason:</strong> Execution deviation: on phones the wrapped header and stacked heads (items 9–10, both approved) push everything below them down, so the card's pixel top moved 2020 → 2114px while its place did not change; ±8px on phones contradicted items 9–10. The blurred miniature is a picture meant to be unreadable; enlarging its text would break it.</p>
         <p><strong>Updated Done criteria:</strong> A6 = 0 readable elements under 12px (blurred miniature excepted). A8 = same place in the order on all widths, pixel top ±8px on desktop. S2 checks: A1 4/4 ok, A2 same 12 requests, A3 words identical, A8 place unchanged and desktop 1220 → 1220px, A9 86s → 86s.</p>
+      </article>
+      <article class="revision-entry">
+        <h3>Rev 4 - 2026-10-29</h3>
+        <p><strong>Change:</strong> S3 built. The phone top bar's "Create Free Account" hides once the email is given (that is when the bottom bar shows). The phone bottom bar keeps its sentence and button but is tighter (12px line, smaller padding): 110 → 77px. The blurred picture after the upsell card is capped at 38rem on phones (report 5,768 → 4,981px long); the upsell card stays fully visible.</p>
+        <p><strong>Reason:</strong> Execution deviation: a button-only bar (the plan's "about 64px") would delete the sentence "Knowing isn't enough. Execution matters. Let Alloro help.", against "nothing removed"; keeping it costs 13px. A7 "one account button visible at a time" is not fully met: at the very top of the phone report the banner's button and the bottom bar show together (2, was 3); removing either would remove a button Jov did not name.</p>
+        <p><strong>Updated Done criteria:</strong> A7 = no duplicate in the phone top bar once the bottom bar shows; bottom bar ≤ 80px with its words. S3 checks: A1 4/4 ok, A2 same 12 requests, A3 words identical, A8 place unchanged, A9 86s → 86s.</p>
       </article>
     </section>
   </main>
