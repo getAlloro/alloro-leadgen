@@ -119,7 +119,7 @@ export default function ColleagueShare() {
               <span className="font-heading text-[40px] font-semibold leading-none text-[#171615]">
                 {checkupScore}
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] mt-1" style={{ color: getScoreColor(checkupScore) }}>
+              <span className="text-xs font-bold uppercase tracking-[0.15em] mt-1" style={{ color: getScoreColor(checkupScore) }}>
                 {getScoreLabel(checkupScore)}
               </span>
             </div>
@@ -141,7 +141,7 @@ export default function ColleagueShare() {
       <div className="anim-scale-in relative bg-white rounded-2xl border border-[#171615]/6 shadow-[0_4px_24px_rgba(23,22,21,0.06)] overflow-hidden" style={{ animationDelay: '160ms' }}>
         <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#D56753] to-[#e57c6a]" />
         <div className="pl-6 pr-5 py-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#171615]/30 mb-3">Your message</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#171615]/30 mb-3">Your message</p>
           <p className="text-sm text-[#171615]/70 leading-relaxed">
             "I just found out where I rank in my market. Took 60 seconds. You should see yours:{" "}
             <span className="text-[#D56753] font-semibold break-all">{checkupLink}</span>"
@@ -191,7 +191,7 @@ export default function ColleagueShare() {
       {/* Rise Together */}
       {referralCode && (
         <div className="anim-scale-in bg-[#D56753]/5 border border-[#D56753]/15 rounded-xl p-4" style={{ animationDelay: '360ms' }}>
-          <p className="text-[10px] font-bold text-[#D56753] uppercase tracking-[0.18em] mb-1.5">Rise Together</p>
+          <p className="text-xs font-bold text-[#D56753] uppercase tracking-[0.18em] mb-1.5">Rise Together</p>
           <p className="text-sm text-[#171615]/70 leading-relaxed">
             When they join, you both pay $1,000 instead of $2,000 for the first 3 months.
           </p>

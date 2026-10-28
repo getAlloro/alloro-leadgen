@@ -46,7 +46,7 @@
       </div>
       <h1>Audit tool: the alloro.com look and a little motion, with everything working exactly as it does today</h1>
       <dl class="meta-grid">
-        <div class="status-card"><dt>Status</dt><dd>In Progress: S1 built and checked locally (Rev 2). Nothing pushed.</dd></div>
+        <div class="status-card"><dt>Status</dt><dd>In Progress: S1-S2 built and checked locally (Rev 3). Nothing pushed.</dd></div>
         <div><dt>Plan folder</dt><dd>plans/10292026-audit-ui-polish</dd></div>
         <div><dt>Repo</dt><dd>getAlloro/alloro-leadgen (audit.getalloro.com). No dev stage: a merge to <code>main</code> deploys to production.</dd></div>
         <div><dt>Worktree</dt><dd>Documents/Projects/alloro-leadgen-worktrees/audit-ui-polish</dd></div>
@@ -224,6 +224,12 @@
         <p><strong>Change:</strong> S1 built. Palette set once in the Tailwind config in <code>index.html</code> (gray/slate → warm greys, blue/indigo → warm ink, orange → terracotta, yellow/amber → alloro amber, green/emerald → alloro green); 169 hard-coded cool colours swapped (the plan's "145" counted lines, not occurrences); headings in Spectral; headline accent solid terracotta italic; scan labels in the site font (the timer keeps monospace digits). Red is kept as "bad" but warmed (<code>#cc4a3d</code> family) instead of left as Tailwind's bright red.</p>
         <p><strong>Reason:</strong> Execution deviation: left as is, the bright red looked louder than everything else once green and amber took alloro.com's softer tones. It still reads as red.</p>
         <p><strong>Updated Done criteria:</strong> none. S1 checks: A1 4/4 runs ok, A2 same 12 requests in order, A3 words identical on 6 screens, A8 email card 1220/2020px unchanged, A9 86s → 86s.</p>
+      </article>
+      <article class="revision-entry">
+        <h3>Rev 3 - 2026-10-29</h3>
+        <p><strong>Change:</strong> S2 built: 83 uses of 9–11px → 12px; three readable 8px spots on the scan screens → 12px (review snippet and initial, phone "Capturing...", step number, whose circle grows 16 → 20px); entry subtitle weight 300 → 400; phone report header wraps to two lines; the two section heads stack "See Key Insights" under the heading on phones. A8 reworded: the email card must keep its place in the report's order (right after "Your business has more potential.") on every width, and its pixel top within 8px on desktop. A6 exception: the miniature dashboard behind the blur keeps its 8px text (9 pieces).</p>
+        <p><strong>Reason:</strong> Execution deviation: on phones the wrapped header and stacked heads (items 9–10, both approved) push everything below them down, so the card's pixel top moved 2020 → 2114px while its place did not change; ±8px on phones contradicted items 9–10. The blurred miniature is a picture meant to be unreadable; enlarging its text would break it.</p>
+        <p><strong>Updated Done criteria:</strong> A6 = 0 readable elements under 12px (blurred miniature excepted). A8 = same place in the order on all widths, pixel top ±8px on desktop. S2 checks: A1 4/4 ok, A2 same 12 requests, A3 words identical, A8 place unchanged and desktop 1220 → 1220px, A9 86s → 86s.</p>
       </article>
     </section>
   </main>

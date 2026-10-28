@@ -123,7 +123,7 @@ export const InputStage = ({
             losing to your competition?
           </span>
         </h1>
-        <p className="text-xl text-gray-600 mb-10 font-light">
+        <p className="text-xl text-gray-600 mb-10 font-normal">
           Alloro will analyze your business's digital presence and reveal growth
           opportunities.
         </p>

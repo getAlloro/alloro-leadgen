@@ -67,7 +67,7 @@ export default function SharedResults() {
         </Link>
         <div className="flex items-center gap-4 mt-5 w-full max-w-[280px]">
           <div className="flex-1 h-px bg-[#171615]/8" />
-          <span className="text-[10px] font-bold tracking-[0.22em] text-[#171615]/22 uppercase whitespace-nowrap">
+          <span className="text-xs font-bold tracking-[0.22em] text-[#171615]/22 uppercase whitespace-nowrap">
             Business Clarity
           </span>
           <div className="flex-1 h-px bg-[#171615]/8" />
@@ -132,7 +132,7 @@ export default function SharedResults() {
                       }}
                     >
                       <span className="font-heading text-[40px] font-semibold leading-none text-[#171615]">{card.score}</span>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.15em] mt-1" style={{ color }}>
+                      <span className="text-xs font-bold uppercase tracking-[0.15em] mt-1" style={{ color }}>
                         {label}
                       </span>
                     </div>
@@ -158,7 +158,7 @@ export default function SharedResults() {
                     <div key={statLabel} className="text-center bg-[#FDFCF9] rounded-xl py-3.5 border border-[#171615]/5">
                       <Icon className="w-3.5 h-3.5 mx-auto mb-1.5" style={{ color }} />
                       <p className="font-heading text-[18px] font-semibold text-[#171615] leading-none">{value}</p>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#171615]/30 mt-1">{statLabel}</p>
+                      <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#171615]/30 mt-1">{statLabel}</p>
                     </div>
                   ))}
                 </div>
@@ -180,7 +180,7 @@ export default function SharedResults() {
                     Check your score
                     <ArrowRight className="w-4 h-4" />
                   </Link>
-                  <p className="text-center text-[11px] text-[#171615]/28 font-medium">
+                  <p className="text-center text-xs text-[#171615]/28 font-medium">
                     Free · 60 seconds · No one sees your results but you
                   </p>
                   <p className="text-center font-heading text-sm font-semibold text-[#171615] pt-1">
@@ -199,7 +199,7 @@ export default function SharedResults() {
           <div className="w-1 h-1 rounded-full bg-[#D56753]/30" />
           <div className="flex-1 h-px bg-[#171615]/6" />
         </div>
-        <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/20 uppercase">
+        <p className="text-xs font-bold tracking-[0.2em] text-[#171615]/20 uppercase">
           Alloro &middot; Business Clarity
         </p>
       </footer>

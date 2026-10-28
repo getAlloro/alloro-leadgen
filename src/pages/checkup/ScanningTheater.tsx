@@ -334,7 +334,7 @@ function DiscoveryFeed({
   return (
     <div className="space-y-1.5 mt-5 pt-5 border-t border-[#171615]/6 max-h-[220px] overflow-y-auto">
       {/* Business data section */}
-      <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mb-2">
+      <p className="text-xs font-bold tracking-[0.2em] text-[#171615]/30 uppercase mb-2">
         Your Profile
       </p>
       {businessItems.slice(0, visibleBusinessItems).map((item, i) => (
@@ -357,7 +357,7 @@ function DiscoveryFeed({
       {/* Competitors section */}
       {visibleCompetitorItems > 0 && (
         <>
-          <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mt-3 mb-2">
+          <p className="text-xs font-bold tracking-[0.2em] text-[#171615]/30 uppercase mt-3 mb-2">
             Competitors Found
           </p>
           {competitorItems.current.slice(0, visibleCompetitorItems).map((item, i) => {
@@ -369,10 +369,10 @@ function DiscoveryFeed({
                   isHighlighted ? "bg-[#171615]/5" : ""
                 }`}
               >
-                <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
                   isHighlighted ? "bg-[#171615]" : "bg-[#171615]/20"
                 }`}>
-                  <span className="text-[8px] font-bold text-white">{i + 1}</span>
+                  <span className="text-xs font-bold text-white">{i + 1}</span>
                 </div>
                 <span className={`font-semibold break-words max-w-[140px] ${isHighlighted ? "text-[#171615]" : "text-slate-600"}`}>
                   {item.label}
@@ -395,7 +395,7 @@ function DiscoveryFeed({
       {/* Oz teaser findings — build anticipation for the results page */}
       {visibleOzLines > 0 && (
         <>
-          <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mt-3 mb-2">
+          <p className="text-xs font-bold tracking-[0.2em] text-[#171615]/30 uppercase mt-3 mb-2">
             Deep Analysis
           </p>
           {OZ_TEASER_LINES.slice(0, visibleOzLines).map((line, i) => (
@@ -486,7 +486,7 @@ function PhotoStrip({ photos }: { photos: PlacePhoto[] }) {
 
   return (
     <div className="mt-3">
-      <p className="text-[10px] font-bold tracking-[0.2em] text-[#171615]/30 uppercase mb-2">
+      <p className="text-xs font-bold tracking-[0.2em] text-[#171615]/30 uppercase mb-2">
         GBP Photos
       </p>
       <div className="flex gap-1.5 overflow-hidden">
@@ -809,7 +809,7 @@ export default function ScanningTheater() {
     <div className="w-full max-w-4xl mt-2 sm:mt-6">
       {/* Header */}
       <div className="text-center mb-8 anim-fade-up">
-        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#D56753]/20 bg-[#D56753]/6 text-[11px] font-bold tracking-[0.18em] text-[#D56753] uppercase mb-4">
+        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#D56753]/20 bg-[#D56753]/6 text-xs font-bold tracking-[0.18em] text-[#D56753] uppercase mb-4">
           <span className="relative w-1.5 h-1.5 shrink-0">
             <span className="absolute inset-0 rounded-full bg-[#D56753]" />
             <span className="live-dot absolute inset-0 rounded-full bg-[#D56753]" />

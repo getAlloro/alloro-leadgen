@@ -107,7 +107,7 @@ export default function BuildingScreen() {
           <div className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ background: `linear-gradient(to bottom, ${scoreColor}, ${scoreColor}99)` }} />
           <div className="pl-7 pr-6 py-6 flex items-center justify-between gap-4">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#171615]/35 mb-1">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#171615]/35 mb-1">
                 Business Clarity Score
               </p>
               <div className="flex items-baseline gap-2">

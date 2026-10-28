@@ -297,14 +297,14 @@ export const DashboardStage = ({
               ) : websiteBlocked ? (
                 <div className="rounded-xl border border-dashed border-amber-300 aspect-video flex flex-col items-center justify-center bg-amber-50/60 px-3">
                   <Globe className="w-10 h-10 text-amber-400 mb-2" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-600 text-center leading-tight">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-600 text-center leading-tight">
                     Site Blocks Scanners
                   </span>
                 </div>
               ) : (
                 <div className="rounded-xl border border-dashed border-gray-300 aspect-video flex flex-col items-center justify-center bg-gray-50">
                   <Globe className="w-10 h-10 text-gray-300 mb-2" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">
                     No website
                   </span>
                 </div>
@@ -325,7 +325,7 @@ export const DashboardStage = ({
                   className="w-5 h-5 object-contain"
                 />
                 <motion.span
-                  className="text-[11px] font-bold text-brand-500 uppercase tracking-wider"
+                  className="text-xs font-bold text-brand-500 uppercase tracking-wider"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
@@ -334,7 +334,7 @@ export const DashboardStage = ({
                 </motion.span>
               </div>
               <motion.h2
-                className="font-heading text-2xl md:text-[2.25rem] font-bold text-gray-900 mb-4 tracking-tight truncate max-w-full"
+                className="font-heading text-2xl md:text-[2.25rem] font-bold text-gray-900 mb-4 tracking-tight line-clamp-2 md:line-clamp-none md:truncate max-w-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
@@ -380,7 +380,7 @@ export const DashboardStage = ({
                       {item.icon && (
                         <item.icon className="w-4 h-4 text-brand-500 shrink-0" />
                       )}
-                      <span className="truncate">{item.value}</span>
+                      <span className="line-clamp-2 md:line-clamp-none md:truncate">{item.value}</span>
                     </span>
                   </motion.div>
                 ))}
@@ -465,7 +465,7 @@ export const DashboardStage = ({
                 <div className="flex-1 flex items-center justify-center py-2 opacity-70">
                   <div className="text-center">
                     <div className="text-3xl font-black text-amber-500 mb-1">—</div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-amber-600">
+                    <p className="text-xs font-bold uppercase tracking-wider text-amber-600">
                       Website Blocks Scanners
                     </p>
                   </div>
@@ -474,7 +474,7 @@ export const DashboardStage = ({
                 <div className="flex-1 flex items-center justify-center py-2 opacity-60 grayscale">
                   <div className="text-center">
                     <div className="text-3xl font-black text-gray-400 mb-1">—</div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
                       No website analyzed
                     </p>
                   </div>
@@ -626,7 +626,7 @@ export const DashboardStage = ({
                 </div>
               </div>
               {competitorCount > 0 && (
-                <p className="mt-4 text-[11px] text-gray-500 text-center relative z-10">
+                <p className="mt-4 text-xs text-gray-500 text-center relative z-10">
                   Ranked against {competitorCount} nearby{" "}
                   {competitorCount === 1 ? "competitor" : "competitors"}
                   {competitorCount < 4 && (
@@ -937,7 +937,7 @@ export const DashboardStage = ({
                 }}
               />
 
-              <div className="flex items-center justify-between mb-8 relative z-10">
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between mb-8 relative z-10">
                 <div className="flex items-center gap-3">
                   <motion.div
                     className="p-2.5 bg-brand-100 rounded-xl"
@@ -1113,7 +1113,7 @@ export const DashboardStage = ({
                 }}
               />
 
-              <div className="flex items-center justify-between mb-8 relative z-10">
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between mb-8 relative z-10">
                 <div className="flex items-center gap-3">
                   <motion.div
                     className="p-2.5 bg-blue-100 rounded-xl"
@@ -1247,7 +1247,7 @@ export const DashboardStage = ({
                             n.active ? "bg-brand-400" : "bg-white/20"
                           }`}
                         />
-                        <span className="text-[10px] font-semibold">
+                        <span className="text-xs font-semibold">
                           {n.label}
                         </span>
                       </div>
@@ -1266,7 +1266,7 @@ export const DashboardStage = ({
                         className="flex items-center gap-2 px-2 py-1.5 rounded-md text-white/60"
                       >
                         <div className="w-3 h-3 rounded-sm bg-white/20" />
-                        <span className="text-[10px] font-semibold">
+                        <span className="text-xs font-semibold">
                           {n.label}
                         </span>
                       </div>
@@ -1279,7 +1279,7 @@ export const DashboardStage = ({
                       </div>
                       <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-white/5 mb-1">
                         <div className="w-2.5 h-2.5 rounded-full bg-brand-400" />
-                        <span className="text-[10px] font-semibold text-white">
+                        <span className="text-xs font-semibold text-white">
                           {SAMPLE_PREVIEW.locationName}
                         </span>
                         <div className="ml-auto w-2 h-2 rounded bg-white/30" />
@@ -1288,7 +1288,7 @@ export const DashboardStage = ({
                         <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center">
                           <div className="w-2 h-2 rounded-full bg-brand-400" />
                         </div>
-                        <span className="text-[10px] text-white/70">
+                        <span className="text-xs text-white/70">
                           {SAMPLE_PREVIEW.businessName}
                         </span>
                       </div>
@@ -1310,7 +1310,7 @@ export const DashboardStage = ({
                           <div className="w-6 h-6 rounded-md bg-brand-500" />
                         </div>
                         <div className="hidden md:block">
-                          <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-500">
+                          <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">
                             Business Hub
                           </div>
                           <div className="text-[8px] font-semibold uppercase tracking-[0.18em] text-gray-400 mt-0.5">
@@ -1322,10 +1322,10 @@ export const DashboardStage = ({
                         <div className="md:hidden w-4 h-4 rounded-full border border-gray-400" />
                         <div className="flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                          <span className="hidden md:inline text-[9px] font-bold uppercase tracking-wider text-green-600">
+                          <span className="hidden md:inline text-xs font-bold uppercase tracking-wider text-green-600">
                             Live Updates On
                           </span>
-                          <span className="md:hidden text-[10px] font-bold text-green-600">
+                          <span className="md:hidden text-xs font-bold text-green-600">
                             ON
                           </span>
                         </div>
@@ -1336,14 +1336,14 @@ export const DashboardStage = ({
                     <div className="p-5 md:p-6">
                       {/* Tag row */}
                       <div className="flex flex-wrap gap-2 mb-4">
-                        <span className="text-[9px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-500">
+                        <span className="text-xs font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-500">
                           · Latest Update · Apr 15
                         </span>
-                        <span className="text-[9px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600">
+                        <span className="text-xs font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600">
                           · Growth Looks Good
                         </span>
                         {/* Invented business: these numbers are not the visitor's. */}
-                        <span className="text-[9px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-gray-900 text-white">
+                        <span className="text-xs font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-gray-900 text-white">
                           Sample
                         </span>
                       </div>
@@ -1361,10 +1361,10 @@ export const DashboardStage = ({
                       <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-4 mb-5">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <span className="text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full bg-gray-900 text-white">
+                            <span className="text-xs font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full bg-gray-900 text-white">
                               Rankings
                             </span>
-                            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
+                            <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
                               {SAMPLE_PREVIEW.cityLabel}
                             </span>
                           </div>
@@ -1376,14 +1376,14 @@ export const DashboardStage = ({
                         </div>
                         <div className="md:border-l md:border-black/5 md:pl-5 flex items-center gap-3">
                           <div>
-                            <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 mb-1">
+                            <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-1">
                               Visibility Score
                             </div>
                             <div className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-gray-900 leading-none">
                               98
                             </div>
                           </div>
-                          <div className="bg-brand-500 text-white text-[10px] font-bold px-3 py-2 rounded-full flex items-center gap-1">
+                          <div className="bg-brand-500 text-white text-xs font-bold px-3 py-2 rounded-full flex items-center gap-1">
                             See Why →
                           </div>
                         </div>
@@ -1401,14 +1401,14 @@ export const DashboardStage = ({
                             key={i}
                             className="bg-white rounded-2xl border border-black/5 shadow-sm p-4"
                           >
-                            <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
+                            <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
                               {k.label}
                             </div>
                             <div className="flex items-baseline justify-between">
                               <span className="font-heading text-2xl md:text-3xl font-black tracking-tighter text-gray-900 leading-none">
                                 {k.val}
                               </span>
-                              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-green-100 text-green-700">
+                              <span className="text-xs font-black px-2 py-0.5 rounded-md bg-green-100 text-green-700">
                                 {k.trend}
                               </span>
                             </div>
@@ -1422,14 +1422,14 @@ export const DashboardStage = ({
                         <div className="md:col-span-2 bg-white rounded-2xl border border-black/5 shadow-sm p-4">
                           <div className="flex items-center justify-between mb-3">
                             <div>
-                              <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
+                              <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
                                 Customer Acquisition
                               </div>
                               <div className="font-heading text-base font-bold text-gray-900 mt-0.5">
                                 Trending up · 12 weeks
                               </div>
                             </div>
-                            <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-green-100 text-green-700">
+                            <span className="text-xs font-black px-2 py-0.5 rounded-md bg-green-100 text-green-700">
                               +32%
                             </span>
                           </div>
@@ -1454,7 +1454,7 @@ export const DashboardStage = ({
 
                         {/* Donut — Review Sentiment */}
                         <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4">
-                          <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3">
+                          <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-3">
                             Sentiment
                           </div>
                           <div className="relative flex items-center justify-center h-24">
@@ -1466,7 +1466,7 @@ export const DashboardStage = ({
                               <span className="font-heading text-2xl font-black tracking-tighter text-gray-900 leading-none">
                                 88%
                               </span>
-                              <span className="text-[9px] font-semibold text-gray-400 mt-0.5">
+                              <span className="text-xs font-semibold text-gray-400 mt-0.5">
                                 Positive
                               </span>
                             </div>
@@ -1477,10 +1477,10 @@ export const DashboardStage = ({
                       {/* Data table — Top Referral Sources */}
                       <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4 mb-5">
                         <div className="flex items-center justify-between mb-3">
-                          <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
+                          <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
                             Top Referral Sources
                           </div>
-                          <span className="text-[9px] font-semibold text-gray-400">
+                          <span className="text-xs font-semibold text-gray-400">
                             Last 30 days
                           </span>
                         </div>
@@ -1515,14 +1515,14 @@ export const DashboardStage = ({
                       {/* Bottom row — 2 widgets */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4">
-                          <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
+                          <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
                             Competitor Gap
                           </div>
                           <div className="flex items-baseline gap-2 mb-3">
                             <span className="font-heading text-3xl font-black tracking-tighter text-gray-900 leading-none">
                               −$24k
                             </span>
-                            <span className="text-[10px] font-bold text-red-600">
+                            <span className="text-xs font-bold text-red-600">
                               monthly loss
                             </span>
                           </div>
@@ -1539,14 +1539,14 @@ export const DashboardStage = ({
                           </div>
                         </div>
                         <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4">
-                          <div className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
+                          <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
                             Appointments Booked
                           </div>
                           <div className="flex items-baseline gap-2 mb-3">
                             <span className="font-heading text-3xl font-black tracking-tighter text-gray-900 leading-none">
                               287
                             </span>
-                            <span className="text-[10px] font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-md">
+                            <span className="text-xs font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-md">
                               +14%
                             </span>
                           </div>
@@ -1699,7 +1699,7 @@ export const DashboardStage = ({
                       Create Your Free Account
                       <ArrowRight className="w-4 h-4" />
                     </motion.a>
-                    <p className="text-[10px] text-gray-500 mt-2.5">
+                    <p className="text-xs text-gray-500 mt-2.5">
                       100% Free · Easy Onboarding
                     </p>
                   </div>

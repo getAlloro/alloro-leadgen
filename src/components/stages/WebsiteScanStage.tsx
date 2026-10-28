@@ -179,7 +179,7 @@ export const WebsiteScanStage = memo(
             />
             <span
               className={`${
-                isMobile ? "text-[8px]" : "text-xs"
+                "text-xs"
               } font-semibold text-gray-600`}
             >
               Capturing...
@@ -287,7 +287,7 @@ export const WebsiteScanStage = memo(
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             exit={{ opacity: 0, scale: 0 }}
                             style={{ top: `${tag.y}%`, left: `${tag.x}%` }}
-                            className="absolute bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg z-30 pointer-events-none"
+                            className="absolute bg-green-500 text-white text-xs font-bold px-2 py-1 rounded shadow-lg z-30 pointer-events-none"
                           >
                             {tag.text}
                           </motion.div>

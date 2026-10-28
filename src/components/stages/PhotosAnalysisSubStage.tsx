@@ -104,7 +104,7 @@ export const PhotosAnalysisSubStage = ({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <motion.div
-                className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"
                 initial={{ y: 10 }}
                 whileHover={{ y: 0 }}
               >
@@ -140,15 +140,15 @@ export const PhotosAnalysisSubStage = ({
                   <div className="flex items-center gap-2 mt-1.5">
                     <div className="flex items-center gap-0.5 text-yellow-500">
                       <Star className="w-3 h-3 fill-yellow-500" />
-                      <span className="text-[10px] font-bold">
+                      <span className="text-xs font-bold">
                         {data.totalScore}
                       </span>
                     </div>
-                    <span className="text-[10px] text-gray-500">
+                    <span className="text-xs text-gray-500">
                       {data.reviewsCount} reviews
                     </span>
                   </div>
-                  <div className="flex items-center gap-1 mt-1 text-[9px] text-gray-400">
+                  <div className="flex items-center gap-1 mt-1 text-xs text-gray-400">
                     <MapPin className="w-2.5 h-2.5" />
                     <span className="truncate">
                       {data.city}, {data.state}
@@ -178,7 +178,7 @@ export const PhotosAnalysisSubStage = ({
               <div className="bg-white rounded-xl shadow-2xl border border-gray-200 p-3">
                 <div className="flex items-center gap-1.5 mb-2">
                   <Star className="w-3 h-3 text-brand-500" />
-                  <span className="text-[10px] font-bold text-gray-700 uppercase tracking-wide">
+                  <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">
                     Recent Reviews
                   </span>
                 </div>
@@ -188,12 +188,12 @@ export const PhotosAnalysisSubStage = ({
                       key={i}
                       className="flex items-start gap-2 p-1.5 bg-gray-50 rounded-lg"
                     >
-                      <div className="w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-[8px] font-bold text-brand-600 flex-shrink-0">
+                      <div className="w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-xs font-bold text-brand-600 flex-shrink-0">
                         {review.name.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1">
-                          <span className="text-[9px] font-semibold text-gray-800 truncate">
+                          <span className="text-xs font-semibold text-gray-800 truncate">
                             {review.name}
                           </span>
                           <div className="flex gap-0.5">
@@ -209,7 +209,7 @@ export const PhotosAnalysisSubStage = ({
                             ))}
                           </div>
                         </div>
-                        <p className="text-[8px] text-gray-500 line-clamp-1 mt-0.5">
+                        <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">
                           {review.text || "Great experience!"}
                         </p>
                       </div>

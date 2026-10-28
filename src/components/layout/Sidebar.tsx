@@ -136,7 +136,7 @@ export const Sidebar = ({
             <span className="font-heading font-semibold text-lg text-gray-900 tracking-tight leading-tight">
               Alloro
             </span>
-            <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">
+            <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">
               What we got for you
             </span>
           </div>
@@ -209,7 +209,7 @@ export const Sidebar = ({
           <span className="font-heading font-semibold text-lg text-gray-900 tracking-tight leading-tight">
             Alloro
           </span>
-          <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">
+          <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">
             Business Analyzer
           </span>
         </div>

@@ -312,7 +312,7 @@ export default function EntryScreen() {
 
       {/* Live badge */}
       <div className="anim-fade-up flex justify-center mb-7" style={{ animationDelay: '0ms' }}>
-        <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#D56753]/20 bg-white/80 text-[11px] font-bold tracking-[0.18em] text-[#D56753] uppercase shadow-[0_2px_12px_rgba(214,104,83,0.08)]">
+        <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#D56753]/20 bg-white/80 text-xs font-bold tracking-[0.18em] text-[#D56753] uppercase shadow-[0_2px_12px_rgba(214,104,83,0.08)]">
           <span className="relative w-1.5 h-1.5 shrink-0">
             <span className="absolute inset-0 rounded-full bg-[#D56753]" />
             <span className="live-dot absolute inset-0 rounded-full bg-[#D56753]" />
@@ -440,7 +440,7 @@ export default function EntryScreen() {
                   <p className="text-sm text-[#171615]/45 mt-1 leading-snug">{selectedPlace.formattedAddress}</p>
                   <div className="flex items-center gap-2.5 mt-3">
                     {selectedPlace.category && (
-                      <span className="inline-block text-[11px] font-bold text-[#D56753] bg-[#D56753]/8 rounded-full px-2.5 py-0.5 tracking-wide uppercase">
+                      <span className="inline-block text-xs font-bold text-[#D56753] bg-[#D56753]/8 rounded-full px-2.5 py-0.5 tracking-wide uppercase">
                         {competitorTerm(selectedPlace.category, selectedPlace.types || [], selectedPlace.name)}
                       </span>
                     )}
@@ -489,7 +489,7 @@ export default function EntryScreen() {
         {["Free", "60 seconds", "See your score instantly"].map((text, i) => (
           <span key={text} className="flex items-center">
             {i > 0 && <span className="w-px h-3 bg-[#171615]/12 mx-3.5" />}
-            <span className="text-[11px] font-medium text-[#171615]/28 tracking-wide">{text}</span>
+            <span className="text-xs font-medium text-[#171615]/28 tracking-wide">{text}</span>
           </span>
         ))}
       </div>
