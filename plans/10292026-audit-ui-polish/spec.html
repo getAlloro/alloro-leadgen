@@ -46,7 +46,7 @@
       </div>
       <h1>Audit tool: the alloro.com look and a little motion, with everything working exactly as it does today</h1>
       <dl class="meta-grid">
-        <div class="status-card"><dt>Status</dt><dd>In Progress: S1-S4 built and checked locally (Rev 5). Nothing pushed.</dd></div>
+        <div class="status-card"><dt>Status</dt><dd>In Progress: S1-S5 built and checked locally (Rev 6). Nothing pushed.</dd></div>
         <div><dt>Plan folder</dt><dd>plans/10292026-audit-ui-polish</dd></div>
         <div><dt>Repo</dt><dd>getAlloro/alloro-leadgen (audit.getalloro.com). No dev stage: a merge to <code>main</code> deploys to production.</dd></div>
         <div><dt>Worktree</dt><dd>Documents/Projects/alloro-leadgen-worktrees/audit-ui-polish</dd></div>
@@ -242,6 +242,12 @@
         <p><strong>Change:</strong> S4 built from <code>63281fc</code> (layout of the Google listing and website scan screens). Kept from <code>main</code>: the two newer scan wordings ("Finding Your Google Listing", "Looking up your business on Google Maps...") and the step hand-off (<code>onCarouselComplete</code> after 5s with the profile drawn), which <code>63281fc</code> had moved into the scan-walk change that is not taken. S1/S2 re-applied to the taken file. A review with no text no longer shows empty quote marks. S1 follow-up: 8 hard-coded blues/greys/green the first sweep did not list (pin glows, one grade colour, a slate and a gray) moved to the same palette. Item 15: the competitor screen is a drawn radar, not a tiled map; no fault found locally (pins did not appear inside the 15s the slow stand-in gives the step, while the list was still fading in).</p>
         <p><strong>Reason:</strong> Execution deviation: the first S4 build stalled on the Google listing step (time to report hit the 180s cap) because the hand-off was missing; the request check showed polls continuing after <code>stage_viewed_2</code>. Restoring it brought the report back at 87s (baseline 86s). Also found: during S3 the baseline was re-measured in quick mode, which dropped its request list, so S3's A2/A9 were not compared at the time; the full baseline was re-measured here and S4 (which contains S3) passes A2 and A9.</p>
         <p><strong>Updated Done criteria:</strong> none. S4 checks: A1 4/4 ok, A2 same 12 requests, A3 report words identical (scan screens add the approved profile facts), A8 place unchanged, A9 86s → 87s.</p>
+      </article>
+      <article class="revision-entry">
+        <h3>Rev 6 - 2026-10-29</h3>
+        <p><strong>Change:</strong> S5 built. New <code>src/styles/motion.css</code> imported from <code>index.tsx</code> (Vite bundles and links it; checked in the built page). <code>&lt;MotionConfig reducedMotion="user"&gt;</code> wraps the app. First screen: two small alloro-style laurel sprigs beside the badge draw once (hidden from screen readers). Score bars and rings play once when they come into view instead of at load off screen; the three lower report cards (Local Ranking, Google listing, website) do the same. With reduce-motion on: CSS animations and transitions end at once, bars and rings show filled with no growing, the rings' glow, the bars' shine and the upsell button's glow do not loop. Item 21 (search box focus ring): already present on live (terracotta border and ring), so unchanged.</p>
+        <p><strong>Reason:</strong> Execution deviation: framer-motion's reduce setting only stops movement, so widths and opacity loops kept running under reduce-motion; the bar, ring and upsell components now read the setting themselves. A10 measured as "nothing moves or loops" (only 0.01ms transitions remain), not a literal 0 from <code>getAnimations()</code>.</p>
+        <p><strong>Updated Done criteria:</strong> A10 = with reduce-motion, no growing bar, no drawing ring, no looping glow or shine, sprigs shown drawn. A11 = a bar is empty before it scrolls in, full after, and does not replay. S5 checks: A1 4/4 ok, A2 same 12 requests, A3 words identical, A8 place unchanged, A9 86s → 86s, A10 and A11 pass.</p>
       </article>
     </section>
   </main>

@@ -110,11 +110,29 @@ export const InputStage = ({
             alt="Alloro"
             className="w-16 h-16 object-contain mb-3"
           />
+          <div className="flex items-center gap-2">
+            <svg className="lw-sprig lw-sprig--mirror" viewBox="0 0 40 18" aria-hidden="true" focusable="false">
+              <path className="lw-stem" pathLength={1} d="M1 11 C 12 11, 26 9.5, 39 5" />
+              <g transform="translate(9 10.6) rotate(-38)"><path className="lw-leaf" style={{ ["--i" as string]: 0 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(15 10.2) rotate(32)"><path className="lw-leaf" style={{ ["--i" as string]: 1 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(21 9.4) rotate(-36)"><path className="lw-leaf" style={{ ["--i" as string]: 2 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(27 8.2) rotate(30)"><path className="lw-leaf" style={{ ["--i" as string]: 3 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(32.5 6.8) rotate(-30)"><path className="lw-leaf" style={{ ["--i" as string]: 4 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+            </svg>
           <div className="flex items-center gap-2 px-4 py-1.5 bg-brand-50 rounded-full border border-brand-100">
             <Sparkles className="w-4 h-4 text-brand-500" />
             <span className="text-sm font-semibold text-brand-600">
               Alloro Business Analyzer
             </span>
+          </div>
+            <svg className="lw-sprig" viewBox="0 0 40 18" aria-hidden="true" focusable="false">
+              <path className="lw-stem" pathLength={1} d="M1 11 C 12 11, 26 9.5, 39 5" />
+              <g transform="translate(9 10.6) rotate(-38)"><path className="lw-leaf" style={{ ["--i" as string]: 0 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(15 10.2) rotate(32)"><path className="lw-leaf" style={{ ["--i" as string]: 1 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(21 9.4) rotate(-36)"><path className="lw-leaf" style={{ ["--i" as string]: 2 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(27 8.2) rotate(30)"><path className="lw-leaf" style={{ ["--i" as string]: 3 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+              <g transform="translate(32.5 6.8) rotate(-30)"><path className="lw-leaf" style={{ ["--i" as string]: 4 }} d="M0 0 Q 4.5 -2.8 9.5 0 Q 4.5 2.8 0 0 Z" /></g>
+            </svg>
           </div>
         </motion.div>
         <h1 className="text-4xl md:text-6xl font-medium text-gray-900 mb-6 tracking-tight">

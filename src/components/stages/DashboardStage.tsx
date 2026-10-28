@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   CheckCircle2,
   Loader2,
@@ -135,6 +135,7 @@ export const DashboardStage = ({
   selectedDataType: "website" | "gbp" | null;
   setSelectedDataType: (type: "website" | "gbp" | null) => void;
 }) => {
+  const reduceMotion = useReducedMotion();
   // `stage_viewed_5` (Report Viewed) fires on mount — objective signal
   // that the pipeline rendered the dashboard shell. Fires BEFORE the
   // paywall is satisfied; the blurred report still counts as "report
@@ -820,7 +821,8 @@ export const DashboardStage = ({
                 custom={4}
                 variants={cardVariants}
                 initial="hidden"
-                animate="visible"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
               >
                 {/* Orange accent contour - top right */}
                 <div className="absolute -top-10 -right-10 w-52 h-52 bg-brand-500 rounded-full opacity-40 blur-2xl pointer-events-none"></div>
@@ -924,7 +926,8 @@ export const DashboardStage = ({
               custom={3}
               variants={cardVariants}
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
               whileHover={{ boxShadow: "0 15px 50px rgba(214,104,83,0.12)" }}
             >
               {/* Subtle pattern background */}
@@ -1100,7 +1103,8 @@ export const DashboardStage = ({
               custom={4}
               variants={cardVariants}
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
               whileHover={{ boxShadow: "0 15px 50px rgba(23,22,21,0.12)" }}
             >
               {/* Subtle pattern background */}
@@ -1625,8 +1629,8 @@ export const DashboardStage = ({
                   {/* Animated background glow */}
                   <motion.div
                     className="absolute -inset-1 bg-brand-500/20 blur-xl"
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-                    transition={{ duration: 3, repeat: Infinity }}
+                    animate={reduceMotion ? { opacity: 0.3 } : { scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 3, repeat: Infinity }}
                   />
 
                   <div className="relative z-10">

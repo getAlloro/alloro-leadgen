@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Target } from "lucide-react";
 import { getColorFromScore } from "../../lib/helpers/scoreUtils";
 import { WhyThisMattersTooltip } from "./WhyThisMattersTooltip";
@@ -42,12 +42,13 @@ export const HorizontalProgressBar = ({
 
   const colorKey = getColorFromScore(score);
   const colors = colorMap[colorKey];
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.div
       className="mb-5"
       initial={{ opacity: 0, x: -30 }}
-      animate={{ opacity: 1, x: 0 }}
+      whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.5, delay, type: "spring", stiffness: 80 }}
     >
       <div className="flex justify-between items-center mb-2">
@@ -62,7 +63,7 @@ export const HorizontalProgressBar = ({
           <motion.span
             className={`text-sm font-bold ${colors.text}`}
             initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.4 }}
             transition={{ delay: delay + 0.3, type: "spring" }}
           >
             {score}%
@@ -75,15 +76,15 @@ export const HorizontalProgressBar = ({
         <motion.div
           className={`h-full ${colors.bg} rounded-full relative overflow-hidden`}
           initial={{ width: 0 }}
-          animate={{ width: `${score}%` }}
+          whileInView={{ width: `${score}%` }} viewport={{ once: true, amount: 0.4 }}
           transition={{
-            duration: 1.2,
+            duration: reduceMotion ? 0 : 1.2,
             ease: [0.4, 0, 0.2, 1],
-            delay: delay + 0.2,
+            delay: reduceMotion ? 0 : delay + 0.2,
           }}
         >
-          {/* Animated shine effect */}
-          <motion.div
+          {/* Animated shine effect (not shown when the device asks for less motion) */}
+          {!reduceMotion && <motion.div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
             initial={{ x: "-100%" }}
             animate={{ x: "200%" }}
@@ -93,14 +94,14 @@ export const HorizontalProgressBar = ({
               repeat: Infinity,
               repeatDelay: 3,
             }}
-          />
+          />}
         </motion.div>
       </div>
       {actionItems.length > 0 && (
         <motion.div
           className="mt-2"
           initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.3, delay: delay + 0.6 }}
         >
           {/* First Action Item */}
