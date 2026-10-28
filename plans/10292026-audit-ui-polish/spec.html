@@ -46,7 +46,7 @@
       </div>
       <h1>Audit tool: the alloro.com look and a little motion, with everything working exactly as it does today</h1>
       <dl class="meta-grid">
-        <div class="status-card"><dt>Status</dt><dd>In Progress: S1-S3 built and checked locally (Rev 4). Nothing pushed.</dd></div>
+        <div class="status-card"><dt>Status</dt><dd>In Progress: S1-S4 built and checked locally (Rev 5). Nothing pushed.</dd></div>
         <div><dt>Plan folder</dt><dd>plans/10292026-audit-ui-polish</dd></div>
         <div><dt>Repo</dt><dd>getAlloro/alloro-leadgen (audit.getalloro.com). No dev stage: a merge to <code>main</code> deploys to production.</dd></div>
         <div><dt>Worktree</dt><dd>Documents/Projects/alloro-leadgen-worktrees/audit-ui-polish</dd></div>
@@ -236,6 +236,12 @@
         <p><strong>Change:</strong> S3 built. The phone top bar's "Create Free Account" hides once the email is given (that is when the bottom bar shows). The phone bottom bar keeps its sentence and button but is tighter (12px line, smaller padding): 110 → 77px. The blurred picture after the upsell card is capped at 38rem on phones (report 5,768 → 4,981px long); the upsell card stays fully visible.</p>
         <p><strong>Reason:</strong> Execution deviation: a button-only bar (the plan's "about 64px") would delete the sentence "Knowing isn't enough. Execution matters. Let Alloro help.", against "nothing removed"; keeping it costs 13px. A7 "one account button visible at a time" is not fully met: at the very top of the phone report the banner's button and the bottom bar show together (2, was 3); removing either would remove a button Jov did not name.</p>
         <p><strong>Updated Done criteria:</strong> A7 = no duplicate in the phone top bar once the bottom bar shows; bottom bar ≤ 80px with its words. S3 checks: A1 4/4 ok, A2 same 12 requests, A3 words identical, A8 place unchanged, A9 86s → 86s.</p>
+      </article>
+      <article class="revision-entry">
+        <h3>Rev 5 - 2026-10-29</h3>
+        <p><strong>Change:</strong> S4 built from <code>63281fc</code> (layout of the Google listing and website scan screens). Kept from <code>main</code>: the two newer scan wordings ("Finding Your Google Listing", "Looking up your business on Google Maps...") and the step hand-off (<code>onCarouselComplete</code> after 5s with the profile drawn), which <code>63281fc</code> had moved into the scan-walk change that is not taken. S1/S2 re-applied to the taken file. A review with no text no longer shows empty quote marks. S1 follow-up: 8 hard-coded blues/greys/green the first sweep did not list (pin glows, one grade colour, a slate and a gray) moved to the same palette. Item 15: the competitor screen is a drawn radar, not a tiled map; no fault found locally (pins did not appear inside the 15s the slow stand-in gives the step, while the list was still fading in).</p>
+        <p><strong>Reason:</strong> Execution deviation: the first S4 build stalled on the Google listing step (time to report hit the 180s cap) because the hand-off was missing; the request check showed polls continuing after <code>stage_viewed_2</code>. Restoring it brought the report back at 87s (baseline 86s). Also found: during S3 the baseline was re-measured in quick mode, which dropped its request list, so S3's A2/A9 were not compared at the time; the full baseline was re-measured here and S4 (which contains S3) passes A2 and A9.</p>
+        <p><strong>Updated Done criteria:</strong> none. S4 checks: A1 4/4 ok, A2 same 12 requests, A3 report words identical (scan screens add the approved profile facts), A8 place unchanged, A9 86s → 87s.</p>
       </article>
     </section>
   </main>
