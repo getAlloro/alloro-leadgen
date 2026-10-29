@@ -80,7 +80,7 @@ export const WebsiteScanStage = memo(
           }
           const to = nextBrowseStop(at, move);
           controls = animate(scrollY, -to * scrollable, {
-            duration: browseDuration(at, to, scrollable),
+            duration: browseDuration(),
             ease: [0.45, 0, 0.2, 1],
           });
           await controls;
