@@ -1,7 +1,18 @@
-import React, { memo, useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { memo, useState, useEffect, useMemo, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  animate,
+  useMotionValue,
+  useReducedMotion,
+} from "framer-motion";
 import { Loader2, Lock } from "lucide-react";
 import { trackEvent, setCurrentStage } from "../../lib/tracking";
+import {
+  nextBrowseStop,
+  browseDuration,
+  browsePause,
+} from "../../lib/browseStops";
 
 /**
  * Website Scan Stage - Captures and analyzes website
@@ -27,6 +38,65 @@ export const WebsiteScanStage = memo(
     // Determine if we have real screenshots or still loading
     const hasScreenshots = !!desktopScreenshot;
     const displayDomain = domain || "loading...";
+
+    // Browse-scroll: while the scan runs, the screenshot glides to random spots
+    // on the page and pauses, like someone skimming it. Still when the device
+    // asks for reduced motion, and when the page is no taller than the screen.
+    const reduceMotion = useReducedMotion();
+    const viewportRef = useRef<HTMLDivElement>(null);
+    const pageRef = useRef<HTMLImageElement>(null);
+    const scrollY = useMotionValue(0);
+
+    useEffect(() => {
+      scrollY.set(0);
+      if (!hasScreenshots || reduceMotion) return;
+      let stopped = false;
+      let controls: ReturnType<typeof animate> | null = null;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      const wait = (seconds: number) =>
+        new Promise<void>((done) => {
+          timer = setTimeout(done, seconds * 1000);
+        });
+
+      const browse = async () => {
+        const img = pageRef.current;
+        if (img && !img.complete) {
+          await new Promise<void>((done) => {
+            img.addEventListener("load", () => done(), { once: true });
+            img.addEventListener("error", () => done(), { once: true });
+          });
+        }
+        await wait(1.2); // a moment on the top of the page first
+        let at = 0;
+        for (let move = 1; !stopped; move++) {
+          const page = pageRef.current;
+          const viewport = viewportRef.current;
+          if (!page || !viewport) return;
+          // Measured each move, so a resized window never scrolls past the end.
+          const scrollable = page.offsetHeight - viewport.clientHeight;
+          if (scrollable < 40) {
+            await wait(1);
+            continue;
+          }
+          const to = nextBrowseStop(at, move);
+          controls = animate(scrollY, -to * scrollable, {
+            duration: browseDuration(),
+            ease: [0.45, 0, 0.2, 1],
+          });
+          await controls;
+          if (stopped) return;
+          at = to;
+          await wait(browsePause());
+        }
+      };
+      browse();
+
+      return () => {
+        stopped = true;
+        controls?.stop();
+        clearTimeout(timer);
+      };
+    }, [hasScreenshots, reduceMotion, desktopScreenshot, scrollY]);
 
     // Fire stage_viewed_1 once on mount
     useEffect(() => {
@@ -259,13 +329,17 @@ export const WebsiteScanStage = memo(
                     </div>
 
                     {/* Screenshot container OR Loading skeleton */}
-                    <div className="absolute inset-0 top-10 overflow-hidden">
+                    <div
+                      ref={viewportRef}
+                      className="absolute inset-0 top-10 overflow-hidden"
+                    >
                       {hasScreenshots ? (
                         <motion.img
+                          ref={pageRef}
                           src={desktopScreenshot}
                           alt="Desktop Screenshot"
                           className="w-full h-auto object-cover object-top"
-                          style={{ minHeight: "100%" }}
+                          style={{ minHeight: "100%", y: scrollY }}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ duration: 0.5 }}
