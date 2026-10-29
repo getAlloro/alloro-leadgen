@@ -49,6 +49,10 @@ import {
 const App = () => {
   // --- STATE ---
   const [stage, setStage] = useState<AuditStage>("input");
+  // The scan screen that has finished fading in. A screen's minimum time
+  // counts from here, not from when it was asked for: the old screen fades
+  // out first, and that fade is not time the visitor sees the new one.
+  const [drawnStage, setDrawnStage] = useState<AuditStage | null>(null);
   const [selectedGBP, setSelectedGBP] = useState<SelectedGBP | null>(null);
   const [auditId, setAuditId] = useState<string | null>(null);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -229,14 +233,22 @@ const App = () => {
   // for at least 5 seconds and the map for 4.5, counted only while the tab is
   // on screen. See src/lib/scanSteps.ts for why.
   const isShownScreenReady =
-    stage === "analyzing_gbp" ? Boolean(auditData?.self_gbp) : true;
+    stage === "analyzing_gbp"
+      ? drawnStage === stage && Boolean(auditData?.self_gbp)
+      : stage === "competitor_map"
+        ? drawnStage === stage
+        : true;
+  const showScanScreen = useCallback((next: AuditStage) => {
+    setDrawnStage(null);
+    setStage(next);
+  }, []);
   useScanSteps({
     shown: stage,
     target: derivedStage,
     enabled: Boolean(auditId) && derivedStage !== "input",
     ready: isShownScreenReady,
     websiteOnly: isWebsiteOnlyAudit(auditData),
-    onShow: setStage,
+    onShow: showScanScreen,
   });
 
   // Mobile progress bar — persists across audit sub-stages (scanning_website
@@ -631,6 +643,9 @@ const App = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onAnimationComplete={(done: { opacity?: number }) => {
+                if (done?.opacity === 1) setDrawnStage("analyzing_gbp");
+              }}
             >
               <GBPAnalysisStage
                 data={auditData?.self_gbp || null}
@@ -646,6 +661,9 @@ const App = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onAnimationComplete={(done: { opacity?: number }) => {
+                if (done?.opacity === 1) setDrawnStage("competitor_map");
+              }}
             >
               <CompetitorMapStage
                 self={businessData}
