@@ -60,40 +60,25 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
  * only where the screen is tall enough for it. Phones keep the compact
  * stacked layout that fits one screen.
  *
+ * How long this screen stays is decided in src/lib/scanSteps.ts: at least
+ * five seconds with the listing drawn and the tab on screen, even when the
+ * server has already moved on.
+ *
  * Memoized for performance.
  */
-const STAGE_DISPLAY_MS = 5000;
-
 export const GBPAnalysisStage = memo(
   ({
     data,
     isLoading = false,
-    onCarouselComplete,
   }: {
     data: BusinessProfile | null;
     isLoading?: boolean;
-    onCarouselComplete?: () => void;
   }) => {
-    const onCompleteRef = React.useRef(onCarouselComplete);
-    onCompleteRef.current = onCarouselComplete;
-    const completedRef = React.useRef(false);
-
     // Fire stage_viewed_2 once on mount (GBP analysis screen)
     useEffect(() => {
       setCurrentStage("stage_viewed_2");
       trackEvent("stage_viewed_2");
     }, []);
-
-    // Fire completion callback once data has rendered for STAGE_DISPLAY_MS.
-    // Replaces the old 3-page carousel timing. (Kept from main: the step timing is not part of the UI polish.)
-    useEffect(() => {
-      if (isLoading || !data || completedRef.current) return;
-      const timer = setTimeout(() => {
-        completedRef.current = true;
-        onCompleteRef.current?.();
-      }, STAGE_DISPLAY_MS);
-      return () => clearTimeout(timer);
-    }, [isLoading, data]);
 
     const breakdown = ratingBreakdown(data?.reviewsDistribution);
     const hours = (data?.openingHours ?? []).filter(
