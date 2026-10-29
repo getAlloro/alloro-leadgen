@@ -11,6 +11,7 @@ import {
 import { Sidebar } from "./src/components/layout";
 import { EmailNotifyFab } from "./src/components/EmailNotifyFab";
 import { useAuditPolling } from "./src/hooks/useAuditPolling";
+import { useScanSteps } from "./src/hooks/useScanSteps";
 import { API_BASE_URL } from "./utils/config";
 import {
   MOCK_BUSINESS,
@@ -48,11 +49,12 @@ import {
 const App = () => {
   // --- STATE ---
   const [stage, setStage] = useState<AuditStage>("input");
+  // The scan screen that has finished fading in. A screen's minimum time
+  // counts from here, not from when it was asked for: the old screen fades
+  // out first, and that fade is not time the visitor sees the new one.
+  const [drawnStage, setDrawnStage] = useState<AuditStage | null>(null);
   const [selectedGBP, setSelectedGBP] = useState<SelectedGBP | null>(null);
   const [auditId, setAuditId] = useState<string | null>(null);
-  const [gbpCarouselComplete, setGbpCarouselComplete] = useState(false);
-  const [competitorMapDisplayed, setCompetitorMapDisplayed] = useState(false);
-  const [pendingStage, setPendingStage] = useState<AuditStage | null>(null);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [mobileProgress, setMobileProgress] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
@@ -226,77 +228,28 @@ const App = () => {
     }
   }, []); // Empty dependency - only run on mount
 
-  useEffect(() => {
-    // Sync stage with polling data
-    if (!auditId || derivedStage === "input") {
-      return;
-    }
-
-    // Website-only audit (no Google listing): there is no Google profile or
-    // competitor map to show, so go straight to the report.
-    if (isWebsiteOnlyAudit(auditData)) {
-      if (stage !== "dashboard") {
-        setStage("dashboard");
-        setPendingStage(null);
-      }
-      return;
-    }
-
-    // GBP gate: hold on analyzing_gbp until carousel completes.
-    if (
-      stage === "analyzing_gbp" &&
-      derivedStage !== "analyzing_gbp" &&
-      !gbpCarouselComplete
-    ) {
-      setPendingStage(derivedStage);
-      return;
-    }
-
-    // Competitor-map gate: backend may race past competitor_map → dashboard
-    // before the user has had time to see the map. Hold dashboard until the
-    // map has been displayed for its minimum window. Also force-route through
-    // competitor_map even if backend skipped past it (e.g. dashboard arrives
-    // before the map ever became the derived stage).
-    if (
-      stage === "competitor_map" &&
-      derivedStage === "dashboard" &&
-      !competitorMapDisplayed
-    ) {
-      setPendingStage("dashboard");
-      return;
-    }
-    if (
-      stage === "analyzing_gbp" &&
-      gbpCarouselComplete &&
-      derivedStage === "dashboard"
-    ) {
-      // Hop through competitor_map first. Dashboard remains pending.
-      setStage("competitor_map");
-      setCompetitorMapDisplayed(false);
-      setPendingStage("dashboard");
-      return;
-    }
-
-    if (derivedStage !== stage) {
-      setStage(derivedStage);
-      if (derivedStage === "analyzing_gbp") {
-        setGbpCarouselComplete(false);
-        setPendingStage(null);
-      }
-      if (derivedStage === "competitor_map") {
-        setCompetitorMapDisplayed(false);
-        setPendingStage(null);
-      }
-    }
-  }, [
-    derivedStage,
-    auditId,
-    stage,
-    gbpCarouselComplete,
-    competitorMapDisplayed,
-    pendingStage,
-    auditData,
-  ]);
+  // Which scan screen is on show. The server's progress says how far the
+  // screens may go; they are shown in order, none skipped, the Google listing
+  // for at least 5 seconds and the map for 4.5, counted only while the tab is
+  // on screen. See src/lib/scanSteps.ts for why.
+  const isShownScreenReady =
+    stage === "analyzing_gbp"
+      ? drawnStage === stage && Boolean(auditData?.self_gbp)
+      : stage === "competitor_map"
+        ? drawnStage === stage
+        : true;
+  const showScanScreen = useCallback((next: AuditStage) => {
+    setDrawnStage(null);
+    setStage(next);
+  }, []);
+  useScanSteps({
+    shown: stage,
+    target: derivedStage,
+    enabled: Boolean(auditId) && derivedStage !== "input",
+    ready: isShownScreenReady,
+    websiteOnly: isWebsiteOnlyAudit(auditData),
+    onShow: showScanScreen,
+  });
 
   // Mobile progress bar — persists across audit sub-stages (scanning_website
   // → analyzing_gbp → competitor_map) by tracking start in a ref so stage
@@ -335,43 +288,6 @@ const App = () => {
     }, 400);
     return () => clearInterval(interval);
   }, [stage]);
-
-  // Once competitor_map has been on screen long enough, allow advance.
-  useEffect(() => {
-    if (stage !== "competitor_map" || competitorMapDisplayed) return;
-    const timer = setTimeout(() => setCompetitorMapDisplayed(true), 4500);
-    return () => clearTimeout(timer);
-  }, [stage, competitorMapDisplayed]);
-
-  // Pending-stage handlers (after either GBP carousel or map display gate clears).
-  useEffect(() => {
-    if (
-      gbpCarouselComplete &&
-      pendingStage &&
-      stage === "analyzing_gbp" &&
-      pendingStage !== "analyzing_gbp"
-    ) {
-      // Always route through competitor_map first when leaving GBP.
-      setStage(pendingStage === "dashboard" ? "competitor_map" : pendingStage);
-      if (pendingStage === "dashboard") {
-        setCompetitorMapDisplayed(false);
-        // leave pendingStage = "dashboard" so the next effect picks it up
-      } else {
-        setPendingStage(null);
-      }
-    }
-  }, [gbpCarouselComplete, pendingStage, stage]);
-
-  useEffect(() => {
-    if (
-      competitorMapDisplayed &&
-      pendingStage === "dashboard" &&
-      stage === "competitor_map"
-    ) {
-      setStage("dashboard");
-      setPendingStage(null);
-    }
-  }, [competitorMapDisplayed, pendingStage, stage]);
 
   // FAB visibility — replaces the old AuditErrorModal logic.
   // 1. When audit polling reports an error, show the FAB in `error` mode
@@ -420,10 +336,6 @@ const App = () => {
 
   const handleClearGBP = useCallback(() => {
     setSelectedGBP(null);
-  }, []);
-
-  const handleGbpCarouselComplete = useCallback(() => {
-    setGbpCarouselComplete(true);
   }, []);
 
   // FAB "Try again" handler. Hits the public retry endpoint which resets the
@@ -731,11 +643,13 @@ const App = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onAnimationComplete={(done: { opacity?: number }) => {
+                if (done?.opacity === 1) setDrawnStage("analyzing_gbp");
+              }}
             >
               <GBPAnalysisStage
                 data={auditData?.self_gbp || null}
                 isLoading={!auditData?.self_gbp}
-                onCarouselComplete={handleGbpCarouselComplete}
               />
             </motion.div>
           )}
@@ -747,6 +661,9 @@ const App = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onAnimationComplete={(done: { opacity?: number }) => {
+                if (done?.opacity === 1) setDrawnStage("competitor_map");
+              }}
             >
               <CompetitorMapStage
                 self={businessData}
