@@ -8,6 +8,7 @@ import {
 } from "./businessWords.ts";
 import { cleanReviewText, biggestGap } from "./reportText.ts";
 import { CHIPS, isChipVariant, pickChipVariant } from "./chipVariant.ts";
+import { WHY_THIS_MATTERS } from "./constants/whyThisMatters.ts";
 
 test("the category picks the kind of business", () => {
   assert.equal(businessKind("Mexican restaurant"), "food");
@@ -33,6 +34,12 @@ test("only a health business sees dental or patient words", () => {
   assert.equal(pillarDisplayName("Trust & Authority", "food"), "Trust & Authority");
   for (const kind of ["health", "food", "trades", "general"] as const) {
     assert.doesNotMatch(moreCustomersLine(kind), /book/i, kind);
+  }
+});
+
+test("tooltips carry no appointment, booking or patient words", () => {
+  for (const [key, words] of Object.entries(WHY_THIS_MATTERS)) {
+    assert.doesNotMatch(words, /appointment|book|patient|dental/i, key);
   }
 });
 
