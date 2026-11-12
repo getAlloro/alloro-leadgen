@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { cleanReviewText } from "../../lib/reportText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Loader2, MapPin } from "lucide-react";
 import { BusinessProfile } from "../../types";
@@ -209,9 +210,12 @@ export const PhotosAnalysisSubStage = ({
                             ))}
                           </div>
                         </div>
-                        <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">
-                          {review.text || "Great experience!"}
-                        </p>
+                        {/* No invented words: a review with no text shows none. */}
+                        {cleanReviewText(review.text) && (
+                          <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">
+                            {cleanReviewText(review.text)}
+                          </p>
+                        )}
                       </div>
                     </div>
                   ))}

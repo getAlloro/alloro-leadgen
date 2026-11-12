@@ -9,18 +9,18 @@ export const WHY_THIS_MATTERS: Record<string, string> = {
   "Google Business Profile Grade":
     "Your Google Business Profile is how customers find and evaluate you. A complete, optimized profile increases your visibility in local searches and builds credibility before customers even visit your site.",
   "Local Ranking":
-    "Local ranking determines where you appear when customers search for services in your area. Higher rankings mean more visibility, more clicks, and more new customer bookings.",
+    "Local ranking determines where you appear when customers search for services in your area. Higher rankings mean more visibility, more clicks, and more new customers.",
 
   // Website pillars
   "Trust & Authority":
-    "Trust signals like testimonials, reviews, and credentials are what convince customers to choose you over competitors. Without them, visitors leave before booking.",
+    "Trust signals like testimonials, reviews, and credentials are what convince customers to choose you over competitors. Without them, visitors leave before reaching out.",
   Accessibility:
     "An accessible website reaches all customers, including those with disabilities. It also improves SEO and demonstrates your commitment to inclusive service.",
   "Customer Journey":
-    "A smooth customer journey—from landing to booking—reduces friction and increases conversions. Every extra click or unclear step costs you appointments.",
+    "A smooth customer journey—from first visit to getting in touch—reduces friction and increases conversions. Every extra click or unclear step costs you customers.",
   // The report still names this pillar "Patient Journey" until the server prompt is reworded; both names find the same words.
   "Patient Journey":
-    "A smooth customer journey—from landing to booking—reduces friction and increases conversions. Every extra click or unclear step costs you appointments.",
+    "A smooth customer journey—from first visit to getting in touch—reduces friction and increases conversions. Every extra click or unclear step costs you customers.",
   "Technical Reliability":
     "Site speed, security, and uptime directly impact rankings and user experience. Technical issues frustrate customers and signal unprofessionalism to Google.",
 

@@ -1,4 +1,5 @@
 import React, { memo, useEffect } from "react";
+import { cleanReviewText } from "../../lib/reportText";
 import { motion } from "framer-motion";
 import {
   Loader2,
@@ -345,9 +346,9 @@ export const GBPAnalysisStage = memo(
                             {review.publishAt}
                           </span>
                         </div>
-                        {review.text && (
+                        {cleanReviewText(review.text) && (
                           <p className="text-gray-600 text-xs md:text-sm leading-relaxed line-clamp-2">
-                            "{review.text}"
+                            "{cleanReviewText(review.text)}"
                           </p>
                         )}
                       </motion.div>

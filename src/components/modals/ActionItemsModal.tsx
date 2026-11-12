@@ -13,6 +13,7 @@ export const ActionItemsModal = ({
   dataType,
   websiteData,
   gbpData,
+  categoryLabel = (c) => c,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -21,6 +22,8 @@ export const ActionItemsModal = ({
   websiteData: WebsiteAnalysis;
   gbpData: GBPAnalysis | null;
   competitorAnalysis?: any | null;
+  /** Turns a pillar key into the words the visitor reads. */
+  categoryLabel?: (category: string) => string;
 }) => {
   if (!isOpen || !dataType) return null;
 
@@ -75,7 +78,7 @@ export const ActionItemsModal = ({
               {/* Pillar Header */}
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-gray-900">
-                  {pillar.category}
+                  {categoryLabel(pillar.category)}
                 </h3>
                 <span
                   className={`px-3 py-1 text-sm font-bold rounded-full ${
