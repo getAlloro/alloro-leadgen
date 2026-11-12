@@ -3,7 +3,14 @@ import { motion } from "framer-motion";
 import { Sparkles, Zap, Users, Globe, AlertCircle } from "lucide-react";
 import { SelectedGBP } from "../../types";
 import { GBPSearchSelect } from "../GBPSearchSelect";
-import { trackEvent, setCurrentStage, beginNewAuditSession } from "../../lib/tracking";
+import { trackEvent, setCurrentStage, beginNewAuditSession, getChipVariant } from "../../lib/tracking";
+import { CHIPS, type ChipIcon } from "../../lib/chipVariant";
+
+const CHIP_ICONS: Record<ChipIcon, React.ReactNode> = {
+  sparkles: <Sparkles className="w-4 h-4 text-brand-500" />,
+  zap: <Zap className="w-4 h-4 text-yellow-500" />,
+  users: <Users className="w-4 h-4 text-blue-500" />,
+};
 
 function normalizeUrl(input: string): string {
   const trimmed = input.trim();
@@ -220,15 +227,16 @@ export const InputStage = ({
         </form>
 
         <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-500">
-          <span className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100">
-            <Sparkles className="w-4 h-4 text-brand-500" /> Deep AI Analysis
-          </span>
-          <span className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100">
-            <Zap className="w-4 h-4 text-yellow-500" /> Live Market Scan
-          </span>
-          <span className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100">
-            <Users className="w-4 h-4 text-blue-500" /> Beat Local Competitors
-          </span>
+          {/* Treatment 1: version A or B, picked once per visitor and
+              recorded on the `landed` event as event_data.variant. */}
+          {CHIPS[getChipVariant()].map((chip) => (
+            <span
+              key={chip.text}
+              className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100"
+            >
+              {CHIP_ICONS[chip.icon]} {chip.text}
+            </span>
+          ))}
         </div>
       </motion.div>
     </div>

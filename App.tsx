@@ -34,6 +34,7 @@ import {
   adoptSessionId,
   markSessionHasAudit,
   retryAudit,
+  getChipVariant,
 } from "./src/lib/tracking";
 import {
   isWebsiteOnlyAudit,
@@ -177,7 +178,7 @@ const App = () => {
   useEffect(() => {
     if (!sessionAdopted) return;
     setCurrentStage("landed");
-    trackEvent("landed");
+    trackEvent("landed", { event_data: { variant: getChipVariant() } });
   }, [sessionAdopted]);
 
   useEffect(() => {

@@ -38,6 +38,13 @@ import { EmailPaywallOverlay } from "../EmailPaywallOverlay";
 import { cardVariants } from "../../lib/animations/variants";
 import { parseScoreValue, isPillarUnchecked } from "../../lib/helpers/scoreUtils";
 import { WHY_THIS_MATTERS } from "../../lib/constants/whyThisMatters";
+import {
+  businessKind,
+  sampleBusiness,
+  moreCustomersLine,
+  pillarDisplayName,
+} from "../../lib/businessWords";
+import { biggestGap } from "../../lib/reportText";
 import { sendAuditReportEmail } from "../../../utils/emailService";
 import {
   MOCK_BUSINESS,
@@ -56,18 +63,6 @@ import { trackEvent, setCurrentStage, getSessionId } from "../../lib/tracking";
  * Append `?ls={sessionId}` to a signup URL, preserving any existing query
  * params. Resolved at click-time so the tracking session id is always current.
  */
-/**
- * The Live Preview dashboard is a picture of the product, shown on every
- * report. It uses an invented business so no real customer's name, doctor or
- * office appears on a stranger's report.
- */
-const SAMPLE_PREVIEW = {
-  personName: "Dr. Rivera",
-  businessName: "Maple Street Dental",
-  locationName: "Springfield",
-  cityLabel: "Springfield",
-} as const;
-
 function buildSignupHref(base: string): string {
   const id = getSessionId();
   const sep = base.includes("?") ? "&" : "?";
@@ -136,6 +131,14 @@ export const DashboardStage = ({
   setSelectedDataType: (type: "website" | "gbp" | null) => void;
 }) => {
   const reduceMotion = useReducedMotion();
+  // The visitor's kind of business, from the category in the report header.
+  // Drives the sample dashboard and any industry words on this screen.
+  const kind = businessKind(business.categoryName);
+  // The Live Preview dashboard is a picture of the product. It uses an
+  // invented business of the visitor's kind, so no real customer appears on a
+  // stranger's report, and it shows no figures, because none of them are real.
+  const sample = sampleBusiness(kind);
+  const categoryLabel = (category: string) => pillarDisplayName(category, kind);
   // `stage_viewed_5` (Report Viewed) fires on mount — objective signal
   // that the pipeline rendered the dashboard shell. Fires BEFORE the
   // paywall is satisfied; the blurred report still counts as "report
@@ -199,6 +202,7 @@ export const DashboardStage = ({
             websiteData={websiteData}
             gbpData={gbpData}
             competitorAnalysis={gbpData?.competitor_analysis}
+            categoryLabel={categoryLabel}
           />
         )}
       </AnimatePresence>
@@ -690,6 +694,29 @@ export const DashboardStage = ({
               const isOutranked = candidateGrades.some(
                 (g) => g === "D" || g === "F"
               );
+              // The single biggest gap: the lowest score we measured. Ranking
+              // is listed first so it wins a tie.
+              const measured = (pillars: { category: string; score: string | number | null; checked?: boolean }[]) =>
+                pillars
+                  .filter((p) => !isPillarUnchecked(p))
+                  .map((p) => ({
+                    label: categoryLabel(p.category),
+                    score: parseScoreValue(p.score ?? undefined),
+                  }));
+              const gap = biggestGap([
+                ...(gbpData?.competitor_analysis &&
+                gbpData.competitor_analysis.rank_score !== null &&
+                gbpData.competitor_analysis.rank_score !== undefined
+                  ? [
+                      {
+                        label: "Local Ranking",
+                        score: parseScoreValue(gbpData.competitor_analysis.rank_score),
+                      },
+                    ]
+                  : []),
+                ...measured(gbpData?.pillars ?? []),
+                ...(hasWebsiteData && websiteData ? measured(websiteData.pillars ?? []) : []),
+              ]);
               return (
                 <>
                   <p className="text-white/90 flex gap-3 items-center justify-center text-sm font-bold md:text-base max-w-2xl mx-auto mb-6">
@@ -712,13 +739,15 @@ export const DashboardStage = ({
                         ? gbpData
                           ? "Outranked"
                           : "Needs work"
-                        : "Good"}
+                        : gap
+                        ? `Biggest gap: ${gap.label}`
+                        : "Graded"}
                     </span>
                   </p>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                    {!isOutranked && !nothingGraded && (
+                    {!isOutranked && !nothingGraded && gap && (
                       <>
-                        But good enough isn't winning. <br />
+                        Start with {gap.label}. <br />
                       </>
                     )}
                     Your business has more potential.
@@ -995,7 +1024,7 @@ export const DashboardStage = ({
                       ) : (
                       <HorizontalProgressBar
                         score={Number(pillar.score)}
-                        label={pillar.category}
+                        label={categoryLabel(pillar.category)}
                         actionItems={pillar.action_items || []}
                         onViewMore={() => {
                           setSelectedPillarCategory(pillar.category);
@@ -1151,7 +1180,7 @@ export const DashboardStage = ({
                     <div key={idx}>
                       <HorizontalProgressBar
                         score={Number(pillar.score)}
-                        label={pillar.category}
+                        label={categoryLabel(pillar.category)}
                         actionItems={pillar.action_items || []}
                         onViewMore={() => {
                           setSelectedPillarCategory(pillar.category);
@@ -1284,7 +1313,7 @@ export const DashboardStage = ({
                       <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-white/5 mb-1">
                         <div className="w-2.5 h-2.5 rounded-full bg-brand-400" />
                         <span className="text-xs font-semibold text-white">
-                          {SAMPLE_PREVIEW.locationName}
+                          {sample.locationName}
                         </span>
                         <div className="ml-auto w-2 h-2 rounded bg-white/30" />
                       </div>
@@ -1293,7 +1322,7 @@ export const DashboardStage = ({
                           <div className="w-2 h-2 rounded-full bg-brand-400" />
                         </div>
                         <span className="text-xs text-white/70">
-                          {SAMPLE_PREVIEW.businessName}
+                          {sample.businessName}
                         </span>
                       </div>
                     </div>
@@ -1354,7 +1383,7 @@ export const DashboardStage = ({
 
                       {/* Greeting */}
                       <h3 className="font-heading text-2xl md:text-4xl font-bold tracking-tight text-gray-900 mb-2">
-                        Good morning, {SAMPLE_PREVIEW.personName}.
+                        Good morning, {sample.personName}.
                       </h3>
                       <p className="text-xs md:text-sm text-gray-500 mb-5 leading-snug">
                         Welcome to your business dashboard. We're loading your
@@ -1369,13 +1398,11 @@ export const DashboardStage = ({
                               Rankings
                             </span>
                             <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
-                              {SAMPLE_PREVIEW.cityLabel}
+                              {sample.cityLabel}
                             </span>
                           </div>
                           <p className="font-heading text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                            You're ranked{" "}
-                            <span className="text-brand-500">#1 of 3</span>{" "}
-                            locally.
+                            See where you rank locally.
                           </p>
                         </div>
                         <div className="md:border-l md:border-black/5 md:pl-5 flex items-center gap-3">
@@ -1383,9 +1410,7 @@ export const DashboardStage = ({
                             <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-1">
                               Visibility Score
                             </div>
-                            <div className="text-4xl md:text-5xl font-black font-heading tracking-tighter text-gray-900 leading-none">
-                              98
-                            </div>
+                            <span aria-hidden="true" className="inline-block h-10 w-16 rounded-md bg-gray-200" />
                           </div>
                           <div className="bg-brand-500 text-white text-xs font-bold px-3 py-2 rounded-full flex items-center gap-1">
                             See Why →
@@ -1396,10 +1421,10 @@ export const DashboardStage = ({
                       {/* KPI tiles row */}
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
                         {[
-                          { label: "New Customers", val: "142", trend: "+18%" },
-                          { label: "Reviews", val: "4.8", trend: "+0.2" },
-                          { label: "GBP Views", val: "12.4k", trend: "+24%" },
-                          { label: "Call Clicks", val: "847", trend: "+9%" },
+                          { label: "New Customers" },
+                          { label: "Reviews" },
+                          { label: "GBP Views" },
+                          { label: "Call Clicks" },
                         ].map((k, i) => (
                           <div
                             key={i}
@@ -1408,14 +1433,7 @@ export const DashboardStage = ({
                             <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
                               {k.label}
                             </div>
-                            <div className="flex items-baseline justify-between">
-                              <span className="font-heading text-2xl md:text-3xl font-black tracking-tighter text-gray-900 leading-none">
-                                {k.val}
-                              </span>
-                              <span className="text-xs font-black px-2 py-0.5 rounded-md bg-green-100 text-green-700">
-                                {k.trend}
-                              </span>
-                            </div>
+                            <span aria-hidden="true" className="inline-block h-7 w-14 rounded-md bg-gray-200" />
                           </div>
                         ))}
                       </div>
@@ -1430,12 +1448,9 @@ export const DashboardStage = ({
                                 Customer Acquisition
                               </div>
                               <div className="font-heading text-base font-bold text-gray-900 mt-0.5">
-                                Trending up · 12 weeks
+                                Week by week
                               </div>
                             </div>
-                            <span className="text-xs font-black px-2 py-0.5 rounded-md bg-green-100 text-green-700">
-                              +32%
-                            </span>
                           </div>
                           <div className="h-24 flex items-end justify-between gap-1.5">
                             {[38, 52, 44, 60, 58, 72, 68, 80, 76, 88, 94, 102].map(
@@ -1467,12 +1482,7 @@ export const DashboardStage = ({
                               <circle cx="18" cy="18" r="15.9155" fill="transparent" stroke="#4f8a5b" strokeWidth="3" strokeDasharray="88, 100" strokeLinecap="round" />
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                              <span className="font-heading text-2xl font-black tracking-tighter text-gray-900 leading-none">
-                                88%
-                              </span>
-                              <span className="text-xs font-semibold text-gray-400 mt-0.5">
-                                Positive
-                              </span>
+                              <span aria-hidden="true" className="inline-block h-6 w-10 rounded-md bg-gray-200" />
                             </div>
                           </div>
                         </div>
@@ -1490,10 +1500,10 @@ export const DashboardStage = ({
                         </div>
                         <div className="space-y-1.5">
                           {[
-                            { src: "Google Search", val: 412, pct: 64 },
-                            { src: "Direct", val: 182, pct: 28 },
-                            { src: "Instagram", val: 74, pct: 12 },
-                            { src: "Facebook", val: 38, pct: 6 },
+                            { src: "Google Search", pct: 64 },
+                            { src: "Direct", pct: 28 },
+                            { src: "Instagram", pct: 12 },
+                            { src: "Facebook", pct: 6 },
                           ].map((row, i) => (
                             <div
                               key={i}
@@ -1508,62 +1518,12 @@ export const DashboardStage = ({
                                   style={{ width: `${row.pct}%` }}
                                 />
                               </div>
-                              <span className="w-10 text-right font-black text-gray-900">
-                                {row.val}
-                              </span>
+
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      {/* Bottom row — 2 widgets */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4">
-                          <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
-                            Competitor Gap
-                          </div>
-                          <div className="flex items-baseline gap-2 mb-3">
-                            <span className="font-heading text-3xl font-black tracking-tighter text-gray-900 leading-none">
-                              −$24k
-                            </span>
-                            <span className="text-xs font-bold text-red-600">
-                              monthly loss
-                            </span>
-                          </div>
-                          <div className="h-12 flex items-end gap-1">
-                            {[30, 45, 38, 55, 48, 62, 58, 70, 65, 78, 82, 90].map(
-                              (h, i) => (
-                                <div
-                                  key={i}
-                                  className="flex-1 bg-gradient-to-t from-red-500/60 to-red-300/60 rounded-sm"
-                                  style={{ height: `${h}%` }}
-                                />
-                              )
-                            )}
-                          </div>
-                        </div>
-                        <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4">
-                          <div className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-2">
-                            Appointments Booked
-                          </div>
-                          <div className="flex items-baseline gap-2 mb-3">
-                            <span className="font-heading text-3xl font-black tracking-tighter text-gray-900 leading-none">
-                              287
-                            </span>
-                            <span className="text-xs font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-md">
-                              +14%
-                            </span>
-                          </div>
-                          <svg viewBox="0 0 100 40" className="w-full h-10">
-                            <polyline
-                              fill="none"
-                              stroke="#d66853"
-                              strokeWidth="2"
-                              points="0,32 10,28 20,30 30,22 40,24 50,16 60,18 70,10 80,12 90,6 100,8"
-                            />
-                          </svg>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -1669,7 +1629,7 @@ export const DashboardStage = ({
                         {
                           icon: Calendar,
                           tint: "bg-brand-500/20 text-brand-300",
-                          text: "More booked appointments, every month",
+                          text: moreCustomersLine(kind),
                         },
                       ].map((b, i) => (
                         <li

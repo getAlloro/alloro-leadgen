@@ -23,6 +23,7 @@
  */
 
 import { API_BASE_URL } from "../../utils/config";
+import { type ChipVariant, isChipVariant, pickChipVariant } from "./chipVariant";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -97,6 +98,10 @@ const SESSION_STORAGE_KEY = "leadgen_session_id";
 const ATTR_SENT_KEY = "leadgen_attr_sent";
 // Set once this device's session has an audit on it: one it started, or one it adopted from a report link.
 const HAD_AUDIT_KEY = "leadgen_session_had_audit";
+// Which version of the first-screen chips this visitor sees ("A" or "B").
+// Picked once per device and kept for good: a new audit session must not
+// re-pick it, or one visitor would be counted under both versions.
+const CHIP_VARIANT_KEY = "leadgen_chip_variant";
 // Prefix — the full key is `leadgen_fired_stages:<session_id>`, value is
 // a comma-separated list of progression stage event names that have
 // already been dispatched from this device. Server-side strict ordering
@@ -390,6 +395,34 @@ export function getSessionId(): string {
     if (!cachedSessionId) cachedSessionId = generateUuid();
     return cachedSessionId;
   }
+}
+
+let cachedChipVariant: ChipVariant | null = null;
+
+/**
+ * This visitor's chip version. Read from localStorage, or picked 50/50 and
+ * saved on the first visit. Without storage (private mode) the pick lasts for
+ * the page's life only, which still matches what the `landed` event records.
+ */
+export function getChipVariant(random: () => number = Math.random): ChipVariant {
+  if (cachedChipVariant) return cachedChipVariant;
+  try {
+    const saved = window.localStorage.getItem(CHIP_VARIANT_KEY);
+    if (isChipVariant(saved)) {
+      cachedChipVariant = saved;
+      return saved;
+    }
+  } catch {
+    // storage unavailable; pick below and keep it in memory
+  }
+  const picked = pickChipVariant(random);
+  cachedChipVariant = picked;
+  try {
+    window.localStorage.setItem(CHIP_VARIANT_KEY, picked);
+  } catch {
+    // noop
+  }
+  return picked;
 }
 
 export function getCurrentStage(): LeadgenEventName {
